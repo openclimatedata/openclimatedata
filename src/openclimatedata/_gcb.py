@@ -81,7 +81,15 @@ https://doi.org/{self.doi}
         )
 
     def to_long_dataframe(self):
-        pass
+        df = self.to_dataframe()
+        df.index.name = "Year"
+        value_vars = df.columns
+        return df.reset_index().melt(
+            id_vars=["Year"],
+            value_vars=value_vars,
+            var_name="Area",
+            value_name="Value",
+        )
 
 
 GCB = {
