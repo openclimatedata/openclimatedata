@@ -46,6 +46,7 @@ https://doi.org/{self.doi}
             value_name="Value",
         )
 
+
 @dataclass
 class _GCB_National:
     sheet_name: str
@@ -115,15 +116,17 @@ The uncertainty for the global estimates is about ±5 % for a ± 1 sigma confide
 }
 
 GCB_National_Emissions = {
-  "2021_territorial": _GCB_National(
-  sheet_name="Territorial Emissions",
-  skiprows=11,
-  note="""Fossil CO2 emissions by country (territorial)
+    "2021_territorial": _GCB_National(
+        sheet_name="Territorial Emissions",
+        skiprows=11,
+        note="""Fossil CO2 emissions by country (territorial)
 All values in million tonnes of carbon per year. For values in million tonnes of CO2 per year, multiply the values below by 3.664
-1MtC = 1 million tonne of carbon = 3.664 million tonnes of CO2""",citation="""Cite as: Friedlingstein et al. 2021
+1MtC = 1 million tonne of carbon = 3.664 million tonnes of CO2""",
+        citation="""Cite as: Friedlingstein et al. 2021
 Methods: Full details of the method are described in Friedlingstein et al (2021) and Andrew and Peters (2021)
 (1) National estimates include emissions from fossil fuel combustion and oxidation and cement production and excludes emissions from bunker fuels. World totals include emissions from bunker fuels.
 (2) Bunker fuels: Emissions from fuels used for international aviation and maritime transport
 (3) The disaggregations of regions (e.g. the former Soviet Union prior to 1992) are based on the shares of emissions in the first year after the countries are disaggregated (e.g., 1992 for the Former Soviet Union).
-(4) The statistical difference presented on column HX is the difference between the world emissions and the sum of the emissions for each countries and for the bunker fuels.""")
+(4) The statistical difference presented on column HX is the difference between the world emissions and the sum of the emissions for each countries and for the bunker fuels.""",
+    )
 }
