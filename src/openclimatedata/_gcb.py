@@ -47,51 +47,6 @@ https://doi.org/{self.doi}
         )
 
 
-@dataclass
-class _GCB_National:
-    sheet_name: str
-    skiprows: int
-    note: str
-    citation: str
-    name: str = "Global Carbon Budget 2021 - National Carbon Emissions - v0.4"
-    doi: str = "10.18160/gcp-2021"
-    filename: str = "National_Carbon_Emissions_2021v0.4.xlsx"
-    license: str = "CC BY 4.0"
-
-    def __repr__(self):
-        return f"""{self.name}
-'{self.filename}' - '{self.sheet_name}'
-
-License: {self.license}
-https://doi.org/{self.doi}
-
-{self.note}
-
-{self.citation}"""
-
-    def to_dataframe(self):
-        file_path = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
-            fname=self.filename,
-            url="https://data.icos-cp.eu/licence_accept?ids=%5B%22rmU_viZcddCV7LdflaFGN-My%22%5D",
-            known_hash="ae653fbe265c75d095ecb75f95a14637e3322b64b7e8f54f29d11a157a64e5de",
-        )
-        return pd.read_excel(
-            file_path, sheet_name=self.sheet_name, skiprows=self.skiprows, index_col=0
-        )
-
-    def to_long_dataframe(self):
-        df = self.to_dataframe()
-        df.index.name = "Year"
-        value_vars = df.columns
-        return df.reset_index().melt(
-            id_vars=["Year"],
-            value_vars=value_vars,
-            var_name="Area",
-            value_name="Value",
-        )
-
-
 GCB = {
     "2021_historical_budget": _GCB(
         sheet_name="Historical Budget",
@@ -121,20 +76,4 @@ Methods: Full details of the method are described in Friedlingstein et al (2021)
 The uncertainty for the global estimates is about ±5 % for a ± 1 sigma confidence level.""",
         citation="""Cite as: Friedlingstein et al (2021; https://doi.org/10.5194/essd-2021-386)""",
     ),
-}
-
-GCB_National_Emissions = {
-    "2021_territorial": _GCB_National(
-        sheet_name="Territorial Emissions",
-        skiprows=11,
-        note="""Fossil CO2 emissions by country (territorial)
-All values in million tonnes of carbon per year. For values in million tonnes of CO2 per year, multiply the values below by 3.664
-1MtC = 1 million tonne of carbon = 3.664 million tonnes of CO2""",
-        citation="""Cite as: Friedlingstein et al. 2021
-Methods: Full details of the method are described in Friedlingstein et al (2021) and Andrew and Peters (2021)
-(1) National estimates include emissions from fossil fuel combustion and oxidation and cement production and excludes emissions from bunker fuels. World totals include emissions from bunker fuels.
-(2) Bunker fuels: Emissions from fuels used for international aviation and maritime transport
-(3) The disaggregations of regions (e.g. the former Soviet Union prior to 1992) are based on the shares of emissions in the first year after the countries are disaggregated (e.g., 1992 for the Former Soviet Union).
-(4) The statistical difference presented on column HX is the difference between the world emissions and the sum of the emissions for each countries and for the bunker fuels.""",
-    )
 }
