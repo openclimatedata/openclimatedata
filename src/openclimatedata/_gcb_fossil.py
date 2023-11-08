@@ -67,7 +67,7 @@ https://doi.org/{self.doi}
 
 
 GCB_Fossil_Emissions = {
-    "2023": _GCB_Fossil(
+    "2023v28": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10065794",
         filename="GCB2023v28_MtCO2_flat.csv",
@@ -79,7 +79,7 @@ GCB_Fossil_Emissions = {
         citation="""Andrew, R. M., & Peters, G. P. (2023). The Global Carbon Project's fossil CO2 emissions dataset (2023v28) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10065794""",
         license="CC BY 4.0",
     ),
-    "2022": _GCB_Fossil(
+    "2022v27": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.7215364",
         filename="GCB2022v27_MtCO2_flat.csv",
@@ -91,7 +91,7 @@ GCB_Fossil_Emissions = {
         citation="""Andrew, Robbie M., & Peters, Glen P. (2022). The Global Carbon Project's fossil CO2 emissions dataset (2022v27) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7215364""",
         license="CC BY 4.0",
     ),
-    "2021": _GCB_Fossil(
+    "2021v34": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.5569235",
         filename="GCB2021v34_MtCO2_flat.csv",
