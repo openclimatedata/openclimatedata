@@ -67,6 +67,18 @@ https://doi.org/{self.doi}
 
 
 GCB_Fossil_Emissions = {
+    "2023": _GCB_Fossil(
+        name="The Global Carbon Project's fossil CO2 emissions dataset",
+        doi="10.5281/zenodo.10065794",
+        filename="GCB2023v28_MtCO2_flat.csv",
+        url="https://zenodo.org/records/10065794/files/GCB2023v28_MtCO2_flat.csv",
+        hash="md5:23d6f3f0a7e88281d41f6eaf8aa68c37",
+        filename_sources="GCB2023v28_sources_flat.csv",
+        url_sources="https://zenodo.org/records/10065794/files/GCB2023v28_sources_flat.csv?download=1",
+        hash_sources="md5:f2a5e14d1562f9be80ab8b59c607b9a2",
+        citation="""Andrew, R. M., & Peters, G. P. (2023). The Global Carbon Project's fossil CO2 emissions dataset (2023v28) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10065794""",
+        license="CC BY 4.0",
+    ),
     "2022": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.7215364",
