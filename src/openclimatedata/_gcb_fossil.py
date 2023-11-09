@@ -113,6 +113,5 @@ GCB_Fossil_Emissions = {
         hash_sources="md5:ae185160899541fc4bef08fa869cbde2",
         citation="""Andrew, Robbie M., & Peters, Glen P. (2021). The Global Carbon Project's fossil CO2 emissions dataset (2021v34) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.5569235""",
         license="CC BY 4.0",
-    )
-
+    ),
 }

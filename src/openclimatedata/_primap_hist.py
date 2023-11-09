@@ -89,6 +89,18 @@ Recommended citation:
         df.year = df.year.astype(int)
         return df
 
+    def to_ocd(self):
+        """Long DataFrame with all column names shortened."""
+        df = self.to_long_dataframe()
+        df = df.rename(
+            columns={
+                "scenario (PRIMAP-hist)": "scenario",
+                "area (ISO3)": "code",
+                "category (IPCC2006_PRIMAP)": "category",
+            }
+        )
+        return df
+
 
 PRIMAPHIST = {
     "2.3.1": _PRIMAPHIST_2(
