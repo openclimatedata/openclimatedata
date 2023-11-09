@@ -35,6 +35,10 @@ https://doi.org/{self.doi}
         return pd.read_csv(file_path, encoding="latin-1")
 
     def to_long_dataframe(self):
+        """
+        Turn GCB Fossil data into a long dataframe and add source metadata
+        as a column. `ISO 3166-1 alpha-3` is renamed to `Code`.
+        """
         df = self.to_dataframe()
         value_vars = df.columns[2:]
         df = df.reset_index().melt(
@@ -64,6 +68,13 @@ https://doi.org/{self.doi}
         df = df.set_index(["Year", "Code", "Category"])
         df_sources = df_sources.set_index(["Year", "Code", "Category"])
         return pd.concat([df, df_sources], axis="columns").reset_index()
+
+    def to_ocd(self):
+        """Long DataFrame with all column names lower-cased."""
+        df = self.to_long_dataframe()
+        df.columns = df.columns.map(lambda x: x.lower())
+
+        return df
 
 
 GCB_Fossil_Emissions = {
