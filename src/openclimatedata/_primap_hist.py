@@ -40,6 +40,14 @@ citation_2_4_2 = (
     + paper_2016
 )
 
+name_2_5= "PRIMAP-hist 2.5"
+doi_2_5 = "10.5281/zenodo.10006301"
+citation_2_5 = (
+    """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301
+
+"""
+    + paper_2016
+)
 
 @dataclass
 class _PRIMAPHIST_2:
@@ -74,10 +82,15 @@ Recommended citation:
 
     def to_long_dataframe(self):
         df = self.to_dataframe()
+
+        # Pre 2.5 provenance not included.
+        if "provenance" not in df.columns:
+            df["provenance"] = None
         df = df.melt(
             id_vars=[
                 "source",
                 "scenario (PRIMAP-hist)",
+                'provenance',
                 "area (ISO3)",
                 "entity",
                 "unit",
@@ -151,4 +164,13 @@ PRIMAPHIST = {
         doi=doi_2_4_2,
         citation=citation_2_4_2,
     ),
+    "2.5": _PRIMAPHIST_2(
+        filename="Guetschow_et_al_2023b-PRIMAP-hist_v2.5_final_15-Oct-2023.csv",
+        known_hash="md5:77405ac4eb5e915a7a9bfc25ff84d7c8",
+        note="The main dataset with numerical extrapolation of all time series to 2022 and three significant digits..",
+        name=name_2_5,
+        doi=doi_2_5,
+        citation=citation_2_5,
+    ),
+
 }
