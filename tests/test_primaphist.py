@@ -1,7 +1,11 @@
+import os
+
 import pytest
 from pytest import approx
 
 from openclimatedata import PRIMAPHIST
+
+GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 versions = PRIMAPHIST.keys()
 
@@ -10,6 +14,7 @@ def test_primaphist():
         assert PRIMAPHIST[version].name
         assert PRIMAPHIST[version].doi
 
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_5():
     df = PRIMAPHIST["2.5"].to_dataframe()
     assert df.iloc[0]["1750"] == approx(0.00564)
@@ -24,6 +29,7 @@ def test_primaphist_2_5():
 
     assert ocdf.iloc[0]["provenance"] == "measured"
 
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_4_2():
     df = PRIMAPHIST["2.4.2"].to_dataframe()
     assert df.iloc[0]["1750"] == approx(0.00564)
