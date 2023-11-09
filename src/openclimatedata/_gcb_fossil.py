@@ -61,7 +61,7 @@ https://doi.org/{self.doi}
             id_vars=["Year", "ISO 3166-1 alpha-3"],
             value_vars=value_vars,
             var_name="Category",
-            value_name="Source",
+            value_name="Provenance",
         )
         df_sources = df_sources.rename(columns={"ISO 3166-1 alpha-3": "Code"})
 
