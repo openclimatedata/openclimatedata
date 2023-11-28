@@ -78,6 +78,18 @@ https://doi.org/{self.doi}
 
 
 GCB_Fossil_Emissions = {
+    "2023v36": _GCB_Fossil(
+        name="The Global Carbon Project's fossil CO2 emissions dataset",
+        doi="10.5281/zenodo.10177738",
+        filename="GCB2023v36_MtCO2_flat.csv",
+        url="https://zenodo.org/records/10177738/files/GCB2023v36_MtCO2_flat.csv",
+        hash="md5:5bb46f04063157eff3dcdca66c19c553",
+        filename_sources="GCB2023v36_sources_flat.csv",
+        url_sources="https://zenodo.org/records/10177738/files/GCB2023v36_sources_flat.csv",
+        hash_sources="md5:bec410534e85732df5871a08ea2d1322",
+        citation="""Andrew, R. M., & Peters, G. P. (2023). The Global Carbon Project's fossil CO2 emissions dataset (2023v36) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10177738""",
+        license="CC BY 4.0",
+    ),
     "2023v28": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10065794",
@@ -85,7 +97,7 @@ GCB_Fossil_Emissions = {
         url="https://zenodo.org/records/10065794/files/GCB2023v28_MtCO2_flat.csv",
         hash="md5:23d6f3f0a7e88281d41f6eaf8aa68c37",
         filename_sources="GCB2023v28_sources_flat.csv",
-        url_sources="https://zenodo.org/records/10065794/files/GCB2023v28_sources_flat.csv?download=1",
+        url_sources="https://zenodo.org/records/10065794/files/GCB2023v28_sources_flat.csv",
         hash_sources="md5:f2a5e14d1562f9be80ab8b59c607b9a2",
         citation="""Andrew, R. M., & Peters, G. P. (2023). The Global Carbon Project's fossil CO2 emissions dataset (2023v28) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10065794""",
         license="CC BY 4.0",
