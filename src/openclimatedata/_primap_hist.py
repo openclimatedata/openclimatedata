@@ -40,7 +40,7 @@ citation_2_4_2 = (
     + paper_2016
 )
 
-name_2_5= "PRIMAP-hist 2.5"
+name_2_5 = "PRIMAP-hist 2.5"
 doi_2_5 = "10.5281/zenodo.10006301"
 citation_2_5 = (
     """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301
@@ -48,6 +48,7 @@ citation_2_5 = (
 """
     + paper_2016
 )
+
 
 @dataclass
 class _PRIMAPHIST_2:
@@ -90,7 +91,7 @@ Recommended citation:
             id_vars=[
                 "source",
                 "scenario (PRIMAP-hist)",
-                'provenance',
+                "provenance",
                 "area (ISO3)",
                 "entity",
                 "unit",
@@ -172,5 +173,4 @@ PRIMAPHIST = {
         doi=doi_2_5,
         citation=citation_2_5,
     ),
-
 }
