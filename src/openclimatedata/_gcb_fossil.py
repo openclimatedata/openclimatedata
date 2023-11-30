@@ -40,6 +40,8 @@ https://doi.org/{self.doi}
         as a column. `ISO 3166-1 alpha-3` is renamed to `Code`.
         """
         df = self.to_dataframe()
+        # A few islands and Kuwaiti oil fires have no code, reusing country.
+        df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].fillna(df["Country"])
         value_vars = df.columns[2:]
         df = df.reset_index().melt(
             id_vars=["Year", "ISO 3166-1 alpha-3"],
@@ -56,6 +58,10 @@ https://doi.org/{self.doi}
             known_hash=self.hash_sources,
         )
         df_sources = pd.read_csv(file_path_sources, encoding="latin-1")
+        # A few islands and Kuwaiti oil fires have no code, reusing country.
+        df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].fillna(
+            df_sources["Country"]
+        )
         value_vars = df_sources.columns[2:]
         df_sources = df_sources.reset_index().melt(
             id_vars=["Year", "ISO 3166-1 alpha-3"],
