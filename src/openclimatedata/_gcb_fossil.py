@@ -41,10 +41,22 @@ https://doi.org/{self.doi}
         as a column. `ISO 3166-1 alpha-3` is renamed to `Code`.
         """
         df = self.to_dataframe()
+
+        file_path_sources = pooch.retrieve(
+            path=pooch.os_cache("openclimatedata"),
+            fname=self.filename_sources,
+            url=self.url_sources,
+            known_hash=self.hash_sources,
+        )
+        df_sources = pd.read_csv(file_path_sources, encoding="latin-1")
+
         # Saint Kitts and Nevis and St. Kitts-Nevis-Anguilla both use KNA.
         # It's replaced with NaN and treated as below to be differentiable.
         if len(df[df["ISO 3166-1 alpha-3"] == "KNA"].Country.unique()) > 1:
             df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].replace("KNA", np.nan)
+            df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].replace(
+                "KNA", np.nan
+            )
 
         # A few islands and Kuwaiti oil fires have no code, reusing country.
         df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].fillna(df["Country"])
@@ -57,22 +69,6 @@ https://doi.org/{self.doi}
         )
         df = df.rename(columns={"ISO 3166-1 alpha-3": "Code"})
 
-        file_path_sources = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
-            fname=self.filename_sources,
-            url=self.url_sources,
-            known_hash=self.hash_sources,
-        )
-        df_sources = pd.read_csv(file_path_sources, encoding="latin-1")
-        if (
-            len(df_sources[df_sources["ISO 3166-1 alpha-3"] == "KNA"].Country.unique())
-            > 1
-        ):
-            df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].replace(
-                "KNA", np.nan
-            )
-
-        # A few islands and Kuwaiti oil fires have no code, reusing country.
         df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].fillna(
             df_sources["Country"]
         )

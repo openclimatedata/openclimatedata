@@ -9,10 +9,12 @@ GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 versions = PRIMAPHIST.keys()
 
+
 def test_primaphist():
     for version in versions:
         assert PRIMAPHIST[version].name
         assert PRIMAPHIST[version].doi
+
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_5():
@@ -28,6 +30,7 @@ def test_primaphist_2_5():
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2022"]
 
     assert ocdf.iloc[0]["provenance"] == "measured"
+
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_4_2():
