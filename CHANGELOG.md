@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6
+
+Add workaround for duplicated KNA code in GCB-Fossil
+([#5](https://github.com/openclimatedata/openclimatedata/issues/5))
+
 ## 0.5
 
 GCB-Fossil: Reuse country/region name in code column when it is missing
