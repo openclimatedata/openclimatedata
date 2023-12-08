@@ -58,3 +58,14 @@ def test_gcb_fossil_all_codes_set():
     )
 
     assert sum(df_long.Code.isnull()) == 0
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_unique_code_name_combinations():
+    # Saint Kitts and Nevis is included twice in GCB Fossil with code 'KNA'.
+    # The second time the name is 'St-Kitts-Nevis-Anguilla'.
+    # This should be handled in the long DataFrame which drops the country.
+    for version in versions:
+        df = GCB_Fossil_Emissions[version].to_dataframe()
+        dfl = GCB_Fossil_Emissions[version].to_long_dataframe()
+        assert len(df.Country.unique()) == len(dfl.Code.unique())
