@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import pooch
 import pandas as pd
+import numpy as np
 
 
 @dataclass
@@ -40,6 +41,11 @@ https://doi.org/{self.doi}
         as a column. `ISO 3166-1 alpha-3` is renamed to `Code`.
         """
         df = self.to_dataframe()
+        # Saint Kitts and Nevis and St. Kitts-Nevis-Anguilla both use KNA.
+        # It's replaced with NaN and treated as below to be differentiable.
+        if len(df[df["ISO 3166-1 alpha-3"] == "KNA"].Country.unique()) > 1:
+            df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].replace("KNA", np.nan)
+
         # A few islands and Kuwaiti oil fires have no code, reusing country.
         df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].fillna(df["Country"])
         value_vars = df.columns[2:]
@@ -58,6 +64,14 @@ https://doi.org/{self.doi}
             known_hash=self.hash_sources,
         )
         df_sources = pd.read_csv(file_path_sources, encoding="latin-1")
+        if (
+            len(df_sources[df_sources["ISO 3166-1 alpha-3"] == "KNA"].Country.unique())
+            > 1
+        ):
+            df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].replace(
+                "KNA", np.nan
+            )
+
         # A few islands and Kuwaiti oil fires have no code, reusing country.
         df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].fillna(
             df_sources["Country"]
