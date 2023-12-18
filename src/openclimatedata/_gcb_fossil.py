@@ -9,6 +9,7 @@ class _GCB_Fossil:
     name: str
     citation: str
     doi: str
+    published: str
     filename: str
     url: str
     hash: str
@@ -97,6 +98,7 @@ GCB_Fossil_Emissions = {
     "2023v36": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10177738",
+        published="2023-11-21",
         filename="GCB2023v36_MtCO2_flat.csv",
         url="https://zenodo.org/records/10177738/files/GCB2023v36_MtCO2_flat.csv",
         hash="md5:5bb46f04063157eff3dcdca66c19c553",
@@ -109,6 +111,7 @@ GCB_Fossil_Emissions = {
     "2023v28": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10065794",
+        published="2023-11-02",
         filename="GCB2023v28_MtCO2_flat.csv",
         url="https://zenodo.org/records/10065794/files/GCB2023v28_MtCO2_flat.csv",
         hash="md5:23d6f3f0a7e88281d41f6eaf8aa68c37",
@@ -121,6 +124,7 @@ GCB_Fossil_Emissions = {
     "2022v27": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.7215364",
+        published="2022-10-17",
         filename="GCB2022v27_MtCO2_flat.csv",
         url="https://zenodo.org/record/7215364/files/GCB2022v27_MtCO2_flat.csv",
         hash="md5:251ce1c5f07d5d28128fa84df856b2f9",
@@ -133,6 +137,7 @@ GCB_Fossil_Emissions = {
     "2021v34": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.5569235",
+        published="2021-10-14",
         filename="GCB2021v34_MtCO2_flat.csv",
         url="https://zenodo.org/record/5569235/files/GCB2021v34_MtCO2_flat.csv",
         hash="md5:00d432500752936a2c95f6feeb599a51",
