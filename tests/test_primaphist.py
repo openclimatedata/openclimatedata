@@ -14,6 +14,7 @@ def test_primaphist():
     for version in versions:
         assert PRIMAPHIST[version].name
         assert PRIMAPHIST[version].doi
+        assert PRIMAPHIST[version].published
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")

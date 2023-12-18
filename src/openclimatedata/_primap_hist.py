@@ -6,6 +6,7 @@ paper_2016 = """Gütschow, J.; Jeffery, L.; Gieseke, R.; Gebel, R.; Stevens, D.;
 
 name_2_3_1 = "PRIMAP-hist 2.3.1"
 doi_2_3_1 = "10.5281/zenodo.5494497"
+published_2_3_1 = "2021-09-22"
 citation_2_3_1 = (
     """Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3.1 (1850-2019). zenodo. doi:10.5281/zenodo.5494497.
 
@@ -15,6 +16,7 @@ citation_2_3_1 = (
 
 name_2_4 = "PRIMAP-hist 2.4"
 doi_2_4 = "10.5281/zenodo.7179775"
+published_2_4 = "2022-10-17"
 citation_2_4 = (
     """Gütschow, J.; Pflüger, M. (2022): The PRIMAP-hist national historical emissions time series v2.4 (1750-2021). zenodo. doi:10.5281/zenodo.7179775.
 
@@ -24,6 +26,7 @@ citation_2_4 = (
 
 name_2_4_1 = "PRIMAP-hist 2.4.1"
 doi_2_4_1 = "10.5281/zenodo.7585420"
+published_2_4_1 = "2023-02-20"
 citation_2_4_1 = (
     """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.1 (1750-2021). zenodo. doi:10.5281/zenodo.7585420.
 
@@ -33,6 +36,7 @@ citation_2_4_1 = (
 
 name_2_4_2 = "PRIMAP-hist 2.4.2"
 doi_2_4_2 = "10.5281/zenodo.7727475"
+published_2_4_2 = "2023-03-15"
 citation_2_4_2 = (
     """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.2 (1750-2021). zenodo. doi:10.5281/zenodo.7727475.
 
@@ -42,6 +46,7 @@ citation_2_4_2 = (
 
 name_2_5 = "PRIMAP-hist 2.5"
 doi_2_5 = "10.5281/zenodo.10006301"
+published_2_5 = "2023-10-15"
 citation_2_5 = (
     """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301
 
@@ -57,6 +62,7 @@ class _PRIMAPHIST_2:
     note: str
     name: str
     doi: str
+    published: str
     citation: str
     license: str = "CC BY 4.0"
 
@@ -123,6 +129,7 @@ PRIMAPHIST = {
         note="The main dataset with numerical extrapolation of all time series to 2019 and three significant digits.",
         name=name_2_3_1,
         doi=doi_2_3_1,
+        published=published_2_3_1,
         citation=citation_2_3_1,
     ),
     "2.3.1_no_extrap": _PRIMAPHIST_2(
@@ -131,6 +138,7 @@ PRIMAPHIST = {
         note="Variant without numerical extrapolation of missing values and not including country groups (three significant digits).",
         name=name_2_3_1,
         doi=doi_2_3_1,
+        published=published_2_3_1,
         citation=citation_2_3_1,
     ),
     "2.3.1_no_extrap_no_rounding": _PRIMAPHIST_2(
@@ -139,6 +147,7 @@ PRIMAPHIST = {
         note="Variant without numerical extrapolation of missing values and not including country groups (eleven significant digits).",
         name=name_2_3_1,
         doi=doi_2_3_1,
+        published=published_2_3_1,
         citation=citation_2_3_1,
     ),
     "2.4": _PRIMAPHIST_2(
@@ -147,6 +156,7 @@ PRIMAPHIST = {
         note="The main dataset with numerical extrapolation of all time series to 2021 and three significant digits.",
         name=name_2_4,
         doi=doi_2_4,
+        published=published_2_4,
         citation=citation_2_4,
     ),
     "2.4.1": _PRIMAPHIST_2(
@@ -155,6 +165,7 @@ PRIMAPHIST = {
         note="The main dataset with numerical extrapolation of all time series to 2021 and three significant digits.",
         name=name_2_4_1,
         doi=doi_2_4_1,
+        published=published_2_4_1,
         citation=citation_2_4_1,
     ),
     "2.4.2": _PRIMAPHIST_2(
@@ -163,6 +174,7 @@ PRIMAPHIST = {
         note="The main dataset with numerical extrapolation of all time series to 2021 and three significant digits.",
         name=name_2_4_2,
         doi=doi_2_4_2,
+        published=published_2_4_2,
         citation=citation_2_4_2,
     ),
     "2.5": _PRIMAPHIST_2(
@@ -171,6 +183,7 @@ PRIMAPHIST = {
         note="The main dataset with numerical extrapolation of all time series to 2022 and three significant digits..",
         name=name_2_5,
         doi=doi_2_5,
+        published=published_2_5,
         citation=citation_2_5,
     ),
 }

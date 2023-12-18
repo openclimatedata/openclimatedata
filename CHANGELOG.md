@@ -1,8 +1,12 @@
 # Changelog
 
+## 0.7
+
+Adds publication field 'published'
+
 ## 0.6
 
-Add workaround for duplicated KNA code in GCB-Fossil
+Adds workaround for duplicated KNA code in GCB-Fossil
 ([#5](https://github.com/openclimatedata/openclimatedata/issues/5))
 
 ## 0.5

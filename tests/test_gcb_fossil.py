@@ -10,11 +10,11 @@ GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 versions = GCB_Fossil_Emissions.keys()
 
 
-@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
-def test_primaphist():
+def test_gcb_fossil():
     for version in versions:
         assert GCB_Fossil_Emissions[version].name
         assert GCB_Fossil_Emissions[version].doi
+        assert GCB_Fossil_Emissions[version].published
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
