@@ -4,6 +4,22 @@ import pandas as pd
 
 paper_2016 = """Gütschow, J.; Jeffery, L.; Gieseke, R.; Gebel, R.; Stevens, D.; Krapp, M.; Rocha, M. (2016): The PRIMAP-hist national historical emissions time series, Earth Syst. Sci. Data, 8, 571-603, doi:10.5194/essd-8-571-2016"""
 
+name_2_2 = "PRIMAP-hist 2.2"
+doi_2_2 = "10.5281/zenodo.4479172"
+published_2_2 = "2021-02-09"
+citation_2_2 = (
+    "Gütschow, J.; Günther, A.; Jeffery, L.; Gieseke, R. (2021): The PRIMAP-hist national historical emissions time series v2.2 (1850-2018). zenodo. doi:10.5281/zenodo.4479172."
+    + paper_2016
+)
+
+name_2_3 = "PRIMAP-hist 2.3"
+doi_2_3 = "10.5281/zenodo.5175154"
+published_2_3 = "2021-08-30"
+citation_2_3 = (
+    "Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3 (1850-2019). zenodo. doi:10.5281/zenodo.5175154."
+    + paper_2016
+)
+
 name_2_3_1 = "PRIMAP-hist 2.3.1"
 doi_2_3_1 = "10.5281/zenodo.5494497"
 published_2_3_1 = "2021-09-22"
@@ -93,8 +109,8 @@ Recommended citation:
         # Pre 2.5 provenance not included.
         if "provenance" not in df.columns:
             df["provenance"] = None
-        df = df.melt(
-            id_vars=[
+        if self.published >= published_2_3:
+            id_vars = [
                 "source",
                 "scenario (PRIMAP-hist)",
                 "provenance",
@@ -102,7 +118,19 @@ Recommended citation:
                 "entity",
                 "unit",
                 "category (IPCC2006_PRIMAP)",
-            ],
+            ]
+        else:
+            id_vars = [
+                "scenario",
+                "provenance",
+                "country",
+                "category",
+                "entity",
+                "unit",
+            ]
+
+        df = df.melt(
+            id_vars=id_vars,
             var_name="year",
             value_name="value",
         )
@@ -112,17 +140,36 @@ Recommended citation:
     def to_ocd(self):
         """Long DataFrame with all column names shortened."""
         df = self.to_long_dataframe()
-        df = df.rename(
-            columns={
-                "scenario (PRIMAP-hist)": "scenario",
-                "area (ISO3)": "code",
-                "category (IPCC2006_PRIMAP)": "category",
-            }
-        )
+        if self.published >= published_2_3:
+            df = df.rename(
+                columns={
+                    "scenario (PRIMAP-hist)": "scenario",
+                    "area (ISO3)": "code",
+                    "category (IPCC2006_PRIMAP)": "category",
+                }
+            )
         return df
 
 
 PRIMAPHIST = {
+    "2.2": _PRIMAPHIST_2(
+        filename="PRIMAP-hist_v2.2_19-Jan-2021.csv",
+        known_hash="md5:a3a8c25f7b784fdb85c89fbff29f5fd3",
+        note="With numerical extrapolation of all time series to 2018.",
+        name=name_2_2,
+        doi=doi_2_2,
+        published=published_2_2,
+        citation=citation_2_2,
+    ),
+    "2.3": _PRIMAPHIST_2(
+        filename="Guetschow-et-al-2021-PRIMAP-hist_v2.3_28_Jul_2021.csv",
+        known_hash="md5:7b29dfb49ca97dcf594bc639767f1e2a",
+        note="The main dataset with numerical extrapolation of all time series to 2019 and three significant digits.",
+        name=name_2_3,
+        doi=doi_2_3,
+        published=published_2_3,
+        citation=citation_2_3,
+    ),
     "2.3.1": _PRIMAPHIST_2(
         filename="Guetschow-et-al-2021-PRIMAP-hist_v2.3.1_20-Sep_2021.csv",
         known_hash="md5:f4cb55a55e4d5e5dcfb1513b677ae318",
