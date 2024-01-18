@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8
+
+Adds PRIMAP-hist 2.2 and 2.3
+
 ## 0.7
 
 Adds publication field 'published'
