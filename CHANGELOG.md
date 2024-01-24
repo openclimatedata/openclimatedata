@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9
+
+Adds GCB-Fossil 2023v43
+
 ## 0.8
 
 Adds PRIMAP-hist 2.2 and 2.3

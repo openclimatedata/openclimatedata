@@ -5,4 +5,4 @@ from ._gcb_fossil import GCB_Fossil_Emissions
 
 __all__ = ["PRIMAPHIST", "GCB", "GCB_National_Emissions", "GCB_Fossil_Emissions"]
 
-__version__ = "0.8"
+__version__ = "0.9"
