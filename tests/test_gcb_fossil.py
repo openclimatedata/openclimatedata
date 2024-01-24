@@ -1,3 +1,4 @@
+import math
 import os
 import pytest
 from pytest import approx
@@ -58,6 +59,19 @@ def test_gcb_fossil_all_codes_set():
     )
 
     assert sum(df_long.Code.isnull()) == 0
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_fossil_2023v43():
+    df = GCB_Fossil_Emissions["2023v43"].to_dataframe()
+    # This version has Cement with zero and Total as `nan`.
+    assert math.isnan(df.iloc[0]["Total"])
+    assert df.iloc[-1]["Per Capita"] == approx(4.658365)
+
+    ocdf = GCB_Fossil_Emissions["2023v43"].to_ocd()
+    # First and last value should be the same after re-shaping.
+    assert math.isnan(ocdf.iloc[0]["value"]) and ocdf.iloc[0]["category"] == "Total"
+    assert ocdf.iloc[-1]["value"] == df.iloc[-1]["Per Capita"]
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")

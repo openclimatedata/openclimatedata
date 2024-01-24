@@ -43,6 +43,9 @@ https://doi.org/{self.doi}
         """
         df = self.to_dataframe()
 
+        if "UN M49" in df.columns:
+            df = df.drop("UN M49", axis=1)
+
         file_path_sources = pooch.retrieve(
             path=pooch.os_cache("openclimatedata"),
             fname=self.filename_sources,
@@ -51,8 +54,11 @@ https://doi.org/{self.doi}
         )
         df_sources = pd.read_csv(file_path_sources, encoding="latin-1")
 
+        if "UN M49" in df_sources.columns:
+            df_sources = df_sources.drop("UN M49", axis=1)
+
         # Saint Kitts and Nevis and St. Kitts-Nevis-Anguilla both use KNA.
-        # It's replaced with NaN and treated as below to be differentiable.
+        # The code is replaced with NaN and treated as below to be differentiable.
         if len(df[df["ISO 3166-1 alpha-3"] == "KNA"].Country.unique()) > 1:
             df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].replace("KNA", np.nan)
             df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].replace(
@@ -95,6 +101,19 @@ https://doi.org/{self.doi}
 
 
 GCB_Fossil_Emissions = {
+    "2023v43": _GCB_Fossil(
+        name="The Global Carbon Project's fossil CO2 emissions dataset",
+        doi="10.5281/zenodo.10562476",
+        published="2024-01-24",
+        filename="GCB2023v43_MtCO2_flat.csv",
+        url="https://zenodo.org/records/10562476/files/GCB2023v43_MtCO2_flat.csv",
+        hash="md5:e8cc0ffc5b6a4dbc2c1ae2453dcfb859",
+        filename_sources="GCB2023v43_sources_flat.csv",
+        url_sources="https://zenodo.org/records/10562476/files/GCB2023v43_sources_flat.csv",
+        hash_sources="md5:1e88fa3eb7322628b7c4bf1f5a278d97",
+        citation="""Andrew, R. M., & Peters, G. P. (2024). The Global Carbon Project's fossil CO2 emissions dataset (2023v43) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10562476""",
+        license="CC BY 4.0",
+    ),
     "2023v36": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10177738",
