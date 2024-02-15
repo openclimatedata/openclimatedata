@@ -88,6 +88,10 @@ https://doi.org/{self.doi}
         )
         df_sources = df_sources.rename(columns={"ISO 3166-1 alpha-3": "Code"})
 
+        df["Code"] = df["Code"].astype("category")
+        df["Category"] = df["Category"].astype("category")
+        df_sources["Provenance"] = df_sources["Provenance"].astype("category")
+
         df = df.set_index(["Year", "Code", "Category"])
         df_sources = df_sources.set_index(["Year", "Code", "Category"])
         return pd.concat([df, df_sources], axis="columns").reset_index()
@@ -96,7 +100,7 @@ https://doi.org/{self.doi}
         """Long DataFrame with all column names lower-cased."""
         df = self.to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
-
+        df['code'] = df['code'].cat.rename_categories({"KSV": "XKX"})
         return df
 
 
