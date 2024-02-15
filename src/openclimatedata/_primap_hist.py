@@ -148,6 +148,8 @@ Recommended citation:
                     "category (IPCC2006_PRIMAP)": "category",
                 }
             )
+        else:
+            df = df.rename(columns={"country": "code"})
         return df
 
 
