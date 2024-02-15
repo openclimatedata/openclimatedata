@@ -1,5 +1,7 @@
 # Changelog
 
+Adds four CEDS versions
+
 ## 0.9
 
 Adds GCB-Fossil 2023v43
