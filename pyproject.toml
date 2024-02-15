@@ -7,7 +7,7 @@ authors = [{name = "Robert Gieseke"}]
 license = {text = "BSD-2-Clause"}
 requires-python = ">=3.8"
 dependencies = [
-    "openpyxl", "pandas", "pooch", "tqdm"
+    "openpyxl", "pandas", "pooch", "pyarrow", "tqdm"
 ]
 
 [project.urls]
