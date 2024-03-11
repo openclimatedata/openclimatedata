@@ -70,6 +70,16 @@ citation_2_5 = (
     + paper_2016
 )
 
+name_2_5_1 = "PRIMAP-hist 2.5.1"
+doi_2_5_1 = "10.5281/zenodo.10705513"
+published_2_5_1 = "2024-02-27"
+citation_2_5_1 = (
+    """Gütschow, J., Pflüger, M., & Busch, D. (2024). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5.1 (2.5.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10705513
+
+"""
+    + paper_2016
+)
+
 
 @dataclass
 class _PRIMAPHIST_2:
@@ -229,10 +239,19 @@ PRIMAPHIST = {
     "2.5": _PRIMAPHIST_2(
         filename="Guetschow_et_al_2023b-PRIMAP-hist_v2.5_final_15-Oct-2023.csv",
         known_hash="md5:77405ac4eb5e915a7a9bfc25ff84d7c8",
-        note="The main dataset with numerical extrapolation of all time series to 2022 and three significant digits..",
+        note="The main dataset with numerical extrapolation of all time series to 2022 and three significant digits.",
         name=name_2_5,
         doi=doi_2_5,
         published=published_2_5,
         citation=citation_2_5,
+    ),
+    "2.5.1": _PRIMAPHIST_2(
+        filename="Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_27-Feb-2024.csv",
+        known_hash="md5:7de949e90dfc924c3829aa25d32afe1b",
+        note="The main dataset with numerical extrapolation of all time series to 2022 and three significant digits.",
+        name=name_2_5_1,
+        doi=doi_2_5_1,
+        published=published_2_5_1,
+        citation=citation_2_5_1,
     ),
 }

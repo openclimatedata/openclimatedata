@@ -3,6 +3,7 @@
 - Adds four CEDS versions
 - Update country code for Kosovo in ocd version of GCB-Fossil to XKX
   ([#10](https://github.com/openclimatedata/openclimatedata/issues/10))
+- Adds PRIMAP-hist 2.5.1
 
 ## 0.9
 
