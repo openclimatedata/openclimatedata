@@ -36,7 +36,7 @@ def test_gcb_sheet_names():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_dataframes_for_subtables_only():
     # In sheets with subtables, `to_dataframe` etc. should only be available
-    # for tables not on the main sheet.
+    # for tables, not on the main sheet.
     for version in versions:
 
         sheet_names = GCB_Global_Carbon_Budget[version].keys()
