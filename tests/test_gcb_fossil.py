@@ -84,14 +84,14 @@ def test_unique_code_name_combinations():
         dfl = GCB_Fossil_Emissions[version].to_long_dataframe()
         assert len(df.Country.unique()) == len(dfl.Code.unique())
 
+
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_kosovo_country_code():
     df = GCB_Fossil_Emissions["2023v43"].to_long_dataframe()
-    
+
     assert len(df[df.Code == "XKX"]) == 0
     assert len(df[df.Code == "KSV"]) > 0
-    
+
     ocdf = GCB_Fossil_Emissions["2023v43"].to_ocd()
     assert len(ocdf[ocdf.code == "KSV"]) == 0
     assert len(ocdf[ocdf.code == "XKX"]) > 0
-    
