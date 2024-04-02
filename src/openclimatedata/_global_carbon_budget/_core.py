@@ -14,8 +14,10 @@ class _GCB_Global_Budget_Release(dict):
         name: str,
         version: str,
         doi: str,
+        doi_article: str,
         published: str,
         citation: str,
+        citation_article: str,
         license: str,
         filename: str,
         url: str,
@@ -25,8 +27,10 @@ class _GCB_Global_Budget_Release(dict):
         self.name = name
         self.version = version
         self.doi = doi
+        self.doi_article = doi_article
         self.published = published
         self.citation = citation
+        self.citation_article = citation_article
         self.license = license
         self.filename = filename
         self.url = url
@@ -119,12 +123,14 @@ class _GCB_Global_Budget_Sheet(dict):
     def _to_long_dataframe(self):
         df = self.to_dataframe()
         value_vars = df.columns
-        return df.reset_index().melt(
+        df = df.reset_index().melt(
             id_vars=["Year"],
             value_vars=value_vars,
             var_name="Category",
             value_name="Value",
         )
+        df.Category = df.Category.astype("category")
+        return df
 
 
 @dataclass
@@ -155,9 +161,12 @@ class _GCB_Global_Budget_Table:
     def to_long_dataframe(self):
         df = self.to_dataframe()
         value_vars = df.columns
-        return df.reset_index().melt(
+        df = df.reset_index().melt(
             id_vars=["Year"],
             value_vars=value_vars,
             var_name="Category",
             value_name="Value",
         )
+        df.Category = df.Category.astype("category")
+        return df
+
