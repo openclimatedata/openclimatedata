@@ -136,6 +136,40 @@ class _CedsTable:
 
 
 CEDS = {
+    "v_2024_04_01": _CedsRelease(
+        **{
+            "name": "CEDS v_2024_04_01 Release Emission Data",
+            "doi": "10.5281/zenodo.10904361",
+            "published": "2024-04-01",
+            "citation": """Hoesly, R., & Smith, S. (2024). CEDS v_2024_04_01 Release Emission Data (v_2024_04_01) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10904361""",
+            "license": "CC BY 4.0",
+            "entities": [
+                "BC",
+                "CH4",
+                "CO",
+                "CO2",
+                "N2O",
+                "NH3",
+                "NMVOC",
+                "NOx",
+                "OC",
+                "SO2",
+            ],
+            "tables": [
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v_2024_04_01_aggregate.zip",
+                        "url": "https://zenodo.org/records/10904361/files/CEDS_v_2024_04_01_aggregate.zip",
+                        "hash": "md5:636752881e915244bb96b4793d9fb121",
+                    },
+                    "patterns": {
+                        "by_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_v2024_04_01.csv",
+                        "by_sector_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_sector_v2024_04_01.csv",
+                    },
+                }
+            ],
+        }
+    ),
     "v_2021_04_21": _CedsRelease(
         **{
             "name": "CEDS v_2021_04_21 Release Emission Data",
