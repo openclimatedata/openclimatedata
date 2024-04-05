@@ -17,12 +17,9 @@ class _CedsRelease(dict):
     citation: str
     doi: str
     published: str
-    filename: str
-    url: str
-    hash: str
     license: str
     entities: list[str]
-    table_patterns: dict
+    tables: list[dict]
 
     def __repr__(self):
         newline = "\n"
@@ -43,14 +40,16 @@ Citation:
         for entity in self.entities:
             if entity not in self.keys():
                 self[entity] = {}
-            for key, value in self.table_patterns.items():
-                self[entity][key] = _CedsTable(
-                    entity=entity,
-                    filename=self.filename,
-                    url=self.url,
-                    hash=self.hash,
-                    path_pattern=value,
-                )
+
+            for table in self.tables:
+                for key, path_pattern in table["patterns"].items():
+                    self[entity][key] = _CedsTable(
+                        entity=entity,
+                        filename=table["zipfile"]["filename"],
+                        url=table["zipfile"]["url"],
+                        hash=table["zipfile"]["hash"],
+                        path_pattern=path_pattern,
+                    )
 
 
 @dataclass
@@ -142,9 +141,6 @@ CEDS = {
             "name": "CEDS v_2021_04_21 Release Emission Data",
             "doi": "10.5281/zenodo.4741285",
             "published": "2021-04-06",
-            "filename": "CEDS_v2021-04-21_emissions.zip",
-            "url": "https://zenodo.org/records/4741285/files/CEDS_v2021-04-21_emissions.zip",
-            "hash": "md5:01659c651754a66ddf3d79715a2ba841",
             # TODO fix the citation with the correct version number? see https://github.com/JGCRI/CEDS/issues/48
             "citation": """O'Rourke, P. R., Smith, S. J., Mott, A., Ahsan, H., McDuffie, E. E., Crippa, M., Klimont, Z., McDonald, B., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2021). CEDS v_2021_04_21 Release Emission Data (v_2021_02_05) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4741285""",
             "license": "CC BY 4.0",
@@ -160,11 +156,20 @@ CEDS = {
                 "OC",
                 "SO2",
             ],
-            "table_patterns": {
-                "by_country": "{entity}_CEDS_emissions_by_country_2021_04_21.csv",
-                "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
-                "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2021_04_21.csv",
-            },
+            "tables": [
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v2021-04-21_emissions.zip",
+                        "url": "https://zenodo.org/records/4741285/files/CEDS_v2021-04-21_emissions.zip",
+                        "hash": "md5:01659c651754a66ddf3d79715a2ba841",
+                    },
+                    "patterns": {
+                        "by_country": "{entity}_CEDS_emissions_by_country_2021_04_21.csv",
+                        "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
+                        "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2021_04_21.csv",
+                    },
+                }
+            ],
         }
     ),
     "v_2021_02_05": _CedsRelease(
@@ -172,9 +177,6 @@ CEDS = {
             "name": "CEDS v_2021_02_05 Release Emission Data",
             "doi": "10.5281/zenodo.4509372",
             "published": "2021-02-05",
-            "filename": "CEDS_v2021-02-05_emissions.zip",
-            "url": "https://zenodo.org/records/4509372/files/CEDS_v2021-02-05_emissions.zip",
-            "hash": "md5:7054c1e1ca510015a37d6c1bb5934c9b",
             "citation": """O'Rourke, P. R., Smith, S. J., Mott, A., Ahsan, H., McDuffie, E. E., Crippa, M., Klimont, Z., McDonald, B., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2021). CEDS v_2021_02_05 Release Emission Data (v_2021_02_05) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4509372""",
             "license": "CC BY 4.0",
             "entities": [
@@ -189,11 +191,20 @@ CEDS = {
                 "OC",
                 "SO2",
             ],
-            "table_patterns": {
-                "by_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_2021_02_05.csv",
-                "by_sector_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
-                "by_country_fuel": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_fuel_2021_02_05.csv",
-            },
+            "tables": [
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v2021-02-05_emissions.zip",
+                        "url": "https://zenodo.org/records/4509372/files/CEDS_v2021-02-05_emissions.zip",
+                        "hash": "md5:7054c1e1ca510015a37d6c1bb5934c9b",
+                    },
+                    "patterns": {
+                        "by_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_2021_02_05.csv",
+                        "by_sector_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
+                        "by_country_fuel": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_fuel_2021_02_05.csv",
+                    },
+                }
+            ],
         }
     ),
     "v_2020_09_11": _CedsRelease(
@@ -201,17 +212,23 @@ CEDS = {
             "name": "CEDS v_2020_09_11 Pre-Release Emission Data",
             "doi": "10.5281/zenodo.4025316",
             "published": "2020-09-11",
-            "filename": "CEDS_v_2020_09_11_emissions.zip",
-            "url": "https://zenodo.org/records/4025316/files/CEDS_v_2020_09_11_emissions.zip",
-            "hash": "md5:0c7f4bfc5eafcd7510920fd0b8bbdd16",
             "citation": """O'Rourke, P. R., Smith, S. J., McDuffie, E. E., Klimont, Z., Crippa, M., Mott, A., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2020). CEDS v_2020_09_11 Pre-Release Emission Data (v_2020_09_11) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4025316""",
             "license": "CC BY 4.0",
             "entities": ["BC", "CO", "NH3", "NMVOC", "NOx", "OC", "SO2"],
-            "table_patterns": {
-                "by_country": "{entity}_CEDS_emissions_by_country_2020_09_11.csv",
-                "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
-                "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2020_09_11.csv",
-            },
+            "tables": [
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v_2020_09_11_emissions.zip",
+                        "url": "https://zenodo.org/records/4025316/files/CEDS_v_2020_09_11_emissions.zip",
+                        "hash": "md5:0c7f4bfc5eafcd7510920fd0b8bbdd16",
+                    },
+                    "patterns": {
+                        "by_country": "{entity}_CEDS_emissions_by_country_2020_09_11.csv",
+                        "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
+                        "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2020_09_11.csv",
+                    },
+                }
+            ],
         }
     ),
     "v_2019_12_23": _CedsRelease(
@@ -219,17 +236,23 @@ CEDS = {
             "name": "CEDS v_2019_12_23 Emission Data",
             "doi": "10.5281/zenodo.3606753",
             "published": "2020-01-13",
-            "filename": "CEDS_v_2019_12_23-final_emissions.zip",
-            "url": "https://zenodo.org/records/3606753/files/CEDS_v_2019_12_23-final_emissions.zip",
-            "hash": "md5:830ac6fbc5ba24885acecf1aa6567db8",
             "citation": """Hoesly, R. M., O'Rourke, P. R., Smith, S. J., Feng, L., Klimont, Z., Janssens-Maenhout, G., Pitkanen, T., Seibert, J. J., Vu, L., Andres, R. J., Bolt, R. M., Bond, T. C., Dawidowski, L., Kholod, N., Kurokawa, J.-. ichi ., Li, M., Liu, L., Lu, Z., Moura, M. C. P., Zhang, Q., Goldstein, B., Muwan, P. (2020). CEDS v_2019_12_23 Emission Data (v_2019_12_23) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.3606753""",
             "license": "CC BY 4.0",
             "entities": ["BC", "CH4", "CO", "CO2", "NH3", "NMVOC", "NOx", "OC", "SO2"],
-            "table_patterns": {
-                "by_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_v_2019_12_23.csv",
-                "by_sector_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_CEDS_sector_v_2019_12_23.csv",
-                "global_by_fuel": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_global_emissions_by_fuel_v_2019_12_23.csv",
-            },
+            "tables": [
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v_2019_12_23-final_emissions.zip",
+                        "url": "https://zenodo.org/records/3606753/files/CEDS_v_2019_12_23-final_emissions.zip",
+                        "hash": "md5:830ac6fbc5ba24885acecf1aa6567db8",
+                    },
+                    "patterns": {
+                        "by_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_v_2019_12_23.csv",
+                        "by_sector_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_CEDS_sector_v_2019_12_23.csv",
+                        "global_by_fuel": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_global_emissions_by_fuel_v_2019_12_23.csv",
+                    },
+                }
+            ],
         }
     ),
 }
