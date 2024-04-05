@@ -21,6 +21,7 @@ class _CedsRelease(dict):
     url: str
     hash: str
     license: str
+    entities: list[str]
     table_patterns: dict
 
     def __repr__(self):
@@ -39,26 +40,6 @@ Citation:
 {newline.join([f'- "{k}"' for k in self.entities])}"""
 
     def __post_init__(self):
-
-        file_path = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
-            fname=self.filename,
-            url=self.url,
-            known_hash=self.hash,
-        )
-        with ZipFile(file_path) as zip_file:
-            filelist = zip_file.infolist()
-            csv_files = [
-                re.sub(
-                    r"^CEDS_", "", f.filename.rsplit("/")[-1]
-                )  # replace leading 'CEDS' for 2019 files which are in a subdirectory
-                for f in filelist
-                if ".csv" in f.filename and not f.filename.startswith("_")
-            ]
-        self.entities = sorted(
-            list(set([f.split("_", maxsplit=1)[0] for f in csv_files]))
-        )
-
         for entity in self.entities:
             if entity not in self.keys():
                 self[entity] = {}
@@ -167,6 +148,18 @@ CEDS = {
             # TODO fix the citation with the correct version number? see https://github.com/JGCRI/CEDS/issues/48
             "citation": """O'Rourke, P. R., Smith, S. J., Mott, A., Ahsan, H., McDuffie, E. E., Crippa, M., Klimont, Z., McDonald, B., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2021). CEDS v_2021_04_21 Release Emission Data (v_2021_02_05) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4741285""",
             "license": "CC BY 4.0",
+            "entities": [
+                "BC",
+                "CH4",
+                "CO",
+                "CO2",
+                "N2O",
+                "NH3",
+                "NMVOC",
+                "NOx",
+                "OC",
+                "SO2",
+            ],
             "table_patterns": {
                 "by_country": "{entity}_CEDS_emissions_by_country_2021_04_21.csv",
                 "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
@@ -184,6 +177,18 @@ CEDS = {
             "hash": "md5:7054c1e1ca510015a37d6c1bb5934c9b",
             "citation": """O'Rourke, P. R., Smith, S. J., Mott, A., Ahsan, H., McDuffie, E. E., Crippa, M., Klimont, Z., McDonald, B., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2021). CEDS v_2021_02_05 Release Emission Data (v_2021_02_05) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4509372""",
             "license": "CC BY 4.0",
+            "entities": [
+                "BC",
+                "CH4",
+                "CO",
+                "CO2",
+                "N2O",
+                "NH3",
+                "NMVOC",
+                "NOx",
+                "OC",
+                "SO2",
+            ],
             "table_patterns": {
                 "by_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_2021_02_05.csv",
                 "by_sector_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
@@ -201,6 +206,7 @@ CEDS = {
             "hash": "md5:0c7f4bfc5eafcd7510920fd0b8bbdd16",
             "citation": """O'Rourke, P. R., Smith, S. J., McDuffie, E. E., Klimont, Z., Crippa, M., Mott, A., Wang, S., Nicholson, M. B., Feng, L., & Hoesly, R. M. (2020). CEDS v_2020_09_11 Pre-Release Emission Data (v_2020_09_11) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4025316""",
             "license": "CC BY 4.0",
+            "entities": ["BC", "CO", "NH3", "NMVOC", "NOx", "OC", "SO2"],
             "table_patterns": {
                 "by_country": "{entity}_CEDS_emissions_by_country_2020_09_11.csv",
                 "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
@@ -218,6 +224,7 @@ CEDS = {
             "hash": "md5:830ac6fbc5ba24885acecf1aa6567db8",
             "citation": """Hoesly, R. M., O'Rourke, P. R., Smith, S. J., Feng, L., Klimont, Z., Janssens-Maenhout, G., Pitkanen, T., Seibert, J. J., Vu, L., Andres, R. J., Bolt, R. M., Bond, T. C., Dawidowski, L., Kholod, N., Kurokawa, J.-. ichi ., Li, M., Liu, L., Lu, Z., Moura, M. C. P., Zhang, Q., Goldstein, B., Muwan, P. (2020). CEDS v_2019_12_23 Emission Data (v_2019_12_23) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.3606753""",
             "license": "CC BY 4.0",
+            "entities": ["BC", "CH4", "CO", "CO2", "NH3", "NMVOC", "NOx", "OC", "SO2"],
             "table_patterns": {
                 "by_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_v_2019_12_23.csv",
                 "by_sector_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_CEDS_sector_v_2019_12_23.csv",
