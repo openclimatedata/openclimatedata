@@ -7,7 +7,7 @@ import pooch
 from openpyxl import load_workbook
 
 
-class _GCB_Global_Budget_Release(dict):
+class _Global_Carbon_Budget_Release(dict):
 
     def __init__(
         self,
@@ -37,7 +37,7 @@ class _GCB_Global_Budget_Release(dict):
         self.known_hash = known_hash
 
         for sheet in sheets:
-            self[sheet["sheet_name"]] = _GCB_Global_Budget_Sheet(release=self, **sheet)
+            self[sheet["sheet_name"]] = _Global_Carbon_Budget_Sheet(release=self, **sheet)
 
     def _get_file_path(self):
         return pooch.retrieve(
@@ -58,7 +58,7 @@ https://doi.org/{self.doi}
 {self.citation}"""
 
 
-class _GCB_Global_Budget_Sheet(dict):
+class _Global_Carbon_Budget_Sheet(dict):
     def __init__(
         self,
         release: object,
@@ -74,7 +74,7 @@ class _GCB_Global_Budget_Sheet(dict):
 
         if tables:
             for table in tables:
-                self[table["table_name"]] = _GCB_Global_Budget_Table(
+                self[table["table_name"]] = _Global_Carbon_Budget_Table(
                     sheet=self,
                     table_name=table["table_name"],
                     skiprows=table["skiprows"],
@@ -134,7 +134,7 @@ class _GCB_Global_Budget_Sheet(dict):
 
 
 @dataclass
-class _GCB_Global_Budget_Table:
+class _Global_Carbon_Budget_Table:
     sheet: object
     table_name: str
     skiprows: int
