@@ -1,11 +1,11 @@
 import re
-
 from dataclasses import dataclass
 from zipfile import ZipFile
-import pooch
-import pandas as pd
-import pyarrow as pa
+
 import numpy as np
+import pandas as pd
+import pooch
+import pyarrow as pa
 
 _dtype_category = pd.ArrowDtype(pa.dictionary(pa.int16(), pa.string()))
 
