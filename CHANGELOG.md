@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.11
+
+- Adds Global Carbon Budget 2023, 2022, and 2021 main Global files
 - Adds CEDS v_2024_04_01
 
 ## 0.10
