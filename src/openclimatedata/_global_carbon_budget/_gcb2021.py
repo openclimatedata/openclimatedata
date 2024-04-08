@@ -1,6 +1,6 @@
-from ._core import _GCB_Global_Budget_Release
+from ._core import _Global_Carbon_Budget_Release
 
-GCB2021 = _GCB_Global_Budget_Release(
+GCB2021 = _Global_Carbon_Budget_Release(
     name="Global Carbon Budget 2021",
     version="1.0",
     doi="10.18160/gcp-2021",

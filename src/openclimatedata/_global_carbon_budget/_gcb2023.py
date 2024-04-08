@@ -1,6 +1,6 @@
-from ._core import _GCB_Global_Budget_Release
+from ._core import _Global_Carbon_Budget_Release
 
-GCB2023 = _GCB_Global_Budget_Release(
+GCB2023 = _Global_Carbon_Budget_Release(
     name="Global Carbon Budget 2023",
     version="1.1",
     doi="10.18160/GCP-2023",
