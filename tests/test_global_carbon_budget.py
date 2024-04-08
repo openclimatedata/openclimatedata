@@ -193,3 +193,74 @@ def test_gcb_2022():
     assert cement_carbonation_sink.GCB.loc[1959] == approx(12.684256)
     assert cement_carbonation_sink.GCB.loc[2021] == approx(229.794956)
     assert pd.isna(cement_carbonation_sink.Guo[2021])
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_2021():
+    year = "2021"
+    global_carbon_budget = GCB_Global_Carbon_Budget[year][
+        "Global Carbon Budget"
+    ].to_dataframe()
+    historical_budget = GCB_Global_Carbon_Budget[year][
+        "Historical Budget"
+    ].to_dataframe()
+    fossil_emissions_by_category = GCB_Global_Carbon_Budget[year][
+        "Fossil Emissions by Category"
+    ].to_dataframe()
+    luc_emissions_gcb = GCB_Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "GCB"
+    ].to_dataframe()
+    luc_emisssions_individual_models = GCB_Global_Carbon_Budget[year][
+        "Land-Use Change Emissions"
+    ]["Individual models"].to_dataframe()
+    ocean_sink_gcb = GCB_Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = GCB_Global_Carbon_Budget[year]["Ocean Sink"][
+        "Data-based products"
+    ].to_dataframe()
+    terrestrial_sink_gcb = GCB_Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "GCB"
+    ].to_dataframe()
+    terrestrial_sink_individual_models = GCB_Global_Carbon_Budget[year][
+        "Terrestrial Sink"
+    ]["Individual models"].to_dataframe()
+    cement_carbonation_sink = GCB_Global_Carbon_Budget[year][
+        "Cement Carbonation Sink"
+    ].to_dataframe()
+
+    assert global_carbon_budget["fossil emissions excluding carbonation"].loc[
+        1959
+    ] == approx(2.41713282396274)
+    assert global_carbon_budget["budget imbalance"].loc[2020] == approx(
+        -0.775025676533141
+    )
+
+    assert historical_budget["fossil emissions excluding carbonation"].loc[
+        1750
+    ] == approx(0.002552)
+    assert historical_budget["budget imbalance"].loc[2020] == approx(-0.775025676531002)
+
+    assert fossil_emissions_by_category["fossil.emissions.excluding.carbonation"].loc[
+        1959
+    ] == approx(2417.13282396274)
+    assert fossil_emissions_by_category["Per.Capita"].loc[2020] == approx(
+        1.21875600594367
+    )
+
+    assert luc_emissions_gcb.Net.loc[1959] == approx(1.84551880806033)
+    assert luc_emisssions_individual_models["Model Spread (sd)"].loc[2020] == approx(
+        0.730856668977054
+    )
+
+    assert ocean_sink_gcb.GCB.loc[1959] == approx(0.918022208427885)
+    assert ocean_sink_data_based_products["sd data-products (excl. Watson.)"].loc[
+        2020
+    ] == approx(0.33545744617825)
+
+    assert terrestrial_sink_gcb.GCB.loc[1959] == approx(0.395882352941176)
+    assert terrestrial_sink_individual_models["Model Spread (sd)"].loc[2020] == approx(
+        0.989381862876127
+    )
+
+    assert cement_carbonation_sink.GCB.loc[1959] == approx(12.68373)
+    assert cement_carbonation_sink.GCB.loc[2020] == approx(218.796424)
+    assert pd.isna(cement_carbonation_sink.Guo[2020])
