@@ -165,8 +165,30 @@ CEDS = {
                     "patterns": {
                         "by_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_v2024_04_01.csv",
                         "by_sector_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_sector_v2024_04_01.csv",
+                        "global_by_sector": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_global_emissions_by_sector_v2024_04_01.csv",
+                        "global_by_sector_fuel": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_global_emissions_by_sector_fuel_v2024_04_01.csv",
                     },
-                }
+                },
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v_2024_04_01_detailed.zip",
+                        "url": "https://zenodo.org/records/10904361/files/CEDS_v_2024_04_01_detailed.zip",
+                        "hash": "md5:8310c3c9ad0da67c11f61168ca7d265d",
+                    },
+                    "patterns": {
+                        "by_sector_fuel": "CEDS_v_2024_04_01_detailed/{entity}_CEDS_emissions_by_country_CEDS_sector_fuel_v2024_04_01.csv"
+                    },
+                },
+                {
+                    "zipfile": {
+                        "filename": "CEDS_v_2024_04_01_supplementary_bunkers.zip",
+                        "url": "https://zenodo.org/records/10904361/files/CEDS_v_2024_04_01_supplementary_bunkers.zip",
+                        "hash": "md5:49d6bbe523409ca61cc84854fe4a27b2",
+                    },
+                    "patterns": {
+                        "bunkers": "CEDS_v_2024_04_01_supplementary_bunkers/S.{entity}_bunker_emissions_v2024_04_01.csv"
+                    },
+                },
             ],
         }
     ),
