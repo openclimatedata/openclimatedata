@@ -1,5 +1,6 @@
 # Changelog
 
+- Adds CEDS v_2024_04_01
 
 ## 0.10
 
