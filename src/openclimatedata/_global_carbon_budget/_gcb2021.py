@@ -48,7 +48,7 @@ GCB2021 = _GCB_Global_Budget_Release(
                 },
                 {
                     "table_name": "Individual models",
-                    "skiprows": list(range(28)) + [29],
+                    "skiprows": list(range(29)) + [30],
                     "columns": "A,P:AF,AH:AI",
                 },
             ],
