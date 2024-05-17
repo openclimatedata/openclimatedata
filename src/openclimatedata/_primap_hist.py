@@ -7,78 +7,54 @@ paper_2016 = """Gütschow, J.; Jeffery, L.; Gieseke, R.; Gebel, R.; Stevens, D.;
 name_2_2 = "PRIMAP-hist 2.2"
 doi_2_2 = "10.5281/zenodo.4479172"
 published_2_2 = "2021-02-09"
-citation_2_2 = (
-    "Gütschow, J.; Günther, A.; Jeffery, L.; Gieseke, R. (2021): The PRIMAP-hist national historical emissions time series v2.2 (1850-2018). zenodo. doi:10.5281/zenodo.4479172."
-    + paper_2016
-)
+citation_2_2 = "Gütschow, J.; Günther, A.; Jeffery, L.; Gieseke, R. (2021): The PRIMAP-hist national historical emissions time series v2.2 (1850-2018). zenodo. doi:10.5281/zenodo.4479172."
 
 name_2_3 = "PRIMAP-hist 2.3"
 doi_2_3 = "10.5281/zenodo.5175154"
 published_2_3 = "2021-08-30"
-citation_2_3 = (
-    "Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3 (1850-2019). zenodo. doi:10.5281/zenodo.5175154."
-    + paper_2016
-)
+citation_2_3 = "Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3 (1850-2019). zenodo. doi:10.5281/zenodo.5175154."
 
 name_2_3_1 = "PRIMAP-hist 2.3.1"
 doi_2_3_1 = "10.5281/zenodo.5494497"
 published_2_3_1 = "2021-09-22"
-citation_2_3_1 = (
-    """Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3.1 (1850-2019). zenodo. doi:10.5281/zenodo.5494497.
+citation_2_3_1 = """Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3.1 (1850-2019). zenodo. doi:10.5281/zenodo.5494497.
 
 """
-    + paper_2016
-)
 
 name_2_4 = "PRIMAP-hist 2.4"
 doi_2_4 = "10.5281/zenodo.7179775"
 published_2_4 = "2022-10-17"
-citation_2_4 = (
-    """Gütschow, J.; Pflüger, M. (2022): The PRIMAP-hist national historical emissions time series v2.4 (1750-2021). zenodo. doi:10.5281/zenodo.7179775.
+citation_2_4 = """Gütschow, J.; Pflüger, M. (2022): The PRIMAP-hist national historical emissions time series v2.4 (1750-2021). zenodo. doi:10.5281/zenodo.7179775.
 
 """
-    + paper_2016
-)
 
 name_2_4_1 = "PRIMAP-hist 2.4.1"
 doi_2_4_1 = "10.5281/zenodo.7585420"
 published_2_4_1 = "2023-02-20"
-citation_2_4_1 = (
-    """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.1 (1750-2021). zenodo. doi:10.5281/zenodo.7585420.
+citation_2_4_1 = """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.1 (1750-2021). zenodo. doi:10.5281/zenodo.7585420.
 
 """
-    + paper_2016
-)
 
 name_2_4_2 = "PRIMAP-hist 2.4.2"
 doi_2_4_2 = "10.5281/zenodo.7727475"
 published_2_4_2 = "2023-03-15"
-citation_2_4_2 = (
-    """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.2 (1750-2021). zenodo. doi:10.5281/zenodo.7727475.
+citation_2_4_2 = """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.2 (1750-2021). zenodo. doi:10.5281/zenodo.7727475.
 
 """
-    + paper_2016
-)
 
 name_2_5 = "PRIMAP-hist 2.5"
 doi_2_5 = "10.5281/zenodo.10006301"
 published_2_5 = "2023-10-15"
-citation_2_5 = (
-    """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301
+citation_2_5 = """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301
 
 """
-    + paper_2016
-)
 
 name_2_5_1 = "PRIMAP-hist 2.5.1"
 doi_2_5_1 = "10.5281/zenodo.10705513"
 published_2_5_1 = "2024-02-27"
-citation_2_5_1 = (
-    """Gütschow, J., Pflüger, M., & Busch, D. (2024). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5.1 (2.5.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10705513
+citation_2_5_1 = """Gütschow, J., Pflüger, M., & Busch, D. (2024). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5.1 (2.5.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10705513
 
 """
-    + paper_2016
-)
 
 
 @dataclass
@@ -101,6 +77,9 @@ License: {self.license}
 https://doi.org/{self.doi}
 
 Recommended citation:
+
+{paper_2016}
+
 {self.citation}
         """
 
