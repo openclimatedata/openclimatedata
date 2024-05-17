@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-import pooch
+
 import pandas as pd
+import pooch
 
 
 @dataclass

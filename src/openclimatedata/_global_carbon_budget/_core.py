@@ -37,7 +37,9 @@ class _Global_Carbon_Budget_Release(dict):
         self.known_hash = known_hash
 
         for sheet in sheets:
-            self[sheet["sheet_name"]] = _Global_Carbon_Budget_Sheet(release=self, **sheet)
+            self[sheet["sheet_name"]] = _Global_Carbon_Budget_Sheet(
+                release=self, **sheet
+            )
 
     def _get_file_path(self):
         return pooch.retrieve(
@@ -169,4 +171,3 @@ class _Global_Carbon_Budget_Table:
         )
         df.Category = df.Category.astype("category")
         return df
-
