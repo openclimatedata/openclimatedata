@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12
+
+- Changes PRIMAP-hist structure to have sub-keys per file.
+  ([#22](https://github.com/openclimatedata/openclimatedata/pull/22))
+
 ## 0.11
 
 - Adds Global Carbon Budget 2023, 2022, and 2021 main Global files
