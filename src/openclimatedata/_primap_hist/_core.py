@@ -8,11 +8,9 @@ newline = "\n"
 
 
 class _File(TypedDict):
-    key: str
     filename: str
     known_hash: str
     note: str
-    release: object
 
 
 class _PRIMAPHIST_2_Release(dict):
@@ -26,7 +24,7 @@ class _PRIMAPHIST_2_Release(dict):
         citation: str,
         doi_article: str,
         citation_article: str,
-        files: list[_File],
+        files: dict[str, _File],
         license: str = "CC BY 4.0",
     ):
         self.name = name
