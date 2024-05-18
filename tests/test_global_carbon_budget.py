@@ -4,25 +4,25 @@ from pytest import approx
 
 import pandas as pd
 
-from openclimatedata import GCB_Global_Carbon_Budget
+from openclimatedata import Global_Carbon_Budget
 
 GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 
-versions = GCB_Global_Carbon_Budget.keys()
+versions = Global_Carbon_Budget.keys()
 
 
 def test_gcb():
     for version in versions:
-        assert GCB_Global_Carbon_Budget[version].name
-        assert GCB_Global_Carbon_Budget[version].doi
-        assert GCB_Global_Carbon_Budget[version].published
+        assert Global_Carbon_Budget[version].name
+        assert Global_Carbon_Budget[version].doi
+        assert Global_Carbon_Budget[version].published
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_sheet_names():
     for version in versions:
-        sheet_names = GCB_Global_Carbon_Budget[version].keys()
+        sheet_names = Global_Carbon_Budget[version].keys()
 
         assert "Global Carbon Budget" in sheet_names
         assert "Historical Budget" in sheet_names
@@ -39,47 +39,45 @@ def test_gcb_dataframes_for_subtables_only():
     # for tables, not on the main sheet.
     for version in versions:
 
-        sheet_names = GCB_Global_Carbon_Budget[version].keys()
+        sheet_names = Global_Carbon_Budget[version].keys()
 
         for sheet_name in sheet_names:
-            if len(GCB_Global_Carbon_Budget[version][sheet_name].keys()) > 0:
+            if len(Global_Carbon_Budget[version][sheet_name].keys()) > 0:
                 assert "to_dataframe" not in dir(
-                    GCB_Global_Carbon_Budget[version][sheet_name]
+                    Global_Carbon_Budget[version][sheet_name]
                 )
                 assert "to_long_dataframe" not in dir(
-                    GCB_Global_Carbon_Budget[version][sheet_name]
+                    Global_Carbon_Budget[version][sheet_name]
                 )
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2023():
     year = "2023"
-    global_carbon_budget = GCB_Global_Carbon_Budget[year][
+    global_carbon_budget = Global_Carbon_Budget[year][
         "Global Carbon Budget"
     ].to_dataframe()
-    historical_budget = GCB_Global_Carbon_Budget[year][
-        "Historical Budget"
-    ].to_dataframe()
-    fossil_emissions_by_category = GCB_Global_Carbon_Budget[year][
+    historical_budget = Global_Carbon_Budget[year]["Historical Budget"].to_dataframe()
+    fossil_emissions_by_category = Global_Carbon_Budget[year][
         "Fossil Emissions by Category"
     ].to_dataframe()
-    luc_emissions_gcb = GCB_Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+    luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
-    luc_emisssions_individual_models = GCB_Global_Carbon_Budget[year][
+    luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models (NET) - Does not include peat emissions"].to_dataframe()
-    ocean_sink_gcb = GCB_Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
-    ocean_sink_data_based_products = GCB_Global_Carbon_Budget[year]["Ocean Sink"][
+    ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
     ].to_dataframe()
-    terrestrial_sink_gcb = GCB_Global_Carbon_Budget[year]["Terrestrial Sink"][
+    terrestrial_sink_gcb = Global_Carbon_Budget[year]["Terrestrial Sink"][
         "GCB"
     ].to_dataframe()
-    terrestrial_sink_individual_models = GCB_Global_Carbon_Budget[year][
-        "Terrestrial Sink"
-    ]["Individual models"].to_dataframe()
-    cement_carbonation_sink = GCB_Global_Carbon_Budget[year][
+    terrestrial_sink_individual_models = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+    cement_carbonation_sink = Global_Carbon_Budget[year][
         "Cement Carbonation Sink"
     ].to_dataframe()
 
@@ -127,32 +125,30 @@ def test_gcb_2023():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2022():
     year = "2022"
-    global_carbon_budget = GCB_Global_Carbon_Budget[year][
+    global_carbon_budget = Global_Carbon_Budget[year][
         "Global Carbon Budget"
     ].to_dataframe()
-    historical_budget = GCB_Global_Carbon_Budget[year][
-        "Historical Budget"
-    ].to_dataframe()
-    fossil_emissions_by_category = GCB_Global_Carbon_Budget[year][
+    historical_budget = Global_Carbon_Budget[year]["Historical Budget"].to_dataframe()
+    fossil_emissions_by_category = Global_Carbon_Budget[year][
         "Fossil Emissions by Category"
     ].to_dataframe()
-    luc_emissions_gcb = GCB_Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+    luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
-    luc_emisssions_individual_models = GCB_Global_Carbon_Budget[year][
+    luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
-    ocean_sink_gcb = GCB_Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
-    ocean_sink_data_based_products = GCB_Global_Carbon_Budget[year]["Ocean Sink"][
+    ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
     ].to_dataframe()
-    terrestrial_sink_gcb = GCB_Global_Carbon_Budget[year]["Terrestrial Sink"][
+    terrestrial_sink_gcb = Global_Carbon_Budget[year]["Terrestrial Sink"][
         "GCB"
     ].to_dataframe()
-    terrestrial_sink_individual_models = GCB_Global_Carbon_Budget[year][
-        "Terrestrial Sink"
-    ]["Individual models"].to_dataframe()
-    cement_carbonation_sink = GCB_Global_Carbon_Budget[year][
+    terrestrial_sink_individual_models = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+    cement_carbonation_sink = Global_Carbon_Budget[year][
         "Cement Carbonation Sink"
     ].to_dataframe()
 
@@ -198,32 +194,30 @@ def test_gcb_2022():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2021():
     year = "2021"
-    global_carbon_budget = GCB_Global_Carbon_Budget[year][
+    global_carbon_budget = Global_Carbon_Budget[year][
         "Global Carbon Budget"
     ].to_dataframe()
-    historical_budget = GCB_Global_Carbon_Budget[year][
-        "Historical Budget"
-    ].to_dataframe()
-    fossil_emissions_by_category = GCB_Global_Carbon_Budget[year][
+    historical_budget = Global_Carbon_Budget[year]["Historical Budget"].to_dataframe()
+    fossil_emissions_by_category = Global_Carbon_Budget[year][
         "Fossil Emissions by Category"
     ].to_dataframe()
-    luc_emissions_gcb = GCB_Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+    luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
-    luc_emisssions_individual_models = GCB_Global_Carbon_Budget[year][
+    luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
-    ocean_sink_gcb = GCB_Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
-    ocean_sink_data_based_products = GCB_Global_Carbon_Budget[year]["Ocean Sink"][
+    ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
     ].to_dataframe()
-    terrestrial_sink_gcb = GCB_Global_Carbon_Budget[year]["Terrestrial Sink"][
+    terrestrial_sink_gcb = Global_Carbon_Budget[year]["Terrestrial Sink"][
         "GCB"
     ].to_dataframe()
-    terrestrial_sink_individual_models = GCB_Global_Carbon_Budget[year][
-        "Terrestrial Sink"
-    ]["Individual models"].to_dataframe()
-    cement_carbonation_sink = GCB_Global_Carbon_Budget[year][
+    terrestrial_sink_individual_models = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+    cement_carbonation_sink = Global_Carbon_Budget[year][
         "Cement Carbonation Sink"
     ].to_dataframe()
 
