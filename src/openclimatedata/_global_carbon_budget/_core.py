@@ -43,7 +43,7 @@ class _Global_Carbon_Budget_Release(dict):
 
     def _get_file_path(self):
         return pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
+            path=pooch.os_cache("openclimatedata/global-carbon-budget"),
             fname=self.filename,
             url=self.url,
             known_hash=self.known_hash,

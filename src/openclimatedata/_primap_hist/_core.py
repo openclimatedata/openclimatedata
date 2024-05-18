@@ -90,7 +90,7 @@ File: {self.filename}
 
     def to_dataframe(self):
         full_path = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
+            path=pooch.os_cache("openclimatedata/primap-hist"),
             url=f"doi:{self.release.doi}/{self.filename}",
             known_hash=self.known_hash,
             progressbar=True,

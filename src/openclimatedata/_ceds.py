@@ -65,7 +65,7 @@ class _CedsTable:
 
     def _get_file_path(self):
         return pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
+            path=pooch.os_cache("openclimatedata/ceds"),
             fname=self.filename,
             url=self.url,
             known_hash=self.hash,

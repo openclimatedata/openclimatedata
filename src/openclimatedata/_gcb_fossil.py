@@ -30,7 +30,7 @@ https://doi.org/{self.doi}
 
     def to_dataframe(self):
         file_path = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
+            path=pooch.os_cache("openclimatedata/gcb-fossil"),
             fname=self.filename,
             url=self.url,
             known_hash=self.hash,
@@ -48,7 +48,7 @@ https://doi.org/{self.doi}
             df = df.drop("UN M49", axis=1)
 
         file_path_sources = pooch.retrieve(
-            path=pooch.os_cache("openclimatedata"),
+            path=pooch.os_cache("openclimatedata/gcb-fossil"),
             fname=self.filename_sources,
             url=self.url_sources,
             known_hash=self.hash_sources,

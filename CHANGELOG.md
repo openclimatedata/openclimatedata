@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13
+
+- Use subdirectories in `~/.cache/openclimatedata` for each dataset
+  [#18](https://github.com/openclimatedata/openclimatedata/issues/18)
+- Rename `GCB_Global_Carbon_Budget` to `Global_Carbon_Budget`
+- Improve Types
+
 ## 0.12
 
 - Changes PRIMAP-hist structure to have sub-keys per file.
