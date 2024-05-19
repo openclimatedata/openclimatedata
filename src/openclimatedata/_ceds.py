@@ -25,7 +25,6 @@ class _CedsRelease(dict):
         newline = "\n"
 
         return f"""{self.name}
-'{self.filename}'
 
 License: {self.license}
 https://doi.org/{self.doi}

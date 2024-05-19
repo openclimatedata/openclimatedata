@@ -14,6 +14,9 @@ versions = CEDS.keys()
 
 def test_ceds():
     for version in versions:
+        # Test __repr__
+        print(CEDS)
+        
         assert CEDS[version].name
         assert CEDS[version].doi
         assert CEDS[version].published
