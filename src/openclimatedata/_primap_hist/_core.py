@@ -95,7 +95,27 @@ File: {self.filename}
             known_hash=self.known_hash,
             progressbar=True,
         )
-        return pd.read_csv(full_path)
+        if self.release.version >= "2.3":
+            dtypes = {
+                "source": "category",
+                "scenario (PRIMAP-hist)": "category",
+                "provenance": "category",
+                "area (ISO3)": "category",
+                "entity": "category",
+                "unit": "category",
+                "category (IPCC2006_PRIMAP)": "category",
+            }
+        else:
+            dtypes = {
+                "source": "category",
+                "scenario": "category",
+                "provenance": "category",
+                "area": "category",
+                "entity": "category",
+                "unit": "category",
+                "category": "category",
+            }
+        return pd.read_csv(full_path, dtype=dtypes)
 
     def to_long_dataframe(self):
         df = self.to_dataframe()
@@ -129,7 +149,7 @@ File: {self.filename}
             var_name="year",
             value_name="value",
         )
-        df.year = df.year.astype(int)
+        df.year = df.year.astype("int32")
         return df
 
     def to_ocd(self):
