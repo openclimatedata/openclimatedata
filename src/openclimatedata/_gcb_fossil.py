@@ -35,7 +35,16 @@ https://doi.org/{self.doi}
             url=self.url,
             known_hash=self.hash,
         )
-        return pd.read_csv(file_path, encoding="latin-1")
+        return pd.read_csv(
+            file_path,
+            encoding="latin-1",
+            dtype={
+                "Country": "category",
+                "ISO 3166-1 alpha-3": "category",
+                "UN M49": "category",
+                "Year": "int32",
+            },
+        )
 
     def to_long_dataframe(self):
         """
@@ -46,6 +55,9 @@ https://doi.org/{self.doi}
 
         if "UN M49" in df.columns:
             df = df.drop("UN M49", axis=1)
+
+        df["Country"] = df["Country"].astype("string")
+        df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].astype("string")
 
         file_path_sources = pooch.retrieve(
             path=pooch.os_cache("openclimatedata/gcb-fossil"),
