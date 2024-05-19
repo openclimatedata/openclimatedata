@@ -1,5 +1,6 @@
 import os
 
+import pandas as pd
 import pytest
 from pytest import approx
 
@@ -60,7 +61,7 @@ def test_primaphist_2_4_2():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2021"]
 
-    assert ocdf.iloc[0]["provenance"] == None
+    assert pd.isna(ocdf.iloc[0]["provenance"])
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
@@ -74,7 +75,7 @@ def test_primaphist_2_3():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2019"]
 
-    assert ocdf.iloc[0]["provenance"] == None
+    assert pd.isna(ocdf.iloc[0]["provenance"])
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
@@ -88,4 +89,4 @@ def test_primaphist_2_2():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1850"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2018"]
 
-    assert ocdf.iloc[0]["provenance"] == None
+    assert pd.isna(ocdf.iloc[0]["provenance"])
