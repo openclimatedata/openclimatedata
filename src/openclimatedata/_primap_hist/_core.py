@@ -122,7 +122,7 @@ File: {self.filename}
 
         # Pre 2.5 provenance not included.
         if "provenance" not in df.columns:
-            df["provenance"] = pd.Series(dtype='category')
+            df["provenance"] = pd.Series(dtype="category")
         # Changed column names in 2.3
         if self.release.version >= "2.3":
             id_vars = [

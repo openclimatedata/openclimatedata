@@ -5,14 +5,10 @@ from zipfile import ZipFile
 import numpy as np
 import pandas as pd
 import pooch
-import pyarrow as pa
-
-_dtype_category = pd.ArrowDtype(pa.dictionary(pa.int16(), pa.string()))
 
 
 @dataclass
 class _CedsRelease(dict):
-
     name: str
     citation: str
     doi: str
@@ -73,22 +69,20 @@ class _CedsTable:
     def _load_csv_from_zip(self, path_pattern):
         file_path = self._get_file_path()
         with ZipFile(file_path) as zip_file:
+            dtype = {
+                "country": "category",
+                "iso": "category",
+                "em": "category",
+                "units": "category",
+                "sector": "category",
+                "fuel": "category",
+            }
+
             df = pd.read_csv(
                 zip_file.open(self.path_pattern.format(entity=self.entity)),
-                engine="pyarrow",
+                dtype=dtype,
             )
 
-        _dtype_category = pd.ArrowDtype(pa.dictionary(pa.int16(), pa.string()))
-        if "country" in df.columns:
-            df["country"] = df["country"].astype(_dtype_category)
-        elif "iso" in df.columns:
-            df["iso"] = df["iso"].astype(_dtype_category)
-        df["em"] = df["em"].astype(_dtype_category)
-        df["units"] = df["units"].astype(_dtype_category)
-        if "sector" in self.path_pattern:
-            df["sector"] = df["sector"].astype(_dtype_category)
-        elif "fuel" in self.path_pattern:
-            df["fuel"] = df["fuel"].astype(_dtype_category)
         return df
 
     def to_dataframe(self):
@@ -103,12 +97,13 @@ class _CedsTable:
         id_vars = [c for c in df.columns if not c.startswith("X")]
 
         df.columns = [int(c[1:]) if c.startswith("X") else c for c in df.columns]
+
         df = df.melt(
             id_vars=id_vars,
             var_name="year",
             value_name="value",
         )
-        df["year"] = df["year"].astype("uint16[pyarrow]")
+        df["year"] = df["year"].astype("int32")
         return df
 
     def to_ocd(self):
@@ -125,12 +120,10 @@ class _CedsTable:
         df = df.rename(columns=column_names)
 
         if "code" in df.columns:
-            df["code"] = df["code"].astype("category")
             df["code"] = df["code"].cat.rename_categories(
                 {"global": "BUNKERS", "srb (kosovo)": "XKX"}
             )
             df["code"] = df["code"].cat.rename_categories(str.upper)
-            df["code"] = df["code"].astype(_dtype_category)
         return df
 
 
