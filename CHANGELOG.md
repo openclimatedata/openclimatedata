@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.14
+
+- Reduce memory usage
+  [#23](https://github.com/openclimatedata/openclimatedata/issues/23)
+- Fix CEDS string representation
+
 ## 0.13
 
 - Use subdirectories in `~/.cache/openclimatedata` for each dataset
