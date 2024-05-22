@@ -12,4 +12,4 @@ __all__ = [
     "GCB_Fossil_Emissions",
 ]
 
-__version__ = "0.14"
+__version__ = "0.15"
