@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15
+
+- Unify PRIMAP-hist citations
+
 ## 0.14
 
 - Reduce memory usage

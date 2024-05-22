@@ -1,10 +1,10 @@
 from ._core import _PRIMAPHIST_2_Release
 
-paper_2016 = """Gütschow, J.; Jeffery, L.; Gieseke, R.; Gebel, R.; Stevens, D.; Krapp, M.; Rocha, M. (2016): The PRIMAP-hist national historical emissions time series, Earth Syst. Sci. Data, 8, 571-603, doi:10.5194/essd-8-571-2016"""
+paper_2016 = """Gütschow, J., Jeffery, L., Gieseke, R., Gebel, R., Stevens, D., Krapp, M., & Rocha, M. (2016): The PRIMAP-hist national historical emissions time series, Earth Syst. Sci. Data, 8, 571-603, doi:10.5194/essd-8-571-2016"""
 doi_article = "10.5194/essd-8-571-2016"
 
 
-citation_2_5_1 = """Gütschow, J., Pflüger, M., & Busch, D. (2024). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5.1 (2.5.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10705513"""
+citation_2_5_1 = """Gütschow, J., Pflüger, M., & Busch, D. (2024). The PRIMAP-hist national historical emissions time series v2.5.1 (1750-2022) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10705513"""
 
 _PRIMAPHIST_2_5_1 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.5.1",
@@ -23,7 +23,7 @@ _PRIMAPHIST_2_5_1 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_5 = """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series (1750-2022) v2.5 (2.5) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301"""
+citation_2_5 = """Gütschow, J., & Pflüger, M. (2023). The PRIMAP-hist national historical emissions time series v2.5 (1750-2022) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.10006301"""
 
 _PRIMAPHIST_2_5 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.5",
@@ -42,7 +42,7 @@ _PRIMAPHIST_2_5 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_4_2 = """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.2 (1750-2021). zenodo. doi:10.5281/zenodo.7727475."""
+citation_2_4_2 = """Gütschow, J., & Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.2 (1750-2021) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7727475"""
 
 _PRIMAPHIST_2_4_2 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.4.2",
@@ -61,7 +61,7 @@ _PRIMAPHIST_2_4_2 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_4_1 = """Gütschow, J.; Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.1 (1750-2021). zenodo. doi:10.5281/zenodo.7585420."""
+citation_2_4_1 = """Gütschow, J., & Pflüger, M. (2023): The PRIMAP-hist national historical emissions time series v2.4.1 (1750-2021) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7585420"""
 
 _PRIMAPHIST_2_4_1 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.4.1",
@@ -81,7 +81,7 @@ _PRIMAPHIST_2_4_1 = _PRIMAPHIST_2_Release(
 )
 
 
-citation_2_4 = """Gütschow, J.; Pflüger, M. (2022): The PRIMAP-hist national historical emissions time series v2.4 (1750-2021). zenodo. doi:10.5281/zenodo.7179775."""
+citation_2_4 = """Gütschow, J., & Pflüger, M. (2022): The PRIMAP-hist national historical emissions time series v2.4 (1750-2021) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7179775"""
 
 _PRIMAPHIST_2_4 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.4",
@@ -100,7 +100,7 @@ _PRIMAPHIST_2_4 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_3_1 = """Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3.1 (1850-2019). zenodo. doi:10.5281/zenodo.5494497."""
+citation_2_3_1 = """Gütschow, J., Günther, A., & Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3.1 (1850-2019) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.5494497"""
 
 _PRIMAPHIST_2_3_1 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.3.1",
@@ -129,7 +129,7 @@ _PRIMAPHIST_2_3_1 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_3 = "Gütschow, J.; Günther, A.; Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3 (1850-2019). zenodo. doi:10.5281/zenodo.5175154."
+citation_2_3 = "Gütschow, J., Günther, A., & Pflüger, M. (2021): The PRIMAP-hist national historical emissions time series v2.3 (1850-2019) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.5175154"
 
 _PRIMAPHIST_2_3 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.3",
@@ -148,7 +148,7 @@ _PRIMAPHIST_2_3 = _PRIMAPHIST_2_Release(
     },
 )
 
-citation_2_2 = "Gütschow, J.; Günther, A.; Jeffery, L.; Gieseke, R. (2021): The PRIMAP-hist national historical emissions time series v2.2 (1850-2018). zenodo. doi:10.5281/zenodo.4479172."
+citation_2_2 = "Gütschow, J., Günther, A., Jeffery, L., & Gieseke, R. (2021): The PRIMAP-hist national historical emissions time series v2.2 (1850-2018) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4479172"
 
 _PRIMAPHIST_2_2 = _PRIMAPHIST_2_Release(
     name="PRIMAP-hist 2.2",
