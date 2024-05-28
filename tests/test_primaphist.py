@@ -89,4 +89,29 @@ def test_primaphist_2_2():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1850"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2018"]
 
+    ocdf_2_3 = PRIMAPHIST["2.3"]["main"].to_ocd()
+
+    # 2.2. ocd table should use the category style of later versions, without 'IPC' prefix
+    assert set(ocdf.category.unique()) == set(ocdf_2_3.category.unique())
+
+    # Entities shold use the style of >=2.3 with GWP in parentheses
+    entities = set(ocdf.entity.unique())
+    assert set(
+        [
+            "KYOTOGHG (AR4GWP100)",
+            "KYOTOGHG (SARGWP100)",
+            "FGASES (AR4GWP100)",
+            "FGASES (SARGWP100)",
+        ]
+    ).issubset(entities)
+
+    assert not set(
+        [
+            "KYOTOGHG",
+            "KYOTOGHGAR4",
+            "FGASES",
+            "FGASESAR4",
+        ]
+    ).issubset(entities)
+
     assert pd.isna(ocdf.iloc[0]["provenance"])

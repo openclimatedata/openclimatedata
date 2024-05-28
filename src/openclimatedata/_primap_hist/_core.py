@@ -165,4 +165,47 @@ File: {self.filename}
             )
         else:
             df = df.rename(columns={"country": "code"})
+        if self.release.version <= "2.2":
+            df.category = df.category.astype(str)
+            df = df.replace(
+                {
+                    "category": {
+                        "IPCM0EL": "M.0.EL",
+                        "IPCMAG": "M.AG",
+                        "IPCMAGELV": "M.AG.ELV",
+                        "IPC1": "1",
+                        "IPC1A": "1.A",
+                        "IPC1B": "1.B",
+                        "IPC1B1": "1.B.1",
+                        "IPC1B2": "1.B.2",
+                        "IPC1B3": "1.B.3",
+                        "IPC1C": "1.C",
+                        "IPC2": "2",
+                        "IPC2A": "2.A",
+                        "IPC2B": "2.B",
+                        "IPC2C": "2.C",
+                        "IPC2D": "2.D",
+                        "IPC2E": "2.E",
+                        "IPC2F": "2.F",
+                        "IPC2G": "2.G",
+                        "IPC2H": "2.H",
+                        "IPC3A": "3.A",
+                        "IPC4": "4",
+                        "IPC5": "5",
+                    }
+                }
+            )
+            df.category = df.category.astype("category")
+
+            # Use entity style of >=2.3
+            df = df.replace(
+                {
+                    "entity": {
+                        "FGASES": "FGASES (SARGWP100)",
+                        "FGASESAR4": "FGASES (AR4GWP100)",
+                        "KYOTOGHG": "KYOTOGHG (SARGWP100)",
+                        "KYOTOGHGAR4": "KYOTOGHG (AR4GWP100)",
+                    }
+                }
+            )
         return df
