@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.16
+
+- Use category and entity styles of later versions in PRIMAP-hist 2.2
+  [#28](https://github.com/openclimatedata/openclimatedata/issues/28)
+
 ## 0.15
 
 - Unify PRIMAP-hist citations
