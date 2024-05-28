@@ -1,11 +1,10 @@
 import os
 
 import pytest
+from pandas.testing import assert_series_equal
 from pytest import approx
 
 from openclimatedata import CEDS
-
-from pandas.testing import assert_series_equal
 
 GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 

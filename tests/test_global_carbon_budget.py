@@ -1,8 +1,8 @@
 import os
-import pytest
-from pytest import approx
 
 import pandas as pd
+import pytest
+from pytest import approx
 
 from openclimatedata import Global_Carbon_Budget
 
