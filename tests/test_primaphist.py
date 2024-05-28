@@ -102,6 +102,10 @@ def test_primaphist_2_2():
             "KYOTOGHG (SARGWP100)",
             "FGASES (AR4GWP100)",
             "FGASES (SARGWP100)",
+            "HFCS (AR4GWP100)",
+            "HFCS (SARGWP100)",
+            "PFCS (AR4GWP100)",
+            "PFCS (SARGWP100)",
         ]
     ).issubset(entities)
 
@@ -111,6 +115,10 @@ def test_primaphist_2_2():
             "KYOTOGHGAR4",
             "FGASES",
             "FGASESAR4",
+            "HFCS",
+            "HFCSAR4",
+            "PFCS",
+            "PFCSAR4",
         ]
     ).issubset(entities)
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17
+
+- Add missing HFCs and PFCs from change in 0.16
+
 ## 0.16
 
 - Use category and entity styles of later versions in PRIMAP-hist 2.2

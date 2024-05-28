@@ -203,6 +203,10 @@ File: {self.filename}
                     "entity": {
                         "FGASES": "FGASES (SARGWP100)",
                         "FGASESAR4": "FGASES (AR4GWP100)",
+                        "HFCS": "HFCS (SARGWP100)",
+                        "HFCSAR4": "HFCS (AR4GWP100)",
+                        "PFCS": "PFCS (SARGWP100)",
+                        "PFCSAR4": "PFCS (AR4GWP100)",
                         "KYOTOGHG": "KYOTOGHG (SARGWP100)",
                         "KYOTOGHGAR4": "KYOTOGHG (AR4GWP100)",
                     }
