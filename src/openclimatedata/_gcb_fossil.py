@@ -70,13 +70,16 @@ https://doi.org/{self.doi}
         if "UN M49" in df_sources.columns:
             df_sources = df_sources.drop("UN M49", axis=1)
 
-        # Saint Kitts and Nevis and St. Kitts-Nevis-Anguilla both use KNA.
-        # The code is replaced with NaN and treated as below to be differentiable.
-        if len(df[df["ISO 3166-1 alpha-3"] == "KNA"].Country.unique()) > 1:
-            df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].replace("KNA", np.nan)
-            df_sources["ISO 3166-1 alpha-3"] = df_sources["ISO 3166-1 alpha-3"].replace(
-                "KNA", np.nan
-            )
+        if self.published < "2024-10-23":
+            # Saint Kitts and Nevis and St. Kitts-Nevis-Anguilla both use KNA.
+            # The code is replaced with NaN and treated as below to be differentiable.
+            if len(df[df["ISO 3166-1 alpha-3"] == "KNA"].Country.unique()) > 1:
+                df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].replace(
+                    "KNA", np.nan
+                )
+                df_sources["ISO 3166-1 alpha-3"] = df_sources[
+                    "ISO 3166-1 alpha-3"
+                ].replace("KNA", np.nan)
 
         # A few islands and Kuwaiti oil fires have no code, reusing country.
         df["ISO 3166-1 alpha-3"] = df["ISO 3166-1 alpha-3"].fillna(df["Country"])
@@ -118,6 +121,19 @@ https://doi.org/{self.doi}
 
 
 GCB_Fossil_Emissions = {
+    "2024v17": _GCB_Fossil(
+        name="The Global Carbon Project's fossil CO2 emissions dataset",
+        doi="10.5281/zenodo.13981696",
+        published="2024-10-23",
+        filename="GCB2024v17_MtCO2_flat.csv",
+        url="https://zenodo.org/records/13981696/files/GCB2024v17_MtCO2_flat.csv",
+        hash="md5:70dac1843444b14655bf756c70c1f04a",
+        filename_sources="GCB2024v17_sources_flat.csv",
+        url_sources="https://zenodo.org/records/13981696/files/GCB2024v17_sources_flat.csv",
+        hash_sources="md5:b73b61013613ed685dfc46dba75440d8",
+        citation="""Andrew, R. M., & Peters, G. P. (2024). The Global Carbon Project's fossil CO2 emissions dataset (2024v17) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.13981696""",
+        license="CC BY 4.0",
+    ),
     "2023v43": _GCB_Fossil(
         name="The Global Carbon Project's fossil CO2 emissions dataset",
         doi="10.5281/zenodo.10562476",
