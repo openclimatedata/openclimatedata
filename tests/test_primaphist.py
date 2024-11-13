@@ -33,6 +33,7 @@ def test_primaphist_2_6():
 
     assert ocdf.iloc[0]["provenance"] == "derived"
 
+
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_5_1():
     df = PRIMAPHIST["2.5.1"]["main"].to_dataframe()

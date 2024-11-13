@@ -89,6 +89,19 @@ def test_gcb_fossil_2024v17():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_fossil_2024v18():
+    df = GCB_Fossil_Emissions["2024v18"].to_dataframe()
+    # This version has Cement with zero and Total as `nan`.
+    assert math.isnan(df.iloc[0]["Total"])
+    assert df.iloc[-1]["Per Capita"] == approx(4.697341)
+
+    ocdf = GCB_Fossil_Emissions["2024v18"].to_ocd()
+    # First and last value should be the same after re-shaping.
+    assert math.isnan(ocdf.iloc[0]["value"]) and ocdf.iloc[0]["category"] == "Total"
+    assert ocdf.iloc[-1]["value"] == df.iloc[-1]["Per Capita"]
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_unique_code_name_combinations():
     # Up to version 2024v17
     # Saint Kitts and Nevis is included twice in GCB Fossil with code 'KNA'.
