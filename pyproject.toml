@@ -1,6 +1,6 @@
 [project]
 name = "openclimatedata"
-version = "0.20"
+version = "0.21"
 description = "Library to help download and locally cache climate data"
 readme = "README.md"
 authors = [{name = "Robert Gieseke"}]

@@ -4,6 +4,25 @@ paper_2016 = """Gütschow, J., Jeffery, L., Gieseke, R., Gebel, R., Stevens, D.,
 doi_article = "10.5194/essd-8-571-2016"
 
 
+citation_2_6_1 = """Gütschow, J., Busch, D., & Pflüger, M. (2025). The PRIMAP-hist national historical emissions time series (1750-2023) v2.6.1 (v2.6.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15016289"""
+
+_PRIMAPHIST_2_6_1 = _PRIMAPHIST_2_Release(
+    name="PRIMAP-hist 2.6.1",
+    version="2.6.1",
+    published="2025-03-13",
+    doi="10.5281/zenodo.15016289",
+    citation=citation_2_6_1,
+    doi_article=doi_article,
+    citation_article=paper_2016,
+    files={
+        "main": {
+            "filename": "Guetschow_et_al_2025-PRIMAP-hist_v2.6.1_final_13-Mar-2025.csv",
+            "known_hash": "md5:09b9c61629f87e16012222e5b303bc36",
+            "note": "The main dataset with numerical extrapolation of all time series to 2023 and three significant digits.",
+        }
+    },
+)
+
 citation_2_6 = """Gütschow, J., Busch, D., & Pflüger, M. (2024). The PRIMAP-hist national historical emissions time series v2.6 (1750-2023) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.13752654"""
 
 _PRIMAPHIST_2_6 = _PRIMAPHIST_2_Release(
@@ -189,6 +208,7 @@ _PRIMAPHIST_2_2 = _PRIMAPHIST_2_Release(
 
 
 PRIMAPHIST = {
+    "2.6.1": _PRIMAPHIST_2_6_1,
     "2.6": _PRIMAPHIST_2_6,
     "2.5.1": _PRIMAPHIST_2_5_1,
     "2.5": _PRIMAPHIST_2_5,
