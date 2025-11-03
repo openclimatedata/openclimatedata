@@ -123,3 +123,11 @@ def test_kosovo_country_code():
     ocdf = GCB_Fossil_Emissions["2023v43"].to_ocd()
     assert len(ocdf[ocdf.code == "KSV"]) == 0
     assert len(ocdf[ocdf.code == "XKX"]) > 0
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_fossil_2025v15():
+    df = GCB_Fossil_Emissions["2025v15"].to_dataframe()
+    assert df.iloc[-1]["Per Capita"] == approx(4.729075)
+
+    ocdf = GCB_Fossil_Emissions["2025v15"].to_ocd()
+    assert ocdf.iloc[-1]["value"] == df.iloc[-1]["Per Capita"]
