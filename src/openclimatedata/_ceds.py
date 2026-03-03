@@ -162,6 +162,60 @@ CEDS = {
             },
         ]
     ),
+    "v_2024_07_08": _CedsRelease(
+        name="CEDS v_2024_07_08 Release Emission Data",
+        doi="10.5281/zenodo.12803197",
+        published="2024-07-24",
+        citation="""Hoesly, R., Smith, S. J., Prime, N., Ahsan, H., Suchyta, H., O'Rourke, P., Crippa, M., Klimont, Z., Guizzardi, D., Behrendt, J., Feng, L., Harkins, C., McDonald, B., Mott, A., McDuffie, A., Nicholson, M., & Wang, S. (2024). CEDS v_2024_07_08 Release Emission Data (v_2024_07_08) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.12803197""",
+        license="CC BY 4.0",
+        entities=[
+            "BC",
+            "CH4",
+            "CO",
+            "CO2",
+            "N2O",
+            "NH3",
+            "NMVOC",
+            "NOx",
+            "OC",
+            "SO2",
+        ],
+        tables=[
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2024_07_08_aggregate.zip",
+                    "url": "https://zenodo.org/records/12803197/files/CEDS_v_2024_07_08_aggregate.zip",
+                    "hash": "md5:4ad029d409b8a66ed6f3d85319c66964",
+                },
+                "patterns": {
+                    "by_country": "{entity}_CEDS_emissions_by_country_v2024_07_08.csv",
+                    "by_sector_country": "{entity}_CEDS_emissions_by_country_sector_v2024_07_08.csv",
+                    "global_by_sector": "{entity}_CEDS_global_emissions_by_sector_v2024_07_08.csv",
+                    "global_by_sector_fuel": "{entity}_CEDS_global_emissions_by_sector_fuel_v2024_07_08.csv",
+                },
+            },
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2024_07_08_detailed.zip",
+                    "url": "https://zenodo.org/records/12803197/files/CEDS_v_2024_07_08_detailed.zip",
+                    "hash": "md5:558811c1a1c8e6997dcb266c18f9c093",
+                },
+                "patterns": {
+                    "by_sector_fuel": "{entity}_CEDS_emissions_by_country_CEDS_sector_fuel_v2024_07_08.csv",
+                },
+            },
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2024_07_08_supplementary_bunkers.zip",
+                    "url": "https://zenodo.org/records/12803197/files/CEDS_v_2024_07_08_supplementary_bunkers.zip",
+                    "hash": "md5:8b90232036c5aea8ba1376c7450d23a4",
+                },
+                "patterns": {
+                    "bunkers": "S.{entity}_bunker_emissions_v2024_07_08.csv",
+                },
+            },
+        ],
+    ),
     "v_2024_04_01": _CedsRelease(
         name="CEDS v_2024_04_01 Release Emission Data",
         doi="10.5281/zenodo.10904361",
