@@ -72,10 +72,54 @@ def test_ceds_reshaping():
                 check_index=False,
                 check_names=False,
             )
-        else:  # > 2024
+        elif int(CEDS[version].published[:4]) < 2025:
             df = CEDS[version]["CO"]["by_sector_country"].to_dataframe()
 
             value = 0.0146970051332098
+            assert df[
+                (df["country"] == "abw")
+                & (df.sector == "1A1a_Electricity-autoproducer")
+            ]["X2022"].values[0] == approx(value)
+            assert (
+                df[
+                    (df["country"] == "abw")
+                    & (df.sector == "1A1a_Electricity-autoproducer")
+                ]["X1750"].values[0]
+                == 0
+            )
+
+            ocdf = CEDS[version]["CO"]["by_sector_country"].to_ocd()
+
+            assert_series_equal(
+                df[
+                    (df["country"] == "abw")
+                    & (df.sector == "1A1a_Electricity-autoproducer")
+                ]["X1750"],
+                ocdf[
+                    (ocdf.code == "ABW")
+                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.year == 1750)
+                ]["value"],
+                check_index=False,
+                check_names=False,
+            )
+            assert_series_equal(
+                df[
+                    (df["country"] == "abw")
+                    & (df.sector == "1A1a_Electricity-autoproducer")
+                ]["X2022"],
+                ocdf[
+                    (ocdf.code == "ABW")
+                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.year == 2022)
+                ]["value"],
+                check_index=False,
+                check_names=False,
+            )
+        else:
+            df = CEDS[version]["CO"]["by_sector_country"].to_dataframe()
+
+            value = 0.0156595847126071
             assert df[
                 (df["country"] == "abw")
                 & (df.sector == "1A1a_Electricity-autoproducer")

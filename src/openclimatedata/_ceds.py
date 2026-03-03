@@ -128,6 +128,40 @@ class _CedsTable:
 
 
 CEDS = {
+    "v_2025_03_18": _CedsRelease(
+        name="CEDS v_2025_03_18 Aggregate Data",
+        doi="10.5281/zenodo.15059443",
+        published="2025-03-18",
+        citation="""Hoesly, R., Smith, S. J., Ahsan, H., Prime, N., O'Rourke, P., Crippa, M., Klimont, Z., Guizzardi, D., Feng, L., Harkins, C., MCDONALD, B., & Wang, S. (2025). CEDS v_2025_03_18 Aggregate Data (v_2025_03_18) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15059443""",
+        license="CC BY 4.0",
+        entities=[
+            "BC",
+            "CH4",
+            "CO",
+            "CO2",
+            "N2O",
+            "NH3",
+            "NMVOC",
+            "NOx",
+            "OC",
+            "SO2",
+        ],
+        tables=[
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2025_03_18_aggregate.zip",
+                    "url": "https://zenodo.org/records/15059443/files/CEDS_v_2025_03_18_aggregate.zip",
+                    "hash": "md5:262b30b8f88708d6a567dbb58ec623a5",
+                },
+                "patterns": {
+                    "by_country": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_estimates_by_country_v_2025_03_18.csv",
+                    "by_sector_country": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_estimates_by_country_sector_v_2025_03_18.csv",
+                    "global_by_sector": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_global_estimates_by_sector_v_2025_03_18.csv",
+                    "global_by_sector_fuel": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_global_estimates_by_sector_fuel_v_2025_03_18.csv",
+                },
+            },
+        ]
+    ),
     "v_2024_04_01": _CedsRelease(
         name="CEDS v_2024_04_01 Release Emission Data",
         doi="10.5281/zenodo.10904361",
