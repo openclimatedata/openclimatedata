@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.24
+
+- Add CEDS v_2025_03_18 and v_2024_07_08
+
 ## 0.17
 
 - Add missing HFCs and PFCs from change in 0.16
@@ -65,10 +69,10 @@
 - GCB-Fossil: Reuse country/region name in code column when it is missing
   ([#2](https://github.com/openclimatedata/openclimatedata/issues/2))
 
-## v0.4
+## 0.4
 
 - Adds GCB Fossil 2023v36
 
-## v0.3
+## 0.3
 
 - Initial Release
