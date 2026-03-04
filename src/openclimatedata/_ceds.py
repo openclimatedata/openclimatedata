@@ -160,6 +160,38 @@ CEDS = {
                     "global_by_sector_fuel": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_global_estimates_by_sector_fuel_v_2025_03_18.csv",
                 },
             },
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2025_03_18_detailed.zip",
+                    "url": "https://zenodo.org/records/15059443/files/CEDS_v_2025_03_18_detailed.zip",
+                    "hash": "md5:ee40a44dfca8b9c4751119c3d9daf22f",
+                },
+                "patterns": {
+                    "by_sector_fuel": "CEDS_v_2025_03_18_detailed/{entity}_CEDS_estimates_by_country_CEDS_sector_fuel_v2025_03_18.csv",
+                },
+            },
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2025_03_18_supplementary_bunkers.zip",
+                    "url": "https://zenodo.org/records/15059443/files/CEDS_v_2025_03_18_supplementary_bunkers.zip",
+                    "hash": "md5:6fc40fdccb1482768887141de20a1da6",
+                },
+                "patterns": {
+                    "bunkers": "CEDS_v_2025_03_18_supplementary_bunkers/S.{entity}_bunker_estimates_v_2025_03_18.csv",
+                },
+            },
+            {
+                "zipfile": {
+                    "filename": "CEDS_v_2025_03_18_supplementary_extension.zip",
+                    "url": "https://zenodo.org/records/15059443/files/CEDS_v_2025_03_18_supplementary_extension.zip",
+                    "hash": "md5:5c2f99d3f18dbd896bb240f8a6c770ce",
+                },
+                "patterns": {
+                    "extension_by_fuel": "CEDS_v_2025_03_18_supplementary_extension/{entity}_Extension_CEDS_global_estimates_by_fuel_v_2025_03_18.csv",
+                    "extension_by_sector_fuel": "CEDS_v_2025_03_18_supplementary_extension/{entity}_Extension_CEDS_global_estimates_by_sector_fuel_v_2025_03_18.csv",
+                    "extension_by_sector": "CEDS_v_2025_03_18_supplementary_extension/{entity}_Extension_CEDS_global_estimates_by_sector_v_2025_03_18.csv",
+                },
+            }
         ]
     ),
     "v_2024_07_08": _CedsRelease(
