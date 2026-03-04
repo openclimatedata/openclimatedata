@@ -167,7 +167,7 @@ CEDS = {
                     "hash": "md5:ee40a44dfca8b9c4751119c3d9daf22f",
                 },
                 "patterns": {
-                    "by_sector_fuel": "CEDS_v_2025_03_18_detailed/{entity}_CEDS_estimates_by_country_CEDS_sector_fuel_v2025_03_18.csv",
+                    "by_sector_fuel": "CEDS_v_2025_03_18_detailed/{entity}_CEDS_estimates_by_country_CEDS_sector_fuel_v_2025_03_18.csv",
                 },
             },
             {
