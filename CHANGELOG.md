@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.25
+
+- Add PRIMAP-hist 2.7
+
 ## 0.24
 
 - Add CEDS v_2025_03_18 and v_2024_07_08
