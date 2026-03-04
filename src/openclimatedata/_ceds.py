@@ -78,8 +78,14 @@ class _CedsTable:
                 "fuel": "category",
             }
 
+            path = self.path_pattern.format(entity=self.entity)
+            # Workaround: NMVOC file is named as `emissions`, others `estimates`
+            if path.endswith(
+                "NMVOC_CEDS_estimates_by_country_CEDS_sector_fuel_v_2025_03_18.csv"
+            ):
+                path = path.replace("estimates", "emissions")
             df = pd.read_csv(
-                zip_file.open(self.path_pattern.format(entity=self.entity)),
+                zip_file.open(path),
                 dtype=dtype,
             )
 
@@ -191,8 +197,8 @@ CEDS = {
                     "extension_by_sector_fuel": "CEDS_v_2025_03_18_supplementary_extension/{entity}_Extension_CEDS_global_estimates_by_sector_fuel_v_2025_03_18.csv",
                     "extension_by_sector": "CEDS_v_2025_03_18_supplementary_extension/{entity}_Extension_CEDS_global_estimates_by_sector_v_2025_03_18.csv",
                 },
-            }
-        ]
+            },
+        ],
     ),
     "v_2024_07_08": _CedsRelease(
         name="CEDS v_2024_07_08 Release Emission Data",
