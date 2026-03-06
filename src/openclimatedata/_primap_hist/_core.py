@@ -14,7 +14,6 @@ class _File(TypedDict):
 
 
 class _PRIMAPHIST_2_Release(dict):
-
     def __init__(
         self,
         name: str,
@@ -25,7 +24,7 @@ class _PRIMAPHIST_2_Release(dict):
         doi_article: str,
         citation_article: str,
         files: dict[str, _File],
-        license: str = "CC BY 4.0",
+        license: str,
     ):
         self.name = name
         self.version = version

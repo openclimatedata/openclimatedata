@@ -13,6 +13,7 @@ _PRIMAPHIST_2_7 = _PRIMAPHIST_2_Release(
     citation=citation_2_7,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY-NC-SA 4.0",
     files={
         "main": {
             "filename": "Guetschow_et_al_2025a-PRIMAP-hist_v2.7_final_22-Aug-2025.csv",
@@ -32,6 +33,7 @@ _PRIMAPHIST_2_6_1 = _PRIMAPHIST_2_Release(
     citation=citation_2_6_1,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow_et_al_2025-PRIMAP-hist_v2.6.1_final_13-Mar-2025.csv",
@@ -51,6 +53,7 @@ _PRIMAPHIST_2_6 = _PRIMAPHIST_2_Release(
     citation=citation_2_6,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow_et_al_2024a-PRIMAP-hist_v2.6_final_13-Sep-2024.csv",
@@ -71,6 +74,7 @@ _PRIMAPHIST_2_5_1 = _PRIMAPHIST_2_Release(
     citation=citation_2_5_1,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_27-Feb-2024.csv",
@@ -90,6 +94,7 @@ _PRIMAPHIST_2_5 = _PRIMAPHIST_2_Release(
     citation=citation_2_5,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow_et_al_2023b-PRIMAP-hist_v2.5_final_15-Oct-2023.csv",
@@ -109,6 +114,7 @@ _PRIMAPHIST_2_4_2 = _PRIMAPHIST_2_Release(
     citation=citation_2_4_2,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow-et-al-2023a-PRIMAP-hist_v2.4.2_final_09-Mar-2023.csv",
@@ -128,6 +134,7 @@ _PRIMAPHIST_2_4_1 = _PRIMAPHIST_2_Release(
     citation=citation_2_4_1,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow-et-al-2023-PRIMAP-hist_v2.4.1_final_16-Feb-2023.csv",
@@ -148,6 +155,7 @@ _PRIMAPHIST_2_4 = _PRIMAPHIST_2_Release(
     citation=citation_2_4,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow-et-al-2022-PRIMAP-hist_v2.4_11-Oct-2022.csv",
@@ -167,6 +175,7 @@ _PRIMAPHIST_2_3_1 = _PRIMAPHIST_2_Release(
     citation=citation_2_3_1,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow-et-al-2021-PRIMAP-hist_v2.3.1_20-Sep_2021.csv",
@@ -196,6 +205,7 @@ _PRIMAPHIST_2_3 = _PRIMAPHIST_2_Release(
     citation=citation_2_3,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "Guetschow-et-al-2021-PRIMAP-hist_v2.3_28_Jul_2021.csv",
@@ -215,6 +225,7 @@ _PRIMAPHIST_2_2 = _PRIMAPHIST_2_Release(
     citation=citation_2_2,
     doi_article=doi_article,
     citation_article=paper_2016,
+    license="CC BY 4.0",
     files={
         "main": {
             "filename": "PRIMAP-hist_v2.2_19-Jan-2021.csv",

@@ -38,7 +38,9 @@ for gcb_version in tqdm(gcb_versions):
     df = ocd.GCB_Fossil_Emissions[gcb_version].to_ocd()
     filename = f"gcb-fossil-{gcb_version}.parquet"
     df.to_parquet(root / "scripts" / filename)
-    html += f'<li><a href="{filename}">{filename}</a> ({ocd.GCB_Fossil_Emissions[gcb_version].license})</li>\n'
+    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.GCB_Fossil_Emissions[gcb_version].license})</br>
+    <small>{ocd.GCB_Fossil_Emissions[gcb_version].citation}</small>
+    </li>\n'''
 
 primaphist_versions = ocd.PRIMAPHIST.keys()
 
@@ -51,7 +53,9 @@ for primaphist_version in tqdm(primaphist_versions):
     df = ocd.PRIMAPHIST[primaphist_version]["main"].to_ocd()
     filename = f"primap-hist-{primaphist_version.replace('.', '-')}.parquet"
     df.to_parquet(root / "scripts" / filename)
-    html += f'<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</li>\n'
+    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</br></li>\n
+    <small>{ocd.PRIMAPHIST[primaphist_version].citation}</small>
+    '''
 
 html += """</ul>
 </body>
