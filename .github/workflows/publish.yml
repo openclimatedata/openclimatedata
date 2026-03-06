@@ -61,3 +61,30 @@ jobs:
     - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
 
+  publish-to-gh-pages:
+    name: Publish webpage to GitHub Pages
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.13"
+    - name: Generate webpage
+      run: uv run scripts/generate-webpage.py
+    - name: Deploy to gh-pages
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout --orphan gh-pages
+        git rm -rf .
+        cp script/index.html .
+        cp script/*.parquet .
+        git add index.html
+        git add *.parquet
+        git commit -m "Update website" || true
+        git push --force origin gh-pages
