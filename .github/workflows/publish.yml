@@ -83,8 +83,8 @@ jobs:
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git checkout --orphan gh-pages
         git rm -rf .
-        cp script/index.html .
-        cp script/*.parquet .
+        cp scripts/index.html .
+        cp scripts/*.parquet .
         git add index.html
         git add *.parquet
         git commit -m "Update website" || true
