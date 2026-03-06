@@ -2,6 +2,7 @@
 # requires-python = ">=3.14"
 # dependencies = [
 #     "openclimatedata",
+#     "openpyxl>=3.1.5",
 # ]
 #
 # [tool.uv.sources]
