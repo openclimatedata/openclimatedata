@@ -12,6 +12,7 @@
 from pathlib import Path
 
 import openclimatedata as ocd
+import pandas as pd
 from tqdm import tqdm
 
 root = Path(__file__).parents[1]
@@ -56,6 +57,26 @@ for primaphist_version in tqdm(primaphist_versions):
     html += f'''<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</br></li>\n
     <small>{ocd.PRIMAPHIST[primaphist_version].citation}</small>
     '''
+
+ceds_versions = ocd.CEDS.keys()
+
+html += """</ul>
+<h2>CEDS</h2>
+<ul>"""
+
+print("CEDS")
+for ceds_version in tqdm(ceds_versions):
+    dfs = []
+    for entity in ocd.CEDS[ceds_version].entities:
+        dfs.append(ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd())
+    df = pd.concat(dfs)
+    filename = f"ceds-by-sector-{ceds_version.replace('.', '-')}.parquet"
+    df.reset_index(inplace=True)
+    df.to_parquet(root / "scripts" / filename, index=False)
+    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
+    <small>{ocd.CEDS[ceds_version].citation}</small>
+'''
+
 
 html += """</ul>
 </body>

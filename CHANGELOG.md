@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.26
+
+- Shorten CEDS keys
+
 ## 0.25
 
 - Add PRIMAP-hist 2.7
