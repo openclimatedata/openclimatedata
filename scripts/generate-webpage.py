@@ -69,11 +69,11 @@ for ceds_version in tqdm(ceds_versions):
     html += f"""{ceds_version}
     <ul>"""
     for entity in ocd.CEDS[ceds_version].entities:
-        # df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
+        df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
         filename = (
             f"ceds-{entity.lower()}-by-sector-{ceds_version.replace('.', '-')}.parquet"
         )
-        # df.to_parquet(root / "scripts" / filename, index=False)
+        df.to_parquet(root / "scripts" / filename, index=False)
         html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
         """
     html += f"""</ul><small>{ocd.CEDS[ceds_version].citation}</small>
