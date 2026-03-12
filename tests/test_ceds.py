@@ -27,7 +27,7 @@ def test_ceds():
 def test_ceds_reshaping():
     for version in versions:
         if int(CEDS[version].published[:4]) < 2024:
-            df = CEDS[version]["CO"]["by_sector_country"].to_dataframe()
+            df = CEDS[version]["CO"]["by_sector"].to_dataframe()
 
             if "iso" in df.columns:  # 2019 version
                 code = "iso"
@@ -46,7 +46,7 @@ def test_ceds_reshaping():
                 == 0
             )
 
-            ocdf = CEDS[version]["CO"]["by_sector_country"].to_ocd()
+            ocdf = CEDS[version]["CO"]["by_sector"].to_ocd()
 
             assert_series_equal(
                 df[
@@ -73,7 +73,7 @@ def test_ceds_reshaping():
                 check_names=False,
             )
         elif int(CEDS[version].published[:4]) < 2025:
-            df = CEDS[version]["CO"]["by_sector_country"].to_dataframe()
+            df = CEDS[version]["CO"]["by_sector"].to_dataframe()
 
             value = 0.0146970051332098
             assert df[
@@ -88,7 +88,7 @@ def test_ceds_reshaping():
                 == 0
             )
 
-            ocdf = CEDS[version]["CO"]["by_sector_country"].to_ocd()
+            ocdf = CEDS[version]["CO"]["by_sector"].to_ocd()
 
             assert_series_equal(
                 df[
@@ -117,7 +117,7 @@ def test_ceds_reshaping():
                 check_names=False,
             )
         else:
-            df = CEDS[version]["CO"]["by_sector_country"].to_dataframe()
+            df = CEDS[version]["CO"]["by_sector"].to_dataframe()
 
             value = 0.0156595847126071
             assert df[
@@ -132,7 +132,7 @@ def test_ceds_reshaping():
                 == 0
             )
 
-            ocdf = CEDS[version]["CO"]["by_sector_country"].to_ocd()
+            ocdf = CEDS[version]["CO"]["by_sector"].to_ocd()
 
             assert_series_equal(
                 df[
