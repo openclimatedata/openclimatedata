@@ -337,7 +337,7 @@ CEDS = {
                 "patterns": {
                     "by_country": "{entity}_CEDS_emissions_by_country_2021_04_21.csv",
                     "by_sector": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
-                    "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2021_04_21.csv",
+                    "by_fuel": "{entity}_CEDS_emissions_by_country_fuel_2021_04_21.csv",
                 },
             },
         ],
@@ -370,7 +370,7 @@ CEDS = {
                 "patterns": {
                     "by_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_2021_02_05.csv",
                     "by_sector": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
-                    "by_country_fuel": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_fuel_2021_02_05.csv",
+                    "by_fuel": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_fuel_2021_02_05.csv",
                 },
             },
         ],
@@ -392,7 +392,7 @@ CEDS = {
                 "patterns": {
                     "by_country": "{entity}_CEDS_emissions_by_country_2020_09_11.csv",
                     "by_sector": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
-                    "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2020_09_11.csv",
+                    "by_fuel": "{entity}_CEDS_emissions_by_country_fuel_2020_09_11.csv",
                 },
             },
         ],
