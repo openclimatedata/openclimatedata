@@ -161,7 +161,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_estimates_by_country_v_2025_03_18.csv",
-                    "by_sector_country": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_estimates_by_country_sector_v_2025_03_18.csv",
+                    "by_sector": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_estimates_by_country_sector_v_2025_03_18.csv",
                     "global_by_sector": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_global_estimates_by_sector_v_2025_03_18.csv",
                     "global_by_sector_fuel": "CEDS_v_2025_03_18_aggregate/{entity}_CEDS_global_estimates_by_sector_fuel_v_2025_03_18.csv",
                 },
@@ -227,7 +227,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "{entity}_CEDS_emissions_by_country_v2024_07_08.csv",
-                    "by_sector_country": "{entity}_CEDS_emissions_by_country_sector_v2024_07_08.csv",
+                    "by_sector": "{entity}_CEDS_emissions_by_country_sector_v2024_07_08.csv",
                     "global_by_sector": "{entity}_CEDS_global_emissions_by_sector_v2024_07_08.csv",
                     "global_by_sector_fuel": "{entity}_CEDS_global_emissions_by_sector_fuel_v2024_07_08.csv",
                 },
@@ -281,7 +281,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_v2024_04_01.csv",
-                    "by_sector_country": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_sector_v2024_04_01.csv",
+                    "by_sector": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_emissions_by_country_sector_v2024_04_01.csv",
                     "global_by_sector": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_global_emissions_by_sector_v2024_04_01.csv",
                     "global_by_sector_fuel": "CEDS_v_2024_04_01_aggregate/{entity}_CEDS_global_emissions_by_sector_fuel_v2024_04_01.csv",
                 },
@@ -336,7 +336,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "{entity}_CEDS_emissions_by_country_2021_04_21.csv",
-                    "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
+                    "by_sector": "{entity}_CEDS_emissions_by_sector_country_2021_04_21.csv",
                     "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2021_04_21.csv",
                 },
             },
@@ -369,7 +369,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_2021_02_05.csv",
-                    "by_sector_country": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
+                    "by_sector": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_sector_country_2021_02_05.csv",
                     "by_country_fuel": "CEDS_v2021-02-05_emissions/{entity}_CEDS_emissions_by_country_fuel_2021_02_05.csv",
                 },
             },
@@ -391,7 +391,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "{entity}_CEDS_emissions_by_country_2020_09_11.csv",
-                    "by_sector_country": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
+                    "by_sector": "{entity}_CEDS_emissions_by_sector_country_2020_09_11.csv",
                     "by_country_fuel": "{entity}_CEDS_emissions_by_country_fuel_2020_09_11.csv",
                 },
             },
@@ -413,7 +413,7 @@ CEDS = {
                 },
                 "patterns": {
                     "by_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_v_2019_12_23.csv",
-                    "by_sector_country": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_CEDS_sector_v_2019_12_23.csv",
+                    "by_sector": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_emissions_by_country_CEDS_sector_v_2019_12_23.csv",
                     "global_by_fuel": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_global_emissions_by_fuel_v_2019_12_23.csv",
                 },
             },
