@@ -39,9 +39,9 @@ for gcb_version in tqdm(gcb_versions):
     df = ocd.GCB_Fossil_Emissions[gcb_version].to_ocd()
     filename = f"gcb-fossil-{gcb_version}.parquet"
     df.to_parquet(root / "scripts" / filename)
-    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.GCB_Fossil_Emissions[gcb_version].license})</br>
+    html += f"""<li><a href="{filename}">{filename}</a> ({ocd.GCB_Fossil_Emissions[gcb_version].license})</br>
     <small>{ocd.GCB_Fossil_Emissions[gcb_version].citation}</small>
-    </li>\n'''
+    </li>\n"""
 
 primaphist_versions = ocd.PRIMAPHIST.keys()
 
@@ -54,31 +54,33 @@ for primaphist_version in tqdm(primaphist_versions):
     df = ocd.PRIMAPHIST[primaphist_version]["main"].to_ocd()
     filename = f"primap-hist-{primaphist_version.replace('.', '-')}.parquet"
     df.to_parquet(root / "scripts" / filename)
-    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</br></li>\n
+    html += f"""<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</br></li>\n
     <small>{ocd.PRIMAPHIST[primaphist_version].citation}</small>
-    '''
+    """
 
 ceds_versions = ocd.CEDS.keys()
 
 html += """</ul>
 <h2>CEDS</h2>
-<ul>"""
+"""
 
 print("CEDS")
 for ceds_version in tqdm(ceds_versions):
-    dfs = []
+    html += f"""{ceds_version}
+    <ul>"""
     for entity in ocd.CEDS[ceds_version].entities:
-        dfs.append(ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd())
-    df = pd.concat(dfs)
-    filename = f"ceds-by-sector-{ceds_version.replace('.', '-')}.parquet"
-    df.reset_index(inplace=True)
-    df.to_parquet(root / "scripts" / filename, index=False)
-    html += f'''<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
-    <small>{ocd.CEDS[ceds_version].citation}</small>
-'''
+        # df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
+        filename = (
+            f"ceds-{entity.lower()}-by-sector-{ceds_version.replace('.', '-')}.parquet"
+        )
+        # df.to_parquet(root / "scripts" / filename, index=False)
+        html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
+        """
+    html += f"""</ul><small>{ocd.CEDS[ceds_version].citation}</small>
+    """
 
 
-html += """</ul>
+html += """
 </body>
 </html>
 """
