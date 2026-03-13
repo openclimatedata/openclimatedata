@@ -32,6 +32,9 @@ def test_ceds_reshaping():
             if "iso" in df.columns:  # 2019 version
                 code = "iso"
                 value = 0.00018696315423434
+            elif "2018" in version:
+                code = "country"
+                value = 0.0001748032595938
             else:
                 code = "country"
                 value = 0.0288382599890555

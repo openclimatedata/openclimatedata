@@ -43,7 +43,11 @@ Citation:
                         filename=table["zipfile"]["filename"],
                         url=table["zipfile"]["url"],
                         hash=table["zipfile"]["hash"],
-                        path_pattern=path_pattern,
+                        path_pattern=(
+                            path_pattern(entity)
+                            if callable(path_pattern)
+                            else path_pattern
+                        ),
                     )
 
 
@@ -79,7 +83,7 @@ class _CedsTable:
             }
 
             path = self.path_pattern.format(entity=self.entity)
-            # Workaround: NMVOC file is named as `emissions`, others `estimates`
+            # Workaround: in v_2025_03_18 NMVOC file is named as `emissions`, others `estimates`
             if path.endswith(
                 "NMVOC_CEDS_estimates_by_country_CEDS_sector_fuel_v_2025_03_18.csv"
             ):
@@ -417,6 +421,44 @@ CEDS = {
                     "global_by_fuel": "CEDS_v_2019_12_23-final_emissions/CEDS_{entity}_global_emissions_by_fuel_v_2019_12_23.csv",
                 },
             },
+        ],
+    ),
+    # "As of 2 August 2018, a corrected supplement is available for download,
+    # which now includes missing data files, most notably, CO2 and CH4 emissions." (Corrected Supplement Explanation.docx)
+    # The data supplementary zip file contains file with filenames starting with 2017_05_18 and 2016_07_26
+    # The CH4_Extension files (by region) are not included below
+    "v_2018_08_02": _CedsRelease(
+        name="CEDS Corrected Supplemental Data",
+        doi="https://doi.org/10.5194/gmd-11-369-2018",
+        published="2018-08-02",
+        citation="""Hoesly, R. M., Smith, S. J., Feng, L., Klimont, Z., Janssens-Maenhout, G., Pitkanen, T., Seibert, J. J., Vu, L., Andres, R. J., Bolt, R. M., Bond, T. C., Dawidowski, L., Kholod, N., Kurokawa, J.-I., Li, M., Liu, L., Lu, Z., Moura, M. C. P., O'Rourke, P. R., and Zhang, Q.: Historical (1750–2014) anthropogenic emissions of reactive gases and aerosols from the Community Emissions Data System (CEDS), Geosci. Model Dev., 11, 369-408, https://doi.org/10.5194/gmd-11-369-2018, 2018.""",
+        license="CC BY 3.0",
+        entities=["SO2", "NOx", "BC", "OC", "NH3", "NMVOC", "CO", "CO2", "CH4"],
+        tables=[
+            {
+                "zipfile": {
+                    "filename": "gmd-11-369-2018-supplement.zip",
+                    "url": "https://doi.org/10.5194/gmd-11-369-2018-supplement",
+                    "hash": "md5:af7e686222c2c98cd3a38f2b9a5dbd24",
+                },
+                "patterns": {
+                    "by_country": lambda entity: (
+                        "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_country_v2016_07_26.csv"
+                        if entity not in ["CO2", "CH4"]
+                        else "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_country_v2017_05_18.csv"
+                    ),
+                    "by_sector": lambda entity: (
+                        "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_sector_country_v2016_07_26.csv"
+                        if entity not in ["CO2", "CH4"]
+                        else "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_sector_country_v2017_05_18.csv"
+                    ),
+                    "global_by_sector": lambda entity: (
+                        "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_sector_v2016_07_26.csv"
+                        if entity not in ["CO2", "CH4"]
+                        else "Supplemental_Data_Correction/Data Supplement/{entity}_CEDS_emissions_by_sector_v2017_05_18.csv"
+                    ),
+                },
+            }
         ],
     ),
 }
