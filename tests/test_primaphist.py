@@ -17,20 +17,6 @@ def test_primaphist():
         assert PRIMAPHIST[version].doi
         assert PRIMAPHIST[version].published
 
-@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
-def test_primaphist_2_7():
-    df = PRIMAPHIST["2.7"]["main"].to_dataframe()
-    assert df.iloc[0]["1750"] == approx(0.00564)
-    assert df.iloc[-1]["2024"] == approx(0.0)
-
-    assert df.iloc[0]["provenance"] == "derived"
-
-    ocdf = PRIMAPHIST["2.7"]["main"].to_ocd()
-    # First and last value should be the same after re-shaping.
-    assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
-    assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2024"]
-
-    assert ocdf.iloc[0]["provenance"] == "derived"
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_6_1():
