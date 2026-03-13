@@ -2,7 +2,7 @@
 
 ## 0.27 
 - Add CEDS 2018 supplemental dataset
-- Remove PRMAP-hist 2.7
+- Remove PRIMAP-hist 2.7
 
 ## 0.26
 
