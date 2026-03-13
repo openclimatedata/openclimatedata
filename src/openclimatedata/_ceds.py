@@ -427,7 +427,7 @@ CEDS = {
     # The CH4_Extension files (by region) are not included below
     "v_2018_08_02": _CedsRelease(
         name="CEDS Corrected Supplemental Data",
-        doi="https://doi.org/10.5194/gmd-11-369-2018",
+        doi="10.5194/gmd-11-369-2018",
         published="2018-08-02",
         citation="""Hoesly, R. M., Smith, S. J., Feng, L., Klimont, Z., Janssens-Maenhout, G., Pitkanen, T., Seibert, J. J., Vu, L., Andres, R. J., Bolt, R. M., Bond, T. C., Dawidowski, L., Kholod, N., Kurokawa, J.-I., Li, M., Liu, L., Lu, Z., Moura, M. C. P., O'Rourke, P. R., and Zhang, Q.: Historical (1750–2014) anthropogenic emissions of reactive gases and aerosols from the Community Emissions Data System (CEDS), Geosci. Model Dev., 11, 369-408, https://doi.org/10.5194/gmd-11-369-2018, 2018.""",
         license="CC BY 3.0",
