@@ -1,8 +1,6 @@
-import re
 from dataclasses import dataclass
 from zipfile import ZipFile
 
-import numpy as np
 import pandas as pd
 import pooch
 

@@ -38,7 +38,6 @@ def test_gcb_dataframes_for_subtables_only():
     # In sheets with subtables, `to_dataframe` etc. should only be available
     # for tables, not on the main sheet.
     for version in versions:
-
         sheet_names = Global_Carbon_Budget[version].keys()
 
         for sheet_name in sheet_names:

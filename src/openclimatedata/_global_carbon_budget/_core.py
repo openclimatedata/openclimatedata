@@ -8,7 +8,6 @@ from openpyxl import load_workbook
 
 
 class _Global_Carbon_Budget_Release(dict):
-
     def __init__(
         self,
         name: str,
