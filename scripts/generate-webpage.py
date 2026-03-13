@@ -66,7 +66,7 @@ html += """</ul>
 
 print("CEDS")
 for ceds_version in tqdm(ceds_versions):
-    html += f"""{ceds_version}
+    html += f"""<p><strong>{ceds_version}</strong></p>
     <ul>"""
     for entity in ocd.CEDS[ceds_version].entities:
         df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
