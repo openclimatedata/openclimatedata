@@ -1,14 +1,12 @@
 [project]
 name = "openclimatedata"
-version = "0.27"
+version = "0.28"
 description = "Library to help download and locally cache climate data"
 readme = "README.md"
-authors = [{name = "Robert Gieseke"}]
-license = {text = "BSD-2-Clause"}
+authors = [{ name = "Robert Gieseke" }]
+license = { text = "BSD-2-Clause" }
 requires-python = ">=3.8"
-dependencies = [
-    "openpyxl", "pandas", "pooch", "tqdm"
-]
+dependencies = ["openpyxl", "pandas", "pooch", "tqdm"]
 
 [project.urls]
 Homepage = "https://github.com/openclimatedata/openclimatedata"
