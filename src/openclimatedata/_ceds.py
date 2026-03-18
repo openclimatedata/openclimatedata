@@ -129,7 +129,7 @@ class _CedsTable:
 
         if "code" in df.columns:
             df["code"] = df["code"].cat.rename_categories(
-                {"global": "BUNKERS", "srb (kosovo)": "XKX"}
+                {"global": "XIT", "srb (kosovo)": "XKX"}
             )
             df["code"] = df["code"].cat.rename_categories(str.upper)
         return df

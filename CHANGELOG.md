@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.28
+
+- Use XIT for international transport/bunkers in CEDS (same code as in GCB Fossil)
+
 ## 0.27 
 - Add CEDS 2018 supplemental dataset
 - Remove PRIMAP-hist 2.7
