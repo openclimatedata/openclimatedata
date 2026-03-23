@@ -57,7 +57,7 @@ def test_ceds_reshaping():
                 ]["X1750"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 1750)
                 ]["value"],
                 check_index=False,
@@ -69,7 +69,7 @@ def test_ceds_reshaping():
                 ]["X2014"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 2014)
                 ]["value"],
                 check_index=False,
@@ -100,7 +100,7 @@ def test_ceds_reshaping():
                 ]["X1750"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 1750)
                 ]["value"],
                 check_index=False,
@@ -113,7 +113,7 @@ def test_ceds_reshaping():
                 ]["X2022"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 2022)
                 ]["value"],
                 check_index=False,
@@ -144,7 +144,7 @@ def test_ceds_reshaping():
                 ]["X1750"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 1750)
                 ]["value"],
                 check_index=False,
@@ -157,7 +157,7 @@ def test_ceds_reshaping():
                 ]["X2022"],
                 ocdf[
                     (ocdf.code == "ABW")
-                    & (ocdf.sector == "1A1a_Electricity-autoproducer")
+                    & (ocdf.category == "1A1a_Electricity-autoproducer")
                     & (ocdf.year == 2022)
                 ]["value"],
                 check_index=False,
