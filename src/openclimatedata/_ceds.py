@@ -118,6 +118,7 @@ class _CedsTable:
         """Return a long DataFrame with standardized codes and column names."""
         df = self.to_long_dataframe()
         column_names = {
+            "sector": "category",
             "em": "entity",
             "units": "unit",
         }
