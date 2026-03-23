@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.29
+- Rename CEDS 'sector' to 'category' in ocd format
+
 ## 0.28
 
 - Use XIT for international transport/bunkers in CEDS (same code as in GCB Fossil)
