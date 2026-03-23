@@ -12,7 +12,7 @@
 from pathlib import Path
 
 import openclimatedata as ocd
-import pandas as pd
+
 from tqdm import tqdm
 
 root = Path(__file__).parents[1]
