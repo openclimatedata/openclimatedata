@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.30
+- Remove 'provenance' from PRIMAP-hist tables in ocd format
+
 ## 0.29
 - Rename CEDS 'sector' to 'category' in ocd format
 

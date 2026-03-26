@@ -1,6 +1,5 @@
 import os
 
-import pandas as pd
 import pytest
 from pytest import approx
 
@@ -31,8 +30,6 @@ def test_primaphist_2_6_1():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2023"]
 
-    assert ocdf.iloc[0]["provenance"] == "derived"
-
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_6():
@@ -46,8 +43,6 @@ def test_primaphist_2_6():
     # First and last value should be the same after re-shaping.
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2023"]
-
-    assert ocdf.iloc[0]["provenance"] == "derived"
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
@@ -63,8 +58,6 @@ def test_primaphist_2_5_1():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2022"]
 
-    assert ocdf.iloc[0]["provenance"] == "derived"
-
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_5():
@@ -79,8 +72,6 @@ def test_primaphist_2_5():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2022"]
 
-    assert ocdf.iloc[0]["provenance"] == "measured"
-
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_4_2():
@@ -93,8 +84,6 @@ def test_primaphist_2_4_2():
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2021"]
 
-    assert pd.isna(ocdf.iloc[0]["provenance"])
-
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_primaphist_2_3():
@@ -106,8 +95,6 @@ def test_primaphist_2_3():
     # First and last value should be the same after re-shaping.
     assert ocdf.iloc[0]["value"] == df.iloc[0]["1750"]
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["2019"]
-
-    assert pd.isna(ocdf.iloc[0]["provenance"])
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
@@ -153,5 +140,3 @@ def test_primaphist_2_2():
             "PFCSAR4",
         ]
     ).issubset(entities)
-
-    assert pd.isna(ocdf.iloc[0]["provenance"])

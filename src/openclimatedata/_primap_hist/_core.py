@@ -120,10 +120,7 @@ File: {self.filename}
         df = self.to_dataframe()
 
         # Pre 2.5 provenance not included.
-        if "provenance" not in df.columns:
-            df["provenance"] = pd.Series(dtype="category")
-        # Changed column names in 2.3
-        if self.release.version >= "2.3":
+        if self.release.version >= "2.5":
             id_vars = [
                 "source",
                 "scenario (PRIMAP-hist)",
@@ -133,10 +130,19 @@ File: {self.filename}
                 "unit",
                 "category (IPCC2006_PRIMAP)",
             ]
+        # Changed column names in 2.3
+        elif self.release.version >= "2.3":
+            id_vars = [
+                "source",
+                "scenario (PRIMAP-hist)",
+                "area (ISO3)",
+                "entity",
+                "unit",
+                "category (IPCC2006_PRIMAP)",
+            ]
         else:
             id_vars = [
                 "scenario",
-                "provenance",
                 "country",
                 "category",
                 "entity",
@@ -164,8 +170,9 @@ File: {self.filename}
             )
         else:
             df = df.rename(columns={"country": "code"})
+        if "provenance" in df.columns:
+            df = df.drop("provenance", axis=1)
         if self.release.version <= "2.2":
-            # df.category = df.category.astype(str)
             df.category = df.category.cat.rename_categories(
                 {
                     "IPCM0EL": "M.0.EL",
