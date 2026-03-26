@@ -116,7 +116,8 @@ https://doi.org/{self.doi}
         """Long DataFrame with all column names lower-cased."""
         df = self.to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
-        df["code"] = df["code"].cat.rename_categories({"KSV": "XKX"})
+        # Use `ocd` code for global sum `WLD`, use XKX for Kosovo
+        df["code"] = df["code"].cat.rename_categories({"WLD": "TOTAL", "KSV": "XKX"})
         return df
 
 

@@ -170,6 +170,8 @@ File: {self.filename}
             )
         else:
             df = df.rename(columns={"country": "code"})
+        # Use `ocd` code for global total `EARTH`
+        df.code = df.code.cat.rename_categories({"EARTH": "TOTAL"})
         if "provenance" in df.columns:
             df = df.drop("provenance", axis=1)
         if self.release.version <= "2.2":
