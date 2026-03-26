@@ -76,6 +76,22 @@ for ceds_version in tqdm(ceds_versions):
         df.to_parquet(root / "scripts" / filename, index=False)
         html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
         """
+
+        if "by_sector_fuel" in ocd.CEDS[ceds_version][entity]:
+            df = ocd.CEDS[ceds_version][entity]["by_sector_fuel"].to_ocd()
+            filename = f"ceds-{entity.lower()}-by-sector-fuel-{ceds_version.replace('.', '-')}.parquet"
+            df.to_parquet(root / "scripts" / filename, index=False)
+            html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
+            """
+
+        if "bunkers" in ocd.CEDS[ceds_version][entity]:
+            df = ocd.CEDS[ceds_version][entity]["bunkers"].to_ocd()
+            filename = f"ceds-{entity.lower()}-bunkers-{ceds_version.replace('.', '-')}.parquet"
+            df.to_parquet(root / "scripts" / filename, index=False)
+            html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
+            """
+
+
     html += f"""</ul><small>{ocd.CEDS[ceds_version].citation}</small>
     """
 
