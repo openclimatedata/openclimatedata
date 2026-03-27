@@ -1,9 +1,16 @@
 # Changelog
 
+
+## 0.31
+
+- Use global code `TOTAL` in GCB Fossil and PRIMAP-hist
+
 ## 0.30
+
 - Remove 'provenance' from PRIMAP-hist tables in ocd format
 
 ## 0.29
+
 - Rename CEDS 'sector' to 'category' in ocd format
 
 ## 0.28
