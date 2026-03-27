@@ -109,7 +109,7 @@ File: {self.filename}
                 "source": "category",
                 "scenario": "category",
                 "provenance": "category",
-                "area": "category",
+                "country": "category",
                 "entity": "category",
                 "unit": "category",
                 "category": "category",
