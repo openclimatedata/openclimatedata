@@ -91,7 +91,6 @@ for ceds_version in tqdm(ceds_versions):
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
             """
 
-
     html += f"""</ul><small>{ocd.CEDS[ceds_version].citation}</small>
     """
 

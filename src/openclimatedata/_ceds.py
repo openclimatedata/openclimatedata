@@ -133,6 +133,7 @@ class _CedsTable:
                 {"global": "XIT", "srb (kosovo)": "XKX"}
             )
             df["code"] = df["code"].cat.rename_categories(str.upper)
+
         return df
 
 
