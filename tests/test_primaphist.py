@@ -110,7 +110,7 @@ def test_primaphist_2_2():
 
     ocdf_2_3 = PRIMAPHIST["2.3"]["main"].to_ocd()
 
-    assert df.dtypes['country'] == 'category'
+    assert df.dtypes["country"] == "category"
 
     # 2.2. ocd table should use the category style of later versions, without 'IPC' prefix
     assert set(ocdf.category.unique()) == set(ocdf_2_3.category.unique())

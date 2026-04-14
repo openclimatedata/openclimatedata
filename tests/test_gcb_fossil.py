@@ -124,6 +124,7 @@ def test_kosovo_country_code():
     assert len(ocdf[ocdf.code == "KSV"]) == 0
     assert len(ocdf[ocdf.code == "XKX"]) > 0
 
+
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_fossil_2025v15():
     df = GCB_Fossil_Emissions["2025v15"].to_dataframe()
