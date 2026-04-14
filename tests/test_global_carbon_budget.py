@@ -66,6 +66,12 @@ def test_gcb_2023():
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models (NET) - Does not include peat emissions"].to_dataframe()
+
+    assert "CLM5.0" in luc_emisssions_individual_models.columns
+    assert "LPX-Bern" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS " not in luc_emisssions_individual_models.columns
+
     ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
     ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
@@ -137,6 +143,11 @@ def test_gcb_2022():
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
+
+    assert "CLM5.0" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS " not in luc_emisssions_individual_models.columns
+
     ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
     ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
@@ -206,6 +217,11 @@ def test_gcb_2021():
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
+
+    assert "CLM5.0" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS " not in luc_emisssions_individual_models.columns
+
     ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
     ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
         "Data-based products"
