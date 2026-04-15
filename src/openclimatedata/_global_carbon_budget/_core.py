@@ -153,9 +153,10 @@ class _Global_Carbon_Budget_Table:
             usecols=self.columns,
             index_col=0,
         )
-        # Remove suffixes from duplicated columns names
+        # Remove suffixes `.1`, `.2`, etc. from duplicated columns names
         # (added by Pandas, see https://github.com/pandas-dev/pandas/issues/64198).
         # `CLM5.0`` needs to remain
+        df.columns = df.columns.map(lambda x: re.sub(r"\.[123]$", "", x))
         df = df.rename(columns={"LPX-Bern.1": "LPX-Bern"})
         df.columns = df.columns.str.strip()
         df.name = self.table_name
