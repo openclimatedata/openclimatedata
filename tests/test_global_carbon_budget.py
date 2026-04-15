@@ -63,6 +63,19 @@ def test_gcb_2023():
     luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
+
+    luc_emissions_blue = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "BLUE"
+    ].to_dataframe()
+
+    assert list(luc_emissions_blue.columns) == [
+        "Net",
+        "deforestation (total)",
+        "forest regrowth (total)",
+        "other transitions",
+        "wood harvest & other forest management",
+    ]
+
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models (NET) - Does not include peat emissions"].to_dataframe()
@@ -140,6 +153,17 @@ def test_gcb_2022():
     luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
+
+    luc_emissions_blue = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "BLUE"
+    ].to_dataframe()
+
+    assert list(luc_emissions_blue.columns) == [
+        "Net",
+        "Gross Sink",
+        "Gross Source",
+    ]
+
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
@@ -214,6 +238,17 @@ def test_gcb_2021():
     luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
         "GCB"
     ].to_dataframe()
+
+    luc_emissions_blue = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "BLUE"
+    ].to_dataframe()
+
+    assert list(luc_emissions_blue.columns) == [
+        "Net",
+        "Gross Sink",
+        "Gross Source",
+    ]
+
     luc_emisssions_individual_models = Global_Carbon_Budget[year][
         "Land-Use Change Emissions"
     ]["Individual models"].to_dataframe()
