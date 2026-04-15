@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.32
+## 0.32.1
 
 - Fix GCB column names (#38)
 
