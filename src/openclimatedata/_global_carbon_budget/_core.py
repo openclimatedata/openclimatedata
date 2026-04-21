@@ -73,6 +73,7 @@ class _Global_Carbon_Budget_Sheet(dict):
         self.skiprows = skiprows
         self.columns = columns
 
+        # Sheets with complex tables are handled as sub-tables
         if tables:
             for table in tables:
                 self[table["table_name"]] = _Global_Carbon_Budget_Table(
@@ -84,6 +85,7 @@ class _Global_Carbon_Budget_Sheet(dict):
         else:
             self.to_dataframe = self._to_dataframe
             self.to_long_dataframe = self._to_long_dataframe
+            self.to_ocd = self._to_ocd
 
     def __repr__(self):
         if not hasattr(self, "note"):
@@ -133,6 +135,12 @@ class _Global_Carbon_Budget_Sheet(dict):
         df.Category = df.Category.astype("category")
         return df
 
+    def _to_ocd(self):
+        """Long DataFrame with all column names lower-cased."""
+        df = self._to_long_dataframe()
+        df.columns = df.columns.map(lambda x: x.lower())
+        return df
+
 
 @dataclass
 class _Global_Carbon_Budget_Table:
@@ -172,4 +180,10 @@ class _Global_Carbon_Budget_Table:
             value_name="Value",
         )
         df.Category = df.Category.astype("category")
+        return df
+
+    def to_ocd(self):
+        """Long DataFrame with all column names lower-cased."""
+        df = self.to_long_dataframe()
+        df.columns = df.columns.map(lambda x: x.lower())
         return df
