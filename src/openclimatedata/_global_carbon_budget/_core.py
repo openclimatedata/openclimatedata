@@ -81,6 +81,7 @@ class _Global_Carbon_Budget_Sheet(dict):
                     table_name=table["table_name"],
                     skiprows=table["skiprows"],
                     columns=table["columns"],
+                    nrows=table.get("nrows", None),
                 )
         else:
             self.to_dataframe = self._to_dataframe
@@ -148,6 +149,7 @@ class _Global_Carbon_Budget_Table:
     table_name: str
     skiprows: int
     columns: str
+    nrows: Optional[int] = None
 
     def __repr__(self):
         return f"""{self.sheet.sheet_name} - {self.table_name} - {self.columns}"""
@@ -160,11 +162,12 @@ class _Global_Carbon_Budget_Table:
             skiprows=self.skiprows,
             usecols=self.columns,
             index_col=0,
+            nrows=self.nrows,
         )
         # Remove suffixes `.1`, `.2`, etc. from duplicated columns names
         # (added by Pandas, see https://github.com/pandas-dev/pandas/issues/64198).
         # `CLM5.0`` needs to remain
-        df.columns = df.columns.map(lambda x: re.sub(r"\.[123]$", "", x))
+        df.columns = df.columns.map(lambda x: re.sub(r"\.[1234]$", "", x))
         df.columns = df.columns.str.strip()
         df.name = self.table_name
         df.index.name = "Year"
