@@ -414,6 +414,92 @@ def test_gcb_2021():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_2020():
+    year = "2020"
+    global_carbon_budget = Global_Carbon_Budget[year][
+        "Global Carbon Budget"
+    ].to_dataframe()
+
+    assert global_carbon_budget.loc[1959][
+        "fossil emissions excluding carbonation"
+    ] == approx(2.415)
+
+    # Excel sheets contains proxy-based projections for 2020, we don't include them in the data
+    assert global_carbon_budget.index[-1] == 2019
+
+    historical_budget = Global_Carbon_Budget[year]["Historical Budget"].to_dataframe()
+    # Excel sheets contains proxy-based projections for 2020, we don't include them in the data
+    assert historical_budget.index[-1] == 2019
+
+    fossil_emissions_by_category = Global_Carbon_Budget[year][
+        "Fossil Emissions by Category"
+    ].to_dataframe()
+    luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "GCB"
+    ].to_dataframe()
+    luc_emissions_bookkeeping = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "Bookkeeping Models"
+    ].to_dataframe()
+    assert "BLUE" in luc_emissions_bookkeeping.columns
+    assert "H&N" in luc_emissions_bookkeeping.columns
+
+    luc_emisssions_individual_models = Global_Carbon_Budget[year][
+        "Land-Use Change Emissions"
+    ]["Individual models"].to_dataframe()
+
+    assert "CLM5.0" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS " not in luc_emisssions_individual_models.columns
+
+    ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
+        "Data-based products"
+    ].to_dataframe()
+    terrestrial_sink_gcb = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "GCB"
+    ].to_dataframe()
+    terrestrial_sink_individual_models = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+
+    assert global_carbon_budget["fossil emissions excluding carbonation"].loc[
+        1959
+    ] == approx(2.415)
+    assert global_carbon_budget["budget imbalance"].loc[2019] == approx(
+        0.3434082821477872
+    )
+
+    assert historical_budget["fossil emissions excluding carbonation"].loc[
+        1751
+    ] == approx(0.002552)
+    assert historical_budget["budget imbalance"].loc[2019] == approx(
+        0.34317149434110444
+    )
+
+    assert fossil_emissions_by_category["fossil emissions excluding carbonation"].loc[
+        1959
+    ] == approx(2415.0)
+    assert fossil_emissions_by_category["Per Capita"].loc[2019] == approx(
+        1.28938398227429
+    )
+
+    assert luc_emissions_gcb.GCB.loc[1959] == approx(1.8041998730239868)
+    assert luc_emisssions_individual_models["MMM (multi-model mean)"].loc[
+        2019
+    ] == approx(2.1597810111764706)
+
+    assert ocean_sink_gcb.GCB.loc[1959] == approx(0.8613677600284719)
+    assert ocean_sink_data_based_products["mean data-products (excl. Watson.)"].loc[
+        2019
+    ] == approx(2.764190868690535)
+
+    assert terrestrial_sink_gcb.GCB.loc[1959] == approx(0.6774448472352941)
+    assert terrestrial_sink_individual_models["Model Spread (sd)"].loc[2019] == approx(
+        1.231594161674994
+    )
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2019():
     year = "2019"
     global_carbon_budget = Global_Carbon_Budget[year][
