@@ -3,7 +3,7 @@ from ._core import _Global_Carbon_Budget_Release
 GCB2020 = _Global_Carbon_Budget_Release(
     name="Global Carbon Budget 2020",
     version="1.0",
-    doi="10.18160/gcp-2020 ",
+    doi="10.18160/gcp-2020",
     doi_article="10.5194/essd-12-3269-2020",
     published="2020-12-11",
     citation="Global Carbon Project. (2020). Supplemental data of Global Carbon Budget 2020 (Version 1.0) [Data set]. Global Carbon Project. https://doi.org/10.18160/gcp-2020",
