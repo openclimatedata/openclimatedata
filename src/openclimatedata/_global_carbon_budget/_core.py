@@ -65,12 +65,14 @@ class _Global_Carbon_Budget_Sheet(dict):
         release: object,
         sheet_name: str,
         skiprows: int,
+        nrows: Optional[int] = None,
         columns: Optional[str] = None,
         tables: Optional[list] = None,
     ):
         self.release = release
         self.sheet_name = sheet_name
         self.skiprows = skiprows
+        self.nrows = nrows
         self.columns = columns
 
         # Sheets with complex tables are handled as sub-tables
@@ -120,6 +122,7 @@ class _Global_Carbon_Budget_Sheet(dict):
             skiprows=self.skiprows,
             usecols=self.columns,
             index_col=0,
+            nrows=self.nrows,
         )
         df.index.name = "Year"
         return df
