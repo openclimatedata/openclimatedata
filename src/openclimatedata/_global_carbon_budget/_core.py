@@ -65,14 +65,17 @@ class _Global_Carbon_Budget_Sheet(dict):
         release: object,
         sheet_name: str,
         skiprows: int,
+        nrows: Optional[int] = None,
         columns: Optional[str] = None,
         tables: Optional[list] = None,
     ):
         self.release = release
         self.sheet_name = sheet_name
         self.skiprows = skiprows
+        self.nrows = nrows
         self.columns = columns
 
+        # Sheets with complex tables are handled as sub-tables
         if tables:
             for table in tables:
                 self[table["table_name"]] = _Global_Carbon_Budget_Table(
@@ -80,10 +83,12 @@ class _Global_Carbon_Budget_Sheet(dict):
                     table_name=table["table_name"],
                     skiprows=table["skiprows"],
                     columns=table["columns"],
+                    nrows=table.get("nrows", None),
                 )
         else:
             self.to_dataframe = self._to_dataframe
             self.to_long_dataframe = self._to_long_dataframe
+            self.to_ocd = self._to_ocd
 
     def __repr__(self):
         if not hasattr(self, "note"):
@@ -117,6 +122,7 @@ class _Global_Carbon_Budget_Sheet(dict):
             skiprows=self.skiprows,
             usecols=self.columns,
             index_col=0,
+            nrows=self.nrows,
         )
         df.index.name = "Year"
         return df
@@ -133,6 +139,12 @@ class _Global_Carbon_Budget_Sheet(dict):
         df.Category = df.Category.astype("category")
         return df
 
+    def _to_ocd(self):
+        """Long DataFrame with all column names lower-cased."""
+        df = self._to_long_dataframe()
+        df.columns = df.columns.map(lambda x: x.lower())
+        return df
+
 
 @dataclass
 class _Global_Carbon_Budget_Table:
@@ -140,6 +152,7 @@ class _Global_Carbon_Budget_Table:
     table_name: str
     skiprows: int
     columns: str
+    nrows: Optional[int] = None
 
     def __repr__(self):
         return f"""{self.sheet.sheet_name} - {self.table_name} - {self.columns}"""
@@ -152,12 +165,12 @@ class _Global_Carbon_Budget_Table:
             skiprows=self.skiprows,
             usecols=self.columns,
             index_col=0,
+            nrows=self.nrows,
         )
         # Remove suffixes `.1`, `.2`, etc. from duplicated columns names
         # (added by Pandas, see https://github.com/pandas-dev/pandas/issues/64198).
         # `CLM5.0`` needs to remain
-        df.columns = df.columns.map(lambda x: re.sub(r"\.[123]$", "", x))
-        df = df.rename(columns={"LPX-Bern.1": "LPX-Bern"})
+        df.columns = df.columns.map(lambda x: re.sub(r"\.[1234]$", "", x))
         df.columns = df.columns.str.strip()
         df.name = self.table_name
         df.index.name = "Year"
@@ -173,4 +186,10 @@ class _Global_Carbon_Budget_Table:
             value_name="Value",
         )
         df.Category = df.Category.astype("category")
+        return df
+
+    def to_ocd(self):
+        """Long DataFrame with all column names lower-cased."""
+        df = self.to_long_dataframe()
+        df.columns = df.columns.map(lambda x: x.lower())
         return df

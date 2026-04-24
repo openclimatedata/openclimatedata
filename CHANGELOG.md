@@ -1,5 +1,7 @@
 # Changelog
 
+- Add GCB 2024, 2020, and 2019
+
 ## 0.32.1
 
 - Fix GCB column names (#38)
@@ -20,7 +22,7 @@
 
 - Use XIT for international transport/bunkers in CEDS (same code as in GCB Fossil)
 
-## 0.27 
+## 0.27
 - Add CEDS 2018 supplemental dataset
 - Remove PRIMAP-hist 2.7
 
