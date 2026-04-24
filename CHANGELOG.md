@@ -1,6 +1,6 @@
 # Changelog
 
-- Add GCB 2024
+- Add GCB 2024, 2020, and 2019
 
 ## 0.32.1
 
