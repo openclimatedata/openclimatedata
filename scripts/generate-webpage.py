@@ -12,6 +12,7 @@
 from pathlib import Path
 
 import openclimatedata as ocd
+import pandas as pd
 
 from tqdm import tqdm
 
@@ -28,6 +29,34 @@ html = f"""<!doctype html>
 <h1>Openclimatedata Downloads - Version {ocd.__version__}</h1>
 <p><a href="https://github.com/openclimatedata/openclimatedata">GitHub Repo</a></p>
 """
+
+global_carbon_budget_versions = ocd.Global_Carbon_Budget.keys()
+
+html += """<h2>Global Carbon Budget</h2>"""
+
+
+print("Global Carbon Budget")
+for gcb_version in tqdm(global_carbon_budget_versions):
+    html += """<ul>\n"""
+    for sheet in ocd.Global_Carbon_Budget[gcb_version].keys():
+        sheetslug = sheet.lower().replace(" ", "-")
+        if sheet not in ["Land-Use Change Emissions", "Ocean Sink", "Terrestrial Sink"]:
+            df = ocd.Global_Carbon_Budget[gcb_version][sheet].to_ocd()
+            filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
+            df.to_parquet(root / "scripts" / filename, index=False)
+            html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+        else:
+            dfs = []
+            for subtable in ocd.Global_Carbon_Budget[gcb_version][sheet].keys():
+                df = ocd.Global_Carbon_Budget[gcb_version][sheet][subtable].to_ocd()
+                df.insert(1, "subtable", subtable)
+                dfs.append(df)
+            filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
+            pd.concat(dfs).to_parquet(root / "scripts" / filename, index=False)
+            html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+
+    html += f"""</ul><small>{ocd.Global_Carbon_Budget[gcb_version].citation}</small>"""
+
 
 gcb_versions = ocd.GCB_Fossil_Emissions.keys()
 
