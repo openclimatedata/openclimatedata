@@ -500,7 +500,9 @@ def test_gcb_2020():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
-@pytest.mark.filterwarnings("ignore:Unknown extension is not supported and will be removed")
+@pytest.mark.filterwarnings(
+    "ignore:Unknown extension is not supported and will be removed"
+)
 def test_gcb_2019():
     year = "2019"
     global_carbon_budget = Global_Carbon_Budget[year][
