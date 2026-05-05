@@ -1,10 +1,14 @@
 import re
+import warnings
+
 from dataclasses import dataclass
 from typing import Optional
 
 import pandas as pd
 import pooch
 from openpyxl import load_workbook
+
+warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 
 class _Global_Carbon_Budget_Release(dict):
