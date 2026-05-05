@@ -169,7 +169,7 @@ class _Global_Carbon_Budget_Table:
         )
         # Remove suffixes `.1`, `.2`, etc. from duplicated columns names
         # (added by Pandas, see https://github.com/pandas-dev/pandas/issues/64198).
-        # `CLM5.0`` needs to remain
+        # `CLM5.0` or `CLM6.0` needs to remain
         df.columns = df.columns.map(lambda x: re.sub(r"\.[1234]$", "", x))
         df.columns = df.columns.str.strip()
         df.name = self.table_name
