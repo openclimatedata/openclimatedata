@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.34
+- Add GCB 2025 (preprint)
+
 ## 0.33
 
 - Add GCB 2024, 2020, and 2019
