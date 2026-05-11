@@ -23,7 +23,9 @@ def test_gcb():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
-def test_index():
+def test_dfs():
+    # Index should be integer years
+    # No column should be unnamed
     for version in versions:
         sheet_names = Global_Carbon_Budget[version].keys()
 
@@ -34,9 +36,11 @@ def test_index():
                         subtable
                     ].to_dataframe()
                     assert type(df.index) is pd.RangeIndex
+                    assert all([not i.startswith("Unnamed") for i in df.columns])
             else:
                 df = Global_Carbon_Budget[version][sheet_name].to_dataframe()
                 assert type(df.index) is pd.RangeIndex
+                all([not i.startswith("Unnamed") for i in df.columns])
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")

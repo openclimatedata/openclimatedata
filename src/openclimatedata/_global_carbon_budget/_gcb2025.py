@@ -70,20 +70,23 @@ GCB2025 = _Global_Carbon_Budget_Release(
                 },
             ],
         },
+        # nrows needed in Ocean Sink sheet, otherwise years get read as floats
         {
             "sheet_name": "Ocean Sink",
             "skiprows": 29,
             "tables": [
-                {"table_name": "GCB", "skiprows": 31, "columns": "A:C"},
+                {"table_name": "GCB", "skiprows": 31, "columns": "A:C", "nrows": 98},
                 {
                     "table_name": "Individual models",
                     "skiprows": 31,
-                    "columns": "A,D:M,O:P",
+                    "columns": "A,E:N,P:Q",
+                    "nrows": 98,
                 },
                 {
                     "table_name": "fCO2-products",
                     "skiprows": 31,
                     "columns": "A,S:AC",
+                    "nrows": 98,
                 },
             ],
         },
