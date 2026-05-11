@@ -1,12 +1,9 @@
 # /// script
 # requires-python = ">=3.14"
 # dependencies = [
-#     "openclimatedata",
+#     "openclimatedata==0.34",
 #     "pyarrow>=23.0.1",
 # ]
-#
-# [tool.uv.sources]
-# openclimatedata = { path = "../", editable = true}
 # ///
 
 from pathlib import Path
@@ -40,20 +37,31 @@ for gcb_version in tqdm(global_carbon_budget_versions):
     html += """<ul>\n"""
     for sheet in ocd.Global_Carbon_Budget[gcb_version].keys():
         sheetslug = sheet.lower().replace(" ", "-")
-        if sheet not in ["Land-Use Change Emissions", "Ocean Sink", "Terrestrial Sink"]:
-            df = ocd.Global_Carbon_Budget[gcb_version][sheet].to_ocd()
+        if sheet not in [
+            "Atmospheric Growth",
+            "Land-Use Change Emissions",
+            "Ocean Sink",
+            "Terrestrial Sink",
+        ]:
             filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
-            df.to_parquet(root / "scripts" / filename, index=False)
+            filepath = Path(root / "scripts" / filename)
+
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+            if not filepath.exists():
+                df = ocd.Global_Carbon_Budget[gcb_version][sheet].to_ocd()
+                df.to_parquet(filepath, index=False)
+
         else:
-            dfs = []
-            for subtable in ocd.Global_Carbon_Budget[gcb_version][sheet].keys():
-                df = ocd.Global_Carbon_Budget[gcb_version][sheet][subtable].to_ocd()
-                df.insert(1, "subtable", subtable)
-                dfs.append(df)
             filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
-            pd.concat(dfs).to_parquet(root / "scripts" / filename, index=False)
+            filepath = Path(root / "scripts" / filename)
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+            if not filepath.exists():
+                dfs = []
+                for subtable in ocd.Global_Carbon_Budget[gcb_version][sheet].keys():
+                    df = ocd.Global_Carbon_Budget[gcb_version][sheet][subtable].to_ocd()
+                    df.insert(1, "subtable", subtable)
+                    dfs.append(df)
+                pd.concat(dfs).to_parquet(filepath, index=False)
 
     html += f"""</ul><small>{ocd.Global_Carbon_Budget[gcb_version].citation}</small>"""
 
@@ -65,12 +73,15 @@ html += """<h2>GCB Fossil</h2>
 
 print("GCB Fossil")
 for gcb_version in tqdm(gcb_versions):
-    df = ocd.GCB_Fossil_Emissions[gcb_version].to_ocd()
     filename = f"gcb-fossil-{gcb_version}.parquet"
-    df.to_parquet(root / "scripts" / filename)
+    filepath = root / "scripts" / filename
     html += f"""<li><a href="{filename}">{filename}</a> ({ocd.GCB_Fossil_Emissions[gcb_version].license})</br>
     <small>{ocd.GCB_Fossil_Emissions[gcb_version].citation}</small>
     </li>\n"""
+    if not filepath.exists():
+        df = ocd.GCB_Fossil_Emissions[gcb_version].to_ocd()
+        df.to_parquet(filepath)
+
 
 primaphist_versions = ocd.PRIMAPHIST.keys()
 
@@ -80,12 +91,14 @@ html += """</ul>
 
 print("PRIMAP-hist")
 for primaphist_version in tqdm(primaphist_versions):
-    df = ocd.PRIMAPHIST[primaphist_version]["main"].to_ocd()
     filename = f"primap-hist-{primaphist_version.replace('.', '-')}.parquet"
-    df.to_parquet(root / "scripts" / filename)
+    filepath = Path(root / "scripts" / filename)
     html += f"""<li><a href="{filename}">{filename}</a> ({ocd.PRIMAPHIST[primaphist_version].license})</br></li>\n
     <small>{ocd.PRIMAPHIST[primaphist_version].citation}</small>
     """
+    if not filepath.exists():
+        df = ocd.PRIMAPHIST[primaphist_version]["main"].to_ocd()
+        df.to_parquet(filepath)
 
 ceds_versions = ocd.CEDS.keys()
 
@@ -97,28 +110,35 @@ print("CEDS")
 for ceds_version in tqdm(ceds_versions):
     html += f"""<p><strong>{ceds_version}</strong></p>
     <ul>"""
+
     for entity in ocd.CEDS[ceds_version].entities:
-        df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
         filename = (
             f"ceds-{entity.lower()}-by-sector-{ceds_version.replace('.', '-')}.parquet"
         )
-        df.to_parquet(root / "scripts" / filename, index=False)
+        filepath = Path(root / "scripts" / filename)
         html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
         """
+        if not filepath.exists():
+            df = ocd.CEDS[ceds_version][entity]["by_sector"].to_ocd()
+            df.to_parquet(filepath, index=False)
 
         if "by_sector_fuel" in ocd.CEDS[ceds_version][entity]:
-            df = ocd.CEDS[ceds_version][entity]["by_sector_fuel"].to_ocd()
             filename = f"ceds-{entity.lower()}-by-sector-fuel-{ceds_version.replace('.', '-')}.parquet"
-            df.to_parquet(root / "scripts" / filename, index=False)
+            filepath = Path(root / "scripts" / filename)
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
             """
+            if not filepath.exists():
+                df = ocd.CEDS[ceds_version][entity]["by_sector_fuel"].to_ocd()
+                df.to_parquet(filepath, index=False)
 
         if "bunkers" in ocd.CEDS[ceds_version][entity]:
-            df = ocd.CEDS[ceds_version][entity]["bunkers"].to_ocd()
             filename = f"ceds-{entity.lower()}-bunkers-{ceds_version.replace('.', '-')}.parquet"
-            df.to_parquet(root / "scripts" / filename, index=False)
+            filepath = Path(root / "scripts" / filename)
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.CEDS[ceds_version].license})</br></li>\n
             """
+            if not filepath.exists():
+                df = ocd.CEDS[ceds_version][entity]["bunkers"].to_ocd()
+                df.to_parquet(root / "scripts" / filename, index=False)
 
     html += f"""</ul><small>{ocd.CEDS[ceds_version].citation}</small>
     """
