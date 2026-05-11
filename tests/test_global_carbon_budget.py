@@ -17,7 +17,26 @@ def test_gcb():
         assert Global_Carbon_Budget[version].__repr__()
         assert Global_Carbon_Budget[version].name
         assert Global_Carbon_Budget[version].doi
-        assert Global_Carbon_Budget[version].published
+        assert Global_Carbon_Budget[version].doi_article
+        if "[preprint]" not in Global_Carbon_Budget[version].citation_article:
+            assert Global_Carbon_Budget[version].published
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_index():
+    for version in versions:
+        sheet_names = Global_Carbon_Budget[version].keys()
+
+        for sheet_name in sheet_names:
+            if len(Global_Carbon_Budget[version][sheet_name].keys()) > 0:
+                for subtable in Global_Carbon_Budget[version][sheet_name].keys():
+                    df = Global_Carbon_Budget[version][sheet_name][
+                        subtable
+                    ].to_dataframe()
+                    assert type(df.index) is pd.RangeIndex
+            else:
+                df = Global_Carbon_Budget[version][sheet_name].to_dataframe()
+                assert type(df.index) is pd.RangeIndex
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
@@ -27,6 +46,8 @@ def test_gcb_sheet_names():
 
         assert "Global Carbon Budget" in sheet_names
         assert "Historical Budget" in sheet_names
+        if version >= "2025":
+            assert "Atmospheric Growth" in sheet_names
         if version > "2019":
             assert "Fossil Emissions by Category" in sheet_names
             assert "Cement Carbonation Sink" in sheet_names
@@ -52,6 +73,118 @@ def test_gcb_dataframes_for_subtables_only():
                 assert "to_long_dataframe" not in dir(
                     Global_Carbon_Budget[version][sheet_name]
                 )
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_2025():
+    year = "2025"
+    global_carbon_budget = Global_Carbon_Budget[year][
+        "Global Carbon Budget"
+    ].to_dataframe()
+    historical_budget = Global_Carbon_Budget[year]["Historical Budget"].to_dataframe()
+    fossil_emissions_by_category = Global_Carbon_Budget[year][
+        "Fossil Emissions by Category"
+    ].to_dataframe()
+    luc_emissions_gcb = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "GCB"
+    ].to_dataframe()
+
+    luc_emissions_blue = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "BLUE"
+    ].to_dataframe()
+
+    luc_emissions_luce = Global_Carbon_Budget[year]["Land-Use Change Emissions"][
+        "LUCE"
+    ].to_dataframe()
+
+    assert list(luc_emissions_blue.columns) == [
+        "Net",
+        "deforestation (total)",
+        "forest regrowth (total)",
+        "other transitions",
+        "wood harvest & other forest management",
+    ]
+
+    assert list(luc_emissions_luce.columns) == [
+        "Net",
+        "deforestation (total)",
+        "forest regrowth (total)",
+        "other transitions",
+        "wood harvest & other forest management",
+    ]
+
+    luc_emisssions_individual_models = Global_Carbon_Budget[year][
+        "Land-Use Change Emissions"
+    ]["Individual models (NET) - Does not include peat emissions"].to_dataframe()
+
+    assert "CLM6.0" in luc_emisssions_individual_models.columns
+
+    atmospheric_growth = Global_Carbon_Budget[year]["Atmospheric Growth"][
+        "GCB"
+    ].to_dataframe()
+    atmospheric_growth_individual_inversions = Global_Carbon_Budget[year][
+        "Atmospheric Growth"
+    ]["Individual Inversions"].to_dataframe()
+
+    ocean_sink_gcb = Global_Carbon_Budget[year]["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = Global_Carbon_Budget[year]["Ocean Sink"][
+        "fCO2-products"
+    ].to_dataframe()
+    terrestrial_sink_gcb = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "GCB"
+    ].to_dataframe()
+    terrestrial_sink_individual_models = Global_Carbon_Budget[year]["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+    cement_carbonation_sink = Global_Carbon_Budget[year][
+        "Cement Carbonation Sink"
+    ].to_dataframe()
+
+    assert global_carbon_budget["fossil emissions excluding carbonation"].loc[
+        1959
+    ] == approx(2.41678824533062)
+    assert global_carbon_budget["budget imbalance"].loc[2024] == approx(
+        -1.69186306041634
+    )
+
+    assert historical_budget["fossil emissions excluding carbonation"].loc[
+        1750
+    ] == approx(0.00253982996724891)
+    assert historical_budget["budget imbalance"].loc[2024] == approx(-1.69186306041634)
+
+    assert fossil_emissions_by_category["fossil.emissions.excluding.carbonation"].loc[
+        1850
+    ] == approx(0.0537247802539048)
+    assert fossil_emissions_by_category["Per.Capita"].loc[2024] == approx(
+        0.00129068632776699
+    )
+
+    assert luc_emissions_gcb.Net.loc[1959] == approx(2.37248)
+    assert luc_emisssions_individual_models["Model Spread (sd)"].loc[2024] == approx(
+        0.543991273730604
+    )
+
+    assert atmospheric_growth.GCB.loc[1959] == approx(2.03904)
+    assert atmospheric_growth_individual_inversions["THU"].loc[2024] == approx(
+        7.22531823174002
+    )
+
+    assert ocean_sink_gcb.GCB.loc[1959] == approx(1.11508070269876)
+    assert ocean_sink_data_based_products["sd fCO2-product"].loc[2024] == approx(
+        0.542323029491313
+    )
+
+    assert terrestrial_sink_gcb.GCB.loc[1959] == approx(0.453344829624502)
+    assert terrestrial_sink_individual_models["Model Spread (sd)"].loc[2024] == approx(
+        1.10504513145914
+    )
+    assert terrestrial_sink_individual_models["Model Spread (sd)"].iloc[-1] == approx(
+        1.10504513145914
+    )
+
+    assert cement_carbonation_sink.GCB.loc[1959] == approx(0.013422795)
+    assert cement_carbonation_sink.GCB.loc[2024] == approx(0.224290503)
+    assert pd.isna(cement_carbonation_sink.Huang[2024])
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
