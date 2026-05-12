@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.35
+- Add units to Global Carbon Budget ocd DataFrames
+
 ## 0.34
 - Add GCB 2025 (preprint)
 
