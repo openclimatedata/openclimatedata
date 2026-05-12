@@ -21,7 +21,12 @@ GCB2025 = _Global_Carbon_Budget_Release(
             "sheet_name": "Historical Budget",
             "skiprows": 15,
         },
-        {"sheet_name": "Fossil Emissions by Category", "skiprows": 8},
+        {
+            "sheet_name": "Fossil Emissions by Category",
+            "skiprows": 8,
+            # TODO Fix in final GCB version, error already reported
+            "unit_overwrite": {"Per.Capita": "1/1000 t/person/yr"},
+        },
         {
             "sheet_name": "Land-Use Change Emissions",
             "skiprows": 36,

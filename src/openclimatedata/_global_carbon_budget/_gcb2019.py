@@ -19,7 +19,12 @@ GCB2019 = _Global_Carbon_Budget_Release(
             "skiprows": 18,
         },
         {"sheet_name": "Historical Budget", "skiprows": 14},
-        {"sheet_name": "Fossil Emissions by Fuel Type", "skiprows": 12},
+        {
+            "sheet_name": "Fossil Emissions by Fuel Type",
+            "skiprows": 12,
+            "unit": "MtC/yr",
+            "unit_overwrite": {"Per Capita": "tC/person/yr"},
+        },
         {
             "sheet_name": "Land-Use Change Emissions",
             "skiprows": 24,

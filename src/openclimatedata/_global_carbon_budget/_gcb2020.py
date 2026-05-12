@@ -20,7 +20,12 @@ GCB2020 = _Global_Carbon_Budget_Release(
             "nrows": 62,
         },
         {"sheet_name": "Historical Budget", "skiprows": 15, "nrows": 271},
-        {"sheet_name": "Fossil Emissions by Category", "skiprows": 8},
+        {
+            "sheet_name": "Fossil Emissions by Category",
+            "skiprows": 8,
+            "unit": "MtC/yr",
+            "unit_overwrite": {"Per Capita": "tC/person/yr"},
+        },
         {
             "sheet_name": "Land-Use Change Emissions",
             "skiprows": 27,
@@ -71,6 +76,11 @@ GCB2020 = _Global_Carbon_Budget_Release(
                 },
             ],
         },
-        {"sheet_name": "Cement Carbonation Sink", "skiprows": 9, "columns": "A,B,D:E"},
+        {
+            "sheet_name": "Cement Carbonation Sink",
+            "skiprows": 9,
+            "columns": "A,B,D:E",
+            "unit": "MtC/yr",
+        },
     ],
 )

@@ -2,7 +2,7 @@ import re
 import warnings
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Literal
 
 import pandas as pd
 import pooch
@@ -63,12 +63,17 @@ https://doi.org/{self.doi}
 {self.citation}"""
 
 
+unit_values = Literal["GtC/yr", "MtC/yr", "tC/person/yr"]
+
+
 class _Global_Carbon_Budget_Sheet(dict):
     def __init__(
         self,
         release: object,
         sheet_name: str,
         skiprows: int,
+        unit: unit_values = "GtC/yr",
+        unit_overwrite: dict[str, unit_values] = {},
         nrows: Optional[int] = None,
         columns: Optional[str] = None,
         tables: Optional[list] = None,
@@ -76,6 +81,8 @@ class _Global_Carbon_Budget_Sheet(dict):
         self.release = release
         self.sheet_name = sheet_name
         self.skiprows = skiprows
+        self.unit = unit
+        self.unit_overwrite = unit_overwrite
         self.nrows = nrows
         self.columns = columns
 
@@ -147,6 +154,14 @@ class _Global_Carbon_Budget_Sheet(dict):
         """Long DataFrame with all column names lower-cased."""
         df = self._to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
+        df["unit"] = df.apply(
+            lambda x: (
+                self.unit_overwrite[x["category"]]
+                if x["category"] in self.unit_overwrite
+                else self.unit
+            ),
+            axis=1,
+        )
         return df
 
 
@@ -196,4 +211,13 @@ class _Global_Carbon_Budget_Table:
         """Long DataFrame with all column names lower-cased."""
         df = self.to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
+        df["unit"] = df.apply(
+            lambda x: (
+                self.sheet.unit_overwrite[x["category"]]
+                if x["category"] in self.sheet.unit_overwrite
+                else self.sheet.unit
+            ),
+            axis=1,
+        )
+
         return df

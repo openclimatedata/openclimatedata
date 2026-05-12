@@ -40,7 +40,40 @@ def test_dfs():
             else:
                 df = Global_Carbon_Budget[version][sheet_name].to_dataframe()
                 assert type(df.index) is pd.RangeIndex
-                all([not i.startswith("Unnamed") for i in df.columns])
+                assert all([not i.startswith("Unnamed") for i in df.columns])
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_units():
+    for version in versions:
+        sheet_names = Global_Carbon_Budget[version].keys()
+        for sheet_name in sheet_names:
+            if len(Global_Carbon_Budget[version][sheet_name].keys()) > 0:
+                for subtable in Global_Carbon_Budget[version][sheet_name].keys():
+                    df = Global_Carbon_Budget[version][sheet_name][subtable].to_ocd()
+                    # Sheets with subtables all have GtC/yr
+                    assert df.iloc[0].unit == "GtC/yr"
+                    assert (
+                        "GtC/yr" in Global_Carbon_Budget[version][sheet_name].__repr__()
+                    )
+            else:
+                df = Global_Carbon_Budget[version][sheet_name].to_ocd()
+                if version < "2025" and sheet_name.startswith(("Fossil", "Cement")):
+                    assert df.iloc[0].unit == "MtC/yr"
+                    assert (
+                        "MtC/yr" in Global_Carbon_Budget[version][sheet_name].__repr__()
+                    )
+                    if sheet_name.startswith("Fossil"):
+                        assert df.iloc[-1].unit == "tC/person/yr"
+                        assert (
+                            "tC/person/yr"
+                            in Global_Carbon_Budget[version][sheet_name].__repr__()
+                        )
+                else:
+                    assert df.iloc[0].unit == "GtC/yr"
+                    assert (
+                        "GtC/yr" in Global_Carbon_Budget[version][sheet_name].__repr__()
+                    )
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
