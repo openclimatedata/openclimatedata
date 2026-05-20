@@ -1,7 +1,7 @@
 # /// script
 # requires-python = ">=3.14"
 # dependencies = [
-#     "openclimatedata==0.35",
+#     "openclimatedata==0.36",
 #     "pyarrow>=23.0.1",
 # ]
 # ///
