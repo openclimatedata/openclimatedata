@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.36
+
+- Update to published GCB 2025 version and v1.0 main data file
+
 ## 0.35
 - Add units to Global Carbon Budget ocd DataFrames
 
