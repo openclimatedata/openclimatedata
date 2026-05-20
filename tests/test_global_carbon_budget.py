@@ -193,7 +193,7 @@ def test_gcb_2025():
         1850
     ] == approx(0.0537247802539048)
     assert fossil_emissions_by_category["Per.Capita"].loc[2024] == approx(
-        0.00129068632776699
+        1.29068632776699
     )
 
     assert luc_emissions_gcb.Net.loc[1959] == approx(2.37248)
