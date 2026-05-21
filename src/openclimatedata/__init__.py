@@ -12,6 +12,6 @@ __all__ = [
     "GCB_Fossil_Emissions",
 ]
 
-from importlib.metadata import version
+import importlib.metadata as _metadata
 
-__version__ = version("openclimatedata")
+__version__ = _metadata.version("openclimatedata")
