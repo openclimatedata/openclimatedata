@@ -6,9 +6,10 @@ from typing import Optional, Literal
 
 import pandas as pd
 import pooch
-from openpyxl import load_workbook
+import openpyxl
 
-warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
+
+unit_values = Literal["GtC/yr", "MtC/yr", "tC/person/yr"]
 
 
 class _Global_Carbon_Budget_Release(dict):
@@ -22,10 +23,11 @@ class _Global_Carbon_Budget_Release(dict):
         citation: str,
         citation_article: str,
         license: str,
-        filename: str,
-        url: str,
-        known_hash: str,
-        sheets: list,
+        # filename: str,
+        # url: str,
+        # known_hash: str,
+        global_carbon_budget: dict,
+        national_fossil_carbon_emissions: dict,
     ):
         self.name = name
         self.version = version
@@ -35,13 +37,47 @@ class _Global_Carbon_Budget_Release(dict):
         self.citation = citation
         self.citation_article = citation_article
         self.license = license
+        # self.filename = filename
+        # self.url = url
+        # self.known_hash = known_hash
+
+        self.Global_Carbon_Budget = _Global_Carbon_Budget_File(
+            release=self,
+            filename=global_carbon_budget["filename"],
+            url=global_carbon_budget["url"],
+            known_hash=global_carbon_budget["known_hash"],
+            sheets=global_carbon_budget["sheets"],
+        )
+
+        self.National_Fossil_Carbon_Emissions = _Global_Carbon_Budget_File(
+            release=self,
+            filename=national_fossil_carbon_emissions["filename"],
+            url=national_fossil_carbon_emissions["url"],
+            known_hash=national_fossil_carbon_emissions["known_hash"],
+            sheets=national_fossil_carbon_emissions["sheets"],
+        )
+
+    def __repr__(self):
+        return f"""{self.name}
+
+License: {self.license}
+https://doi.org/{self.doi}
+
+{self.citation}"""
+
+
+class _Global_Carbon_Budget_File(dict):
+    def __init__(
+        self, release: object, filename: str, url: str, known_hash: str, sheets: list
+    ):
+        self.release = release
         self.filename = filename
         self.url = url
         self.known_hash = known_hash
 
         for sheet in sheets:
             self[sheet["sheet_name"]] = _Global_Carbon_Budget_Sheet(
-                release=self, **sheet
+                release=self.release, file=self, **sheet
             )
 
     def _get_file_path(self):
@@ -53,23 +89,16 @@ class _Global_Carbon_Budget_Release(dict):
         )
 
     def __repr__(self):
-        return f"""{self.name}
-
-'{self.filename}'
-
-License: {self.license}
-https://doi.org/{self.doi}
-
-{self.citation}"""
-
-
-unit_values = Literal["GtC/yr", "MtC/yr", "tC/person/yr"]
+        return f"""
+            {self.filename}
+        """
 
 
 class _Global_Carbon_Budget_Sheet(dict):
     def __init__(
         self,
         release: object,
+        file: object,
         sheet_name: str,
         skiprows: int,
         unit: unit_values = "GtC/yr",
@@ -79,6 +108,7 @@ class _Global_Carbon_Budget_Sheet(dict):
         tables: Optional[list] = None,
     ):
         self.release = release
+        self.file = file
         self.sheet_name = sheet_name
         self.skiprows = skiprows
         self.unit = unit
@@ -103,8 +133,8 @@ class _Global_Carbon_Budget_Sheet(dict):
 
     def __repr__(self):
         if not hasattr(self, "note"):
-            file_path = self.release._get_file_path()
-            wb = load_workbook(file_path)
+            file_path = self.file._get_file_path()
+            wb = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
             rows = [
                 list(row)
                 for row in list(
@@ -120,48 +150,58 @@ class _Global_Carbon_Budget_Sheet(dict):
 
             self.note = note
 
-        return f"""{self.release.name} — {self.sheet_name}
+        return f"""{self.release.name} — {self.file.filename}  — {self.sheet_name}
 
 {self.note}
 """
 
     def _to_dataframe(self):
-        file_path = self.release._get_file_path()
-        df = pd.read_excel(
-            file_path,
-            sheet_name=self.sheet_name,
-            skiprows=self.skiprows,
-            usecols=self.columns,
-            index_col=0,
-            nrows=self.nrows,
-        )
+        file_path = self.file._get_file_path()
+        with warnings.catch_warnings(action="ignore", category=UserWarning):
+            df = pd.read_excel(
+                file_path,
+                sheet_name=self.sheet_name,
+                skiprows=self.skiprows,
+                usecols=self.columns,
+                index_col=0,
+                nrows=self.nrows,
+            )
         df.index.name = "Year"
         return df
 
     def _to_long_dataframe(self):
         df = self.to_dataframe()
         value_vars = df.columns
-        df = df.reset_index().melt(
-            id_vars=["Year"],
-            value_vars=value_vars,
-            var_name="Category",
-            value_name="Value",
-        )
-        df.Category = df.Category.astype("category")
+        var_name = "Region" if value_vars[0] == "Afghanistan" else "Category"
+        with warnings.catch_warnings(
+            action="ignore", category=pd.errors.PerformanceWarning
+        ):
+            df = df.reset_index().melt(
+                id_vars=["Year"],
+                value_vars=value_vars,
+                var_name=var_name,
+                value_name="Value",
+            )
+        df[var_name] = df[var_name].astype("category")
         return df
 
     def _to_ocd(self):
         """Long DataFrame with all column names lower-cased."""
         df = self._to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
-        df["unit"] = df.apply(
-            lambda x: (
-                self.unit_overwrite[x["category"]]
-                if x["category"] in self.unit_overwrite
-                else self.unit
-            ),
-            axis=1,
-        )
+        if "category" in df.columns:
+            df["unit"] = df.apply(
+                lambda x: (
+                    self.unit_overwrite[x["category"]]
+                    if x["category"] in self.unit_overwrite
+                    else self.unit
+                ),
+                axis=1,
+            )
+        else:
+            # For national fossil and land-use emissions all columns should have the same unit, so no overwrite needed
+            df["unit"] = self.unit
+
         return df
 
 
@@ -177,7 +217,7 @@ class _Global_Carbon_Budget_Table:
         return f"""{self.sheet.sheet_name} - {self.table_name} - {self.columns}"""
 
     def to_dataframe(self):
-        file_path = self.sheet.release._get_file_path()
+        file_path = self.sheet.file._get_file_path()
         df = pd.read_excel(
             file_path,
             sheet_name=self.sheet.sheet_name,
