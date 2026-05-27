@@ -23,9 +23,6 @@ class _Global_Carbon_Budget_Release(dict):
         citation: str,
         citation_article: str,
         license: str,
-        # filename: str,
-        # url: str,
-        # known_hash: str,
         global_carbon_budget: dict,
         national_fossil_carbon_emissions: dict,
     ):
@@ -37,10 +34,7 @@ class _Global_Carbon_Budget_Release(dict):
         self.citation = citation
         self.citation_article = citation_article
         self.license = license
-        # self.filename = filename
-        # self.url = url
-        # self.known_hash = known_hash
-
+  
         self.Global_Carbon_Budget = _Global_Carbon_Budget_File(
             release=self,
             filename=global_carbon_budget["filename"],
