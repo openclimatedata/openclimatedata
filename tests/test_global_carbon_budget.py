@@ -27,10 +27,15 @@ def test_dfs():
     # Index should be integer years
     # No column should be unnamed
     for version in versions:
-        for excel_file in [
+        excel_files = [
             Global_Carbon_Budget[version].Global_Carbon_Budget,
             Global_Carbon_Budget[version].National_Fossil_Carbon_Emissions,
-        ]:
+        ]
+        if version >= "2022":
+            excel_files += [
+                Global_Carbon_Budget[version].National_Landuse_Change_Emissions
+            ]
+        for excel_file in excel_files:
             sheet_names = excel_file.keys()
 
             for sheet_name in sheet_names:
@@ -41,7 +46,10 @@ def test_dfs():
                         assert all([not i.startswith("Unnamed") for i in df.columns])
                 else:
                     df = excel_file[sheet_name].to_dataframe()
-                    assert type(df.index) is pd.RangeIndex
+                    if "QF" in df.index:  # early National Landuse data has a QF row
+                        assert type(df.index) is pd.Index
+                    else:
+                        assert type(df.index) is pd.RangeIndex
                     assert all([not i.startswith("Unnamed") for i in df.columns])
 
 
@@ -79,6 +87,19 @@ def test_national_fossil_units():
             df = excel_file[sheet_name].to_ocd()
             assert df.iloc[0].unit == "MtC/yr"
             assert "MtC/yr" in excel_file[sheet_name].__repr__()
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_national_landuse_change_units():
+    for version in versions:
+        if version < "2022":
+            continue
+        excel_file = Global_Carbon_Budget[version].National_Landuse_Change_Emissions
+        sheet_names = excel_file.keys()
+        for sheet_name in sheet_names:
+            df = excel_file[sheet_name].to_ocd()
+            assert df.iloc[0].unit in {"TgC/yr", "MtC/yr"}
+            assert "MtC" in excel_file[sheet_name].__repr__()
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")

@@ -139,4 +139,14 @@ GCB2025 = _Global_Carbon_Budget_Release(
             {"sheet_name": "Emissions Transfers", "skiprows": 8, "unit": "MtC/yr"},
         ],
     },
+    national_landuse_change_emissions={
+        "filename": "National_LandUseChange_Carbon_Emissions_2025_v1.0.xlsx",
+        "url": "https://data.icos-cp.eu/licence_accept?ids=%5B%22milTbWkl0G-MSpdYG3IBIfzy%22%5D",
+        "known_hash": "9a29536d6925d06f8c4a97581b720121fcf219732c240e970bc24167d74e38d1",
+        "sheets": [
+            {"sheet_name": "BLUE", "skiprows": 7, "unit": "TgC/yr"},
+            {"sheet_name": "OSCAR", "skiprows": 7, "unit": "TgC/yr"},
+            {"sheet_name": "LUCE", "skiprows": 7, "unit": "TgC/yr"},
+        ],
+    },
 )
