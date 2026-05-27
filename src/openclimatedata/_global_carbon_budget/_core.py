@@ -25,6 +25,7 @@ class _Global_Carbon_Budget_Release(dict):
         license: str,
         global_carbon_budget: dict,
         national_fossil_carbon_emissions: dict,
+        national_landuse_change_emissions: Optional[dict] = None,
     ):
         self.name = name
         self.version = version
@@ -34,7 +35,7 @@ class _Global_Carbon_Budget_Release(dict):
         self.citation = citation
         self.citation_article = citation_article
         self.license = license
-  
+
         self.Global_Carbon_Budget = _Global_Carbon_Budget_File(
             release=self,
             filename=global_carbon_budget["filename"],
@@ -50,6 +51,15 @@ class _Global_Carbon_Budget_Release(dict):
             known_hash=national_fossil_carbon_emissions["known_hash"],
             sheets=national_fossil_carbon_emissions["sheets"],
         )
+
+        if national_landuse_change_emissions:
+            self.National_Landuse_Change_Emissions = _Global_Carbon_Budget_File(
+                release=self,
+                filename=national_landuse_change_emissions["filename"],
+                url=national_landuse_change_emissions["url"],
+                known_hash=national_landuse_change_emissions["known_hash"],
+                sheets=national_landuse_change_emissions["sheets"],
+            )
 
     def __repr__(self):
         return f"""{self.name}
@@ -167,6 +177,12 @@ class _Global_Carbon_Budget_Sheet(dict):
         df = self.to_dataframe()
         value_vars = df.columns
         var_name = "Region" if value_vars[0] == "Afghanistan" else "Category"
+
+        qf = None
+        if self.file.filename.startswith("National_LandUse") and "QF" in df.index:
+            qf = df.loc["QF"].astype("Int64")
+            df = df.drop("QF")
+
         with warnings.catch_warnings(
             action="ignore", category=pd.errors.PerformanceWarning
         ):
@@ -177,6 +193,15 @@ class _Global_Carbon_Budget_Sheet(dict):
                 value_name="Value",
             )
         df[var_name] = df[var_name].astype("category")
+
+        if isinstance(qf, pd.Series):
+            df = (
+                df.set_index("Region")
+                .merge(qf, left_index=True, right_index=True)
+                .reset_index()
+            )
+            df["QF"] = df["QF"].astype("category")
+
         return df
 
     def _to_ocd(self):

@@ -124,4 +124,15 @@ GCB2024 = _Global_Carbon_Budget_Release(
             {"sheet_name": "Emissions Transfers", "skiprows": 8, "unit": "MtC/yr"},
         ],
     },
+    national_landuse_change_emissions={
+        "filename": "National_LandUseChange_Carbon_Emissions_2024v1.01.xlsx",
+        "url": "https://data.icos-cp.eu/licence_accept?ids=%5B%22nG85fH5iPt4QKpd3Lt4-wvN0%22%5D",
+        "known_hash": "9c6f397c7e623ede102a97772ede3ec2f3749d882c3e1fcc629a1268e03f2e60",
+        "sheets": [
+            {"sheet_name": "BLUE", "skiprows": 7, "unit": "TgC/yr"},
+            {"sheet_name": "H&C2023", "skiprows": 7, "unit": "TgC/yr"},
+            {"sheet_name": "OSCAR", "skiprows": 7, "unit": "TgC/yr"},
+            {"sheet_name": "LUCE", "skiprows": 7, "unit": "TgC/yr"},
+        ],
+    },
 )

@@ -106,4 +106,14 @@ GCB2022 = _Global_Carbon_Budget_Release(
             {"sheet_name": "Emissions Transfers", "skiprows": 8, "unit": "MtC/yr"},
         ],
     },
+    national_landuse_change_emissions={
+        "filename": "National_LandUseChange_Carbon_Emissions_2022v1.0.xlsx",
+        "url": "https://data.icos-cp.eu/licence_accept?ids=%5B%22IuLZ5Dkg7UoiSt_ZLskXbwGw%22%5D",
+        "known_hash": "22e2d9e43920ed4a224adfd92ec9176f01b0e7a494d9b31027b5f11aeb4b0e85",
+        "sheets": [
+            {"sheet_name": "BLUE", "skiprows": 7, "unit": "MtC/yr"},
+            {"sheet_name": "H&N2017", "skiprows": 7, "unit": "MtC/yr"},
+            {"sheet_name": "OSCAR", "skiprows": 7, "unit": "MtC/yr"},
+        ],
+    },
 )
