@@ -82,22 +82,60 @@ def test_national_fossil_units():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_national_fossil_emissions():
+    for version in versions:
+        excel_file = Global_Carbon_Budget[version].National_Fossil_Carbon_Emissions
+
+        territorial_emissions = excel_file["Territorial Emissions"]
+        consumption_emissions = excel_file["Consumption Emissions"]
+        emissions_transfer = excel_file["Emissions Transfers"]
+
+        te_df = territorial_emissions.to_dataframe()
+        te_ocd = territorial_emissions.to_ocd()
+
+        assert te_df.index[-1] == int(version) - 1
+        assert te_df.iloc[-1].World == te_ocd.iloc[-1].value
+
+        ce_df = consumption_emissions.to_dataframe()
+        ce_ocd = consumption_emissions.to_ocd()
+
+        assert ce_df.index[-1] == int(version) - 1
+        assert ce_df.iloc[-1].World == ce_ocd.iloc[-1].value
+
+        et_df = emissions_transfer.to_dataframe()
+        et_ocd = emissions_transfer.to_ocd()
+
+        assert et_df.index[-1] == int(version) - 1
+        assert et_df.iloc[-1].World == et_ocd.iloc[-1].value
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_sheet_names():
     for version in versions:
-        sheet_names = Global_Carbon_Budget[version].Global_Carbon_Budget.keys()
+        global_carbon_budget_sheet_names = Global_Carbon_Budget[
+            version
+        ].Global_Carbon_Budget.keys()
 
-        assert "Global Carbon Budget" in sheet_names
-        assert "Historical Budget" in sheet_names
+        assert "Global Carbon Budget" in global_carbon_budget_sheet_names
+        assert "Historical Budget" in global_carbon_budget_sheet_names
         if version >= "2025":
-            assert "Atmospheric Growth" in sheet_names
+            assert "Atmospheric Growth" in global_carbon_budget_sheet_names
         if version > "2019":
-            assert "Fossil Emissions by Category" in sheet_names
-            assert "Cement Carbonation Sink" in sheet_names
+            assert "Fossil Emissions by Category" in global_carbon_budget_sheet_names
+            assert "Cement Carbonation Sink" in global_carbon_budget_sheet_names
         else:
-            assert "Fossil Emissions by Fuel Type" in sheet_names
-        assert "Land-Use Change Emissions" in sheet_names
-        assert "Ocean Sink" in sheet_names
-        assert "Terrestrial Sink" in sheet_names
+            assert "Fossil Emissions by Fuel Type" in global_carbon_budget_sheet_names
+        assert "Land-Use Change Emissions" in global_carbon_budget_sheet_names
+        assert "Ocean Sink" in global_carbon_budget_sheet_names
+        assert "Terrestrial Sink" in global_carbon_budget_sheet_names
+
+        national_fossil_sheet_names = Global_Carbon_Budget[
+            version
+        ].National_Fossil_Carbon_Emissions.keys()
+
+        assert "Territorial Emissions" in national_fossil_sheet_names
+        assert "Consumption Emissions" in national_fossil_sheet_names
+        assert "Emissions Transfers" in national_fossil_sheet_names
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
