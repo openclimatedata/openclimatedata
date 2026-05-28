@@ -131,6 +131,21 @@ def test_national_fossil_emissions():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_national_landuse_change_emissions():
+    for version in versions:
+        if version < "2022":
+            continue
+        excel_file = Global_Carbon_Budget[version].National_Landuse_Change_Emissions
+
+        for model in excel_file.keys():
+            df = excel_file[model].to_dataframe()
+            ocdf = excel_file[model].to_ocd()
+
+            assert df.loc[1850].Afghanistan == ocdf.iloc[0].value
+            assert df.iloc[-1, -1] == ocdf.iloc[-1].value
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_sheet_names():
     for version in versions:
         global_carbon_budget_sheet_names = Global_Carbon_Budget[
