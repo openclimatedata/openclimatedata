@@ -126,6 +126,17 @@ def test_kosovo_country_code():
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_tur_country_name():
+    # Should be "Turkey" or "Türkiye"
+    for version in versions:
+        df = GCB_Fossil_Emissions[version].to_dataframe()
+        assert df[df["ISO 3166-1 alpha-3"] == "TUR"].iloc[0].Country in [
+            "Turkey",
+            "Türkiye",
+        ]
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_fossil_2025v15():
     df = GCB_Fossil_Emissions["2025v15"].to_dataframe()
     assert df.iloc[-1]["Per Capita"] == approx(4.729075)
