@@ -176,7 +176,7 @@ class _Global_Carbon_Budget_Sheet(dict):
     def _to_long_dataframe(self):
         df = self.to_dataframe()
         value_vars = df.columns
-        var_name = "Region" if value_vars[0] == "Afghanistan" else "Category"
+        var_name = "Country" if value_vars[0] == "Afghanistan" else "Category"
 
         qf = None
         if self.file.filename.startswith("National_LandUse") and "QF" in df.index:
@@ -196,7 +196,7 @@ class _Global_Carbon_Budget_Sheet(dict):
 
         if isinstance(qf, pd.Series):
             df = (
-                df.set_index("Region")
+                df.set_index("Country")
                 .merge(qf, left_index=True, right_index=True)
                 .reset_index()
             )
