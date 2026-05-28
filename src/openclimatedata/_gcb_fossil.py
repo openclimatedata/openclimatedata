@@ -37,7 +37,7 @@ https://doi.org/{self.doi}
         )
         return pd.read_csv(
             file_path,
-            encoding="latin-1",
+            encoding="latin-1" if self.published == "2021-10-14" else "UTF-8",
             dtype={
                 "Country": "category",
                 "ISO 3166-1 alpha-3": "category",
