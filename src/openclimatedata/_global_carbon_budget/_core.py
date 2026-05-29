@@ -8,6 +8,7 @@ import pandas as pd
 import pooch
 import openpyxl
 
+from ._countrynames import mappings
 
 unit_values = Literal["GtC/yr", "MtC/yr", "tC/person/yr"]
 
@@ -208,6 +209,7 @@ class _Global_Carbon_Budget_Sheet(dict):
         """Long DataFrame with all column names lower-cased."""
         df = self._to_long_dataframe()
         df.columns = df.columns.map(lambda x: x.lower())
+
         if "category" in df.columns:
             df["unit"] = df.apply(
                 lambda x: (
@@ -217,9 +219,13 @@ class _Global_Carbon_Budget_Sheet(dict):
                 ),
                 axis=1,
             )
-        else:
+        elif "country" in df.columns:
             # For national fossil and land-use emissions all columns should have the same unit, so no overwrite needed
             df["unit"] = self.unit
+
+            df["code"] = df["country"].apply(lambda x: mappings.get(x, x))
+            df = df.drop("country", axis=1)
+            df = df[["code", "year", "value", "unit"]]
 
         return df
 

@@ -6,6 +6,8 @@ from pytest import approx
 
 from openclimatedata import Global_Carbon_Budget
 
+from openclimatedata._global_carbon_budget._countrynames import mappings
+
 GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 
@@ -172,6 +174,69 @@ def test_gcb_sheet_names():
         assert "Territorial Emissions" in national_fossil_sheet_names
         assert "Consumption Emissions" in national_fossil_sheet_names
         assert "Emissions Transfers" in national_fossil_sheet_names
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_countrynames():
+    countrynames = set()
+    special_codes = set(
+        [
+            "Africa",
+            "Asia",
+            "Bunkers",
+            "Central America",
+            "EU27",
+            "EU28",
+            "Europe",
+            "KP Annex B",
+            "Middle East",
+            "Non KP Annex B",
+            "Non-OECD",
+            "North America",
+            "Oceania",
+            "OECD",
+            "South America",
+            "Statistical Difference",
+            "DISPUTED",
+            "OTHER",
+            "TOTAL",
+        ]
+    )
+
+    for version in versions:
+        territorial_emissions = (
+            Global_Carbon_Budget[version]
+            .National_Fossil_Carbon_Emissions["Territorial Emissions"]
+            .to_dataframe()
+        )
+        for name in territorial_emissions.columns:
+            countrynames.add(name)
+
+        if version >= "2022":
+            luc_emissions = (
+                Global_Carbon_Budget[version]
+                .National_Landuse_Change_Emissions[
+                    list(
+                        Global_Carbon_Budget[
+                            version
+                        ].National_Landuse_Change_Emissions.keys()
+                    )[0]
+                ]
+                .to_dataframe()
+            )
+            for name in luc_emissions.columns:
+                countrynames.add(name)
+
+        ocd_codes = (
+            Global_Carbon_Budget[version]
+            .National_Fossil_Carbon_Emissions["Territorial Emissions"]
+            .to_ocd()
+            .code.unique()
+        )
+        assert set([i for i in ocd_codes if len(i) > 3]).issubset(special_codes)
+
+    special_codes.remove("TOTAL")
+    assert countrynames.difference(set(mappings.keys())) == special_codes
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
