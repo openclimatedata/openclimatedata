@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.37
+
+- Include National Fossil and Landuse Change emissions in Global Carbon Budget
+- Fix encoding when reading GCB Fossil CSVs
+
 ## 0.36
 
 - Update to published GCB 2025 version and v1.0 main data file
