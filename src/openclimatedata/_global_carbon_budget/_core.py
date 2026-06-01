@@ -165,7 +165,9 @@ class _Global_Carbon_Budget_Sheet(dict):
             ]
             note = ""
             for row in rows:
-                note += ("\t".join([cell if cell else "\t" for cell in row])).strip()
+                line = ("\t".join([cell if cell else "\t" for cell in row])).strip()
+                if not line.startswith("AFGHANISTAN"):
+                    note += line
                 note += "\n"
 
             self.note = note
