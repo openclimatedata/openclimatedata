@@ -173,7 +173,7 @@ class _Global_Carbon_Budget_Sheet(dict):
         return f"""{self.release.name} — {self.file.filename}  — {self.sheet_name}
 
 {self.note}
-"""
+""".strip()
 
     def _to_dataframe(self):
         file_path = self.file._get_file_path()
