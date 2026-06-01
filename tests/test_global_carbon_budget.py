@@ -30,8 +30,8 @@ def test_dfs():
     # No column should be unnamed
     for version in versions:
         excel_files = [
-            Global_Carbon_Budget[version].Global_Carbon_Budget,
-            Global_Carbon_Budget[version].National_Fossil_Carbon_Emissions,
+            Global_Carbon_Budget[version].Global_Budget,
+            Global_Carbon_Budget[version].National_Fossil_Emissions,
         ]
         if version >= "2022":
             excel_files += [
@@ -58,7 +58,7 @@ def test_dfs():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_global_units():
     for version in versions:
-        excel_file = Global_Carbon_Budget[version].Global_Carbon_Budget
+        excel_file = Global_Carbon_Budget[version].Global_Budget
         sheet_names = excel_file.keys()
         for sheet_name in sheet_names:
             if len(excel_file[sheet_name].keys()) > 0:
@@ -83,7 +83,7 @@ def test_global_units():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_national_fossil_units():
     for version in versions:
-        excel_file = Global_Carbon_Budget[version].National_Fossil_Carbon_Emissions
+        excel_file = Global_Carbon_Budget[version].National_Fossil_Emissions
         sheet_names = excel_file.keys()
         for sheet_name in sheet_names:
             df = excel_file[sheet_name].to_ocd()
@@ -107,7 +107,7 @@ def test_national_landuse_change_units():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_national_fossil_emissions():
     for version in versions:
-        excel_file = Global_Carbon_Budget[version].National_Fossil_Carbon_Emissions
+        excel_file = Global_Carbon_Budget[version].National_Fossil_Emissions
 
         territorial_emissions = excel_file["Territorial Emissions"]
         consumption_emissions = excel_file["Consumption Emissions"]
@@ -152,7 +152,7 @@ def test_gcb_sheet_names():
     for version in versions:
         global_carbon_budget_sheet_names = Global_Carbon_Budget[
             version
-        ].Global_Carbon_Budget.keys()
+        ].Global_Budget.keys()
 
         assert "Global Carbon Budget" in global_carbon_budget_sheet_names
         assert "Historical Budget" in global_carbon_budget_sheet_names
@@ -169,7 +169,7 @@ def test_gcb_sheet_names():
 
         national_fossil_sheet_names = Global_Carbon_Budget[
             version
-        ].National_Fossil_Carbon_Emissions.keys()
+        ].National_Fossil_Emissions.keys()
 
         assert "Territorial Emissions" in national_fossil_sheet_names
         assert "Consumption Emissions" in national_fossil_sheet_names
@@ -206,7 +206,7 @@ def test_gcb_countrynames():
     for version in versions:
         territorial_emissions = (
             Global_Carbon_Budget[version]
-            .National_Fossil_Carbon_Emissions["Territorial Emissions"]
+            .National_Fossil_Emissions["Territorial Emissions"]
             .to_dataframe()
         )
         for name in territorial_emissions.columns:
@@ -229,7 +229,7 @@ def test_gcb_countrynames():
 
         ocd_codes = (
             Global_Carbon_Budget[version]
-            .National_Fossil_Carbon_Emissions["Territorial Emissions"]
+            .National_Fossil_Emissions["Territorial Emissions"]
             .to_ocd()
             .code.unique()
         )
@@ -244,29 +244,29 @@ def test_gcb_dataframes_for_subtables_only():
     # In sheets with subtables, `to_dataframe` etc. should only be available
     # for tables, not on the main sheet.
     for version in versions:
-        sheet_names = Global_Carbon_Budget[version].Global_Carbon_Budget.keys()
+        sheet_names = Global_Carbon_Budget[version].Global_Budget.keys()
 
         for sheet_name in sheet_names:
             if (
                 len(
                     Global_Carbon_Budget[version]
-                    .Global_Carbon_Budget[sheet_name]
+                    .Global_Budget[sheet_name]
                     .keys()
                 )
                 > 0
             ):
                 assert "to_dataframe" not in dir(
-                    Global_Carbon_Budget[version].Global_Carbon_Budget[sheet_name]
+                    Global_Carbon_Budget[version].Global_Budget[sheet_name]
                 )
                 assert "to_long_dataframe" not in dir(
-                    Global_Carbon_Budget[version].Global_Carbon_Budget[sheet_name]
+                    Global_Carbon_Budget[version].Global_Budget[sheet_name]
                 )
 
 
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2025():
     year = "2025"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
     historical_budget = gcb["Historical Budget"].to_dataframe()
     fossil_emissions_by_category = gcb["Fossil Emissions by Category"].to_dataframe()
@@ -361,7 +361,7 @@ def test_gcb_2025():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2024():
     year = "2024"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
     historical_budget = gcb["Historical Budget"].to_dataframe()
     fossil_emissions_by_category = gcb["Fossil Emissions by Category"].to_dataframe()
@@ -447,7 +447,7 @@ def test_gcb_2024():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2023():
     year = "2023"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
 
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
     historical_budget = gcb["Historical Budget"].to_dataframe()
@@ -527,7 +527,7 @@ def test_gcb_2023():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2022():
     year = "2022"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
 
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
     historical_budget = gcb["Historical Budget"].to_dataframe()
@@ -602,7 +602,7 @@ def test_gcb_2022():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2021():
     year = "2021"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
 
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
     historical_budget = gcb["Historical Budget"].to_dataframe()
@@ -677,7 +677,7 @@ def test_gcb_2021():
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_gcb_2020():
     year = "2020"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
 
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
 
@@ -760,7 +760,7 @@ def test_gcb_2020():
 )
 def test_gcb_2019():
     year = "2019"
-    gcb = Global_Carbon_Budget[year].Global_Carbon_Budget
+    gcb = Global_Carbon_Budget[year].Global_Budget
 
     global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
 

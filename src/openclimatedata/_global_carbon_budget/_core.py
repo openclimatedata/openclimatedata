@@ -37,7 +37,7 @@ class _Global_Carbon_Budget_Release(dict):
         self.citation_article = citation_article
         self.license = license
 
-        self.Global_Carbon_Budget = _Global_Carbon_Budget_File(
+        self.Global_Budget = _Global_Carbon_Budget_File(
             release=self,
             filename=global_carbon_budget["filename"],
             url=global_carbon_budget["url"],
@@ -45,7 +45,7 @@ class _Global_Carbon_Budget_Release(dict):
             sheets=global_carbon_budget["sheets"],
         )
 
-        self.National_Fossil_Carbon_Emissions = _Global_Carbon_Budget_File(
+        self.National_Fossil_Emissions = _Global_Carbon_Budget_File(
             release=self,
             filename=national_fossil_carbon_emissions["filename"],
             url=national_fossil_carbon_emissions["url"],
