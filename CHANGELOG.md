@@ -2,7 +2,8 @@
 
 ## 0.38
 
-- Shorten GCB field names and tweak descriptions 
+- Shorten GCB field names and tweak descriptions
+- Use GCB version for release year and add data_version attribute
 
 ## 0.37
 
