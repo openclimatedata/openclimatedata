@@ -247,14 +247,7 @@ def test_gcb_dataframes_for_subtables_only():
         sheet_names = Global_Carbon_Budget[version].Global_Budget.keys()
 
         for sheet_name in sheet_names:
-            if (
-                len(
-                    Global_Carbon_Budget[version]
-                    .Global_Budget[sheet_name]
-                    .keys()
-                )
-                > 0
-            ):
+            if len(Global_Carbon_Budget[version].Global_Budget[sheet_name].keys()) > 0:
                 assert "to_dataframe" not in dir(
                     Global_Carbon_Budget[version].Global_Budget[sheet_name]
                 )

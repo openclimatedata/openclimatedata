@@ -17,7 +17,8 @@ class _Global_Carbon_Budget_Release(dict):
     def __init__(
         self,
         name: str,
-        version: str,
+        version: int,
+        data_version: str,
         doi: str,
         doi_article: str,
         published: str,
@@ -30,6 +31,7 @@ class _Global_Carbon_Budget_Release(dict):
     ):
         self.name = name
         self.version = version
+        self.data_version = data_version
         self.doi = doi
         self.doi_article = doi_article
         self.published = published
@@ -63,12 +65,22 @@ class _Global_Carbon_Budget_Release(dict):
             )
 
     def __repr__(self):
-        return f"""{self.name}
+        repr = f"""{self.name}
+
+Article: {self.citation_article}
+
+Data: {self.citation}
 
 License: {self.license}
 https://doi.org/{self.doi}
 
-{self.citation}"""
+Global_Carbon_Budget['{self.version}'].Global_Budget: `{self.Global_Budget.filename}`
+Global_Carbon_Budget['{self.version}'].National_Fossil_Emissions: `{self.National_Fossil_Emissions.filename}`"""
+        if hasattr(self, "National_Landuse_Change_Emissions"):
+            repr += f"""
+Global_Carbon_Budget['{self.version}'].National_Landuse_Change_Emissions: `{self.National_Landuse_Change_Emissions.filename}`
+"""
+        return repr
 
 
 class _Global_Carbon_Budget_File(dict):
@@ -79,6 +91,7 @@ class _Global_Carbon_Budget_File(dict):
         self.filename = filename
         self.url = url
         self.known_hash = known_hash
+        self.sheets = sheets
 
         for sheet in sheets:
             self[sheet["sheet_name"]] = _Global_Carbon_Budget_Sheet(
@@ -95,8 +108,10 @@ class _Global_Carbon_Budget_File(dict):
 
     def __repr__(self):
         return f"""
-            {self.filename}
-        """
+{self.filename}
+
+Sheets:
+""" + "\n".join([sheet["sheet_name"] for sheet in self.sheets])
 
 
 class _Global_Carbon_Budget_Sheet(dict):

@@ -2,7 +2,8 @@ from ._core import _Global_Carbon_Budget_Release
 
 GCB2025 = _Global_Carbon_Budget_Release(
     name="Global Carbon Budget 2025",
-    version="1.0",
+    version=2025,
+    data_version="1.0",
     doi="10.18160/gcp-2025",
     doi_article="10.5194/essd-18-3211-2026",
     published="2026-05-13",
