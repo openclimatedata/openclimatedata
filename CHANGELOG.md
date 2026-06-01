@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.38
+
+- Shorten GCB field names and tweak descriptions 
+
 ## 0.37
 
 - Include National Fossil and Landuse Change emissions in Global Carbon Budget
