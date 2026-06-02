@@ -121,7 +121,7 @@ mappings = {
     "Saint Kitts and Nevis": "KNA",
     "South Korea": "KOR",
     "Korea, Republic of": "KOR",
-    "Kosovo": "KSV",
+    "Kosovo": "XKX",
     "Kuwait": "KWT",
     "Laos": "LAO",
     "Lao People's Democratic Republic": "LAO",
