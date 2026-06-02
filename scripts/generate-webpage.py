@@ -1,7 +1,7 @@
 # /// script
 # requires-python = ">=3.14"
 # dependencies = [
-#     "openclimatedata==0.36",
+#     "openclimatedata==0.38.1",
 #     "pyarrow>=23.0.1",
 # ]
 # ///
@@ -35,7 +35,7 @@ html += """<h2>Global Carbon Budget</h2>"""
 print("Global Carbon Budget")
 for gcb_version in tqdm(global_carbon_budget_versions):
     html += """<ul>\n"""
-    for sheet in ocd.Global_Carbon_Budget[gcb_version].keys():
+    for sheet in ocd.Global_Carbon_Budget[gcb_version].Global_Budget.keys():
         sheetslug = sheet.lower().replace(" ", "-")
         if sheet not in [
             "Atmospheric Growth",
@@ -48,7 +48,7 @@ for gcb_version in tqdm(global_carbon_budget_versions):
 
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
             if not filepath.exists():
-                df = ocd.Global_Carbon_Budget[gcb_version][sheet].to_ocd()
+                df = ocd.Global_Carbon_Budget[gcb_version].Global_Budget[sheet].to_ocd()
                 df.to_parquet(filepath, index=False)
 
         else:
@@ -57,11 +57,48 @@ for gcb_version in tqdm(global_carbon_budget_versions):
             html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
             if not filepath.exists():
                 dfs = []
-                for subtable in ocd.Global_Carbon_Budget[gcb_version][sheet].keys():
-                    df = ocd.Global_Carbon_Budget[gcb_version][sheet][subtable].to_ocd()
+                for subtable in (
+                    ocd.Global_Carbon_Budget[gcb_version].Global_Budget[sheet].keys()
+                ):
+                    df = (
+                        ocd.Global_Carbon_Budget[gcb_version]
+                        .Global_Budget[sheet][subtable]
+                        .to_ocd()
+                    )
                     df.insert(1, "subtable", subtable)
                     dfs.append(df)
                 pd.concat(dfs).to_parquet(filepath, index=False)
+
+    for sheet in ocd.Global_Carbon_Budget[gcb_version].National_Fossil_Emissions.keys():
+        sheetslug = sheet.lower().replace(" ", "-")
+        filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
+        filepath = Path(root / "scripts" / filename)
+
+        html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+        if not filepath.exists():
+            df = (
+                ocd.Global_Carbon_Budget[gcb_version]
+                .National_Fossil_Emissions[sheet]
+                .to_ocd()
+            )
+            df.to_parquet(filepath, index=False)
+
+    if gcb_version >= "2022":
+        for sheet in ocd.Global_Carbon_Budget[
+            gcb_version
+        ].National_Landuse_Change_Emissions.keys():
+            sheetslug = sheet.lower().replace(" ", "-").replace("&", "")
+            filename = f"global-carbon-budget-{gcb_version}-{sheetslug}.parquet"
+            filepath = Path(root / "scripts" / filename)
+
+            html += f"""<li><a href="{filename}">{filename}</a> ({ocd.Global_Carbon_Budget[gcb_version].license})</li>\n"""
+            if not filepath.exists():
+                df = (
+                    ocd.Global_Carbon_Budget[gcb_version]
+                    .National_Landuse_Change_Emissions[sheet]
+                    .to_ocd()
+                )
+                df.to_parquet(filepath, index=False)
 
     html += f"""</ul><small>{ocd.Global_Carbon_Budget[gcb_version].citation}</small>"""
 
