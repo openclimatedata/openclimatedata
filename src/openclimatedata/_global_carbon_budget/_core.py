@@ -193,6 +193,23 @@ class _Global_Carbon_Budget_Sheet(dict):
 
     def _to_long_dataframe(self):
         df = self.to_dataframe()
+
+        # Drop empty rows
+        if (
+            self.sheet_name
+            in [
+                "Consumption Emissions",
+                "Emissions Transfers",
+            ]
+            and self.release.version < 2022
+        ):
+            df = df[
+                df.drop(["Bunkers", "World", "Statistical Difference"], axis=1)
+                .notnull()
+                .any(axis=1)
+                | (df.index >= 1990)
+            ]
+
         value_vars = df.columns
         var_name = "Country" if value_vars[0] == "Afghanistan" else "Category"
 
