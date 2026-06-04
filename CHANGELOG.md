@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.39
+
+- Drop empty rows pre 1990 from Consumption Emissions/Transfer Emissions in long formats 
+
 ## 0.38
 
 - Shorten GCB field names and tweak descriptions
