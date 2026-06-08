@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.40
+
+- Add GCB 2018
+
 ## 0.39
 
 - Drop empty rows pre 1990 from Consumption Emissions/Transfer Emissions in long formats 
