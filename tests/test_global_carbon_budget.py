@@ -24,6 +24,9 @@ def test_gcb():
             assert Global_Carbon_Budget[version].published
 
 
+@pytest.mark.filterwarnings(
+    "ignore:Unknown extension is not supported and will be removed"
+)
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_dfs():
     # Index should be integer years
@@ -55,6 +58,9 @@ def test_dfs():
                     assert all([not i.startswith("Unnamed") for i in df.columns])
 
 
+@pytest.mark.filterwarnings(
+    "ignore:Unknown extension is not supported and will be removed"
+)
 @pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
 def test_global_units():
     for version in versions:
@@ -816,3 +822,72 @@ def test_gcb_2019():
     assert terrestrial_sink_individual_models["MMM (multi-model mean)"].loc[
         2018
     ] == approx(3.46882836308954)
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+@pytest.mark.filterwarnings(
+    "ignore:Unknown extension is not supported and will be removed"
+)
+def test_gcb_2018():
+    year = "2018"
+    gcb = Global_Carbon_Budget[year].Global_Budget
+
+    global_carbon_budget = gcb["Global Carbon Budget"].to_dataframe()
+
+    assert global_carbon_budget.loc[1959]["fossil fuel and industry"] == approx(
+        2.45337786217562
+    )
+
+    historical_budget = gcb["Historical Budget"].to_dataframe()
+    fossil_emissions_by_category = gcb["Fossil Emissions by Fuel Type"].to_dataframe()
+    luc_emissions_gcb = gcb["Land-Use Change Emissions"]["GCB"].to_dataframe()
+    luc_emissions_bookkeeping = gcb["Land-Use Change Emissions"][
+        "Bookkeeping Models"
+    ].to_dataframe()
+    assert "BLUE" in luc_emissions_bookkeeping.columns
+    assert "H&N" in luc_emissions_bookkeeping.columns
+
+    luc_emisssions_individual_models = gcb["Land-Use Change Emissions"][
+        "Individual models"
+    ].to_dataframe()
+
+    assert "CLM5.0" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS" in luc_emisssions_individual_models.columns
+    assert "LPJ-GUESS " not in luc_emisssions_individual_models.columns
+
+    ocean_sink_gcb = gcb["Ocean Sink"]["GCB"].to_dataframe()
+    ocean_sink_data_based_products = gcb["Ocean Sink"][
+        "Data-based products"
+    ].to_dataframe()
+    terrestrial_sink_gcb = gcb["Terrestrial Sink"]["GCB"].to_dataframe()
+    terrestrial_sink_individual_models = gcb["Terrestrial Sink"][
+        "Individual models"
+    ].to_dataframe()
+
+    assert global_carbon_budget["fossil fuel and industry"].loc[1959] == approx(
+        2.45337786217562
+    )
+    assert global_carbon_budget["budget imbalance"].loc[2017] == approx(
+        0.324100592385211
+    )
+
+    assert historical_budget["fossil fuel and industry"].loc[1751] == approx(0.003)
+    assert historical_budget["land sink"].loc[2017] == approx(3.78219744560725)
+
+    assert fossil_emissions_by_category.Total.loc[1959] == approx(2453.37786217562)
+    assert fossil_emissions_by_category["Per Capita"].loc[2017] == approx(
+        1.30686278575981
+    )
+
+    assert luc_emissions_gcb.GCB.loc[1959] == approx(1.8105875)
+    assert luc_emisssions_individual_models["MMM (multi-model mean)"].loc[
+        2017
+    ] == approx(1.96590566386091)
+
+    assert ocean_sink_gcb.GCB.loc[1959] == approx(0.85237591)
+    assert ocean_sink_data_based_products["Rödenbeck"].loc[2017] == approx(2.24)
+
+    assert terrestrial_sink_gcb.GCB.loc[1959] == approx(0.516073203889333)
+    assert terrestrial_sink_individual_models["MMM"].loc[2017] == approx(
+        3.78219744560725
+    )

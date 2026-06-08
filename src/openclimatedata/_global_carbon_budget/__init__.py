@@ -1,3 +1,4 @@
+from ._gcb2018 import GCB2018
 from ._gcb2019 import GCB2019
 from ._gcb2020 import GCB2020
 from ._gcb2021 import GCB2021
@@ -14,4 +15,5 @@ Global_Carbon_Budget = {
     "2021": GCB2021,
     "2020": GCB2020,
     "2019": GCB2019,
+    "2018": GCB2018,
 }
