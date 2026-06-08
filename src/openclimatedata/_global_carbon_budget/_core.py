@@ -277,14 +277,15 @@ class _Global_Carbon_Budget_Table:
 
     def to_dataframe(self):
         file_path = self.sheet.file._get_file_path()
-        df = pd.read_excel(
-            file_path,
-            sheet_name=self.sheet.sheet_name,
-            skiprows=self.skiprows,
-            usecols=self.columns,
-            index_col=0,
-            nrows=self.nrows,
-        )
+        with warnings.catch_warnings(action="ignore", category=UserWarning):
+            df = pd.read_excel(
+                file_path,
+                sheet_name=self.sheet.sheet_name,
+                skiprows=self.skiprows,
+                usecols=self.columns,
+                index_col=0,
+                nrows=self.nrows,
+            )
         # Remove suffixes `.1`, `.2`, etc. from duplicated columns names
         # (added by Pandas, see https://github.com/pandas-dev/pandas/issues/64198).
         # `CLM5.0` or `CLM6.0` needs to remain
