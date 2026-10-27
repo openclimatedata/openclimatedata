@@ -143,3 +143,12 @@ def test_gcb_fossil_2025v15():
 
     ocdf = GCB_Fossil_Emissions["2025v15"].to_ocd()
     assert ocdf.iloc[-1]["value"] == df.iloc[-1]["Per Capita"]
+
+
+@pytest.mark.skipif(GITHUB_ACTIONS, reason="Test requires downloading.")
+def test_gcb_fossil_2026v11():
+    df = GCB_Fossil_Emissions["2026v11"].to_dataframe()
+    assert df.iloc[-1]["Per Capita"] == approx(4.737237)
+
+    ocdf = GCB_Fossil_Emissions["2026v11"].to_ocd()
+    assert ocdf.iloc[-1]["value"] == df.iloc[-1]["Per Capita"]
