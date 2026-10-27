@@ -1,12 +1,16 @@
 # Changelog
 
+## 0.41
+
+- Add GCB Fossil 2026v11
+
 ## 0.40
 
 - Add GCB 2018
 
 ## 0.39
 
-- Drop empty rows pre 1990 from Consumption Emissions/Transfer Emissions in long formats 
+- Drop empty rows pre 1990 from Consumption Emissions/Transfer Emissions in long formats
 
 ## 0.38
 
@@ -23,9 +27,11 @@
 - Update to published GCB 2025 version and v1.0 main data file
 
 ## 0.35
+
 - Add units to Global Carbon Budget ocd DataFrames
 
 ## 0.34
+
 - Add GCB 2025 (preprint)
 
 ## 0.33
@@ -53,6 +59,7 @@
 - Use XIT for international transport/bunkers in CEDS (same code as in GCB Fossil)
 
 ## 0.27
+
 - Add CEDS 2018 supplemental dataset
 - Remove PRIMAP-hist 2.7
 
