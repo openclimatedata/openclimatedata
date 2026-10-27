@@ -14,5 +14,5 @@ Changelog = "https://github.com/openclimatedata/openclimatedata/releases"
 Issues = "https://github.com/openclimatedata/openclimatedata/issues"
 CI = "https://github.com/openclimatedat/openclimatedata/actions"
 
-[project.optional-dependencies]
-test = ["pytest"]
+[dependency-groups]
+dev = ["pytest"]
