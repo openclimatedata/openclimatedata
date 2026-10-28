@@ -132,8 +132,7 @@ GCB_Fossil_Emissions = {
         filename_sources="GCB2026v11_sources_flat.csv",
         url_sources="https://zenodo.org/records/23667912/files/GCB2026v11_sources_flat.csv?download=1",
         hash_sources="md5:92346aa840df060512157af03d617d25",
-        citation="""
-Andrew, R. M., & Peters, G. P. (2026). The Global Carbon Project's fossil CO2 emissions dataset (Versions 2026v11) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23667912""",
+        citation="""Andrew, R. M., & Peters, G. P. (2026). The Global Carbon Project's fossil CO2 emissions dataset (2026v11) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.23667912""",
         license="CC BY 4.0",
     ),
     "2025v15": _GCB_Fossil(
